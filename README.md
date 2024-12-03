@@ -1,3 +1,3 @@
 # cheesy-website
 This is my website
-https://stanthecheeseman.github.io/
+https://cheesy-website.github.io/
