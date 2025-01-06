@@ -26,25 +26,25 @@
             document.querySelector("link[rel='icon']").href = "https://i.ibb.co/NY8yC9c/download-1.png";
         }, 3500);
     </script>
-    <style>
-    .changelog-menu {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #f8f9fa;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-    </style>
     <script>
         window.onbeforeunload = function() {
             return "Are you sure you want to leave?";
         };
     </script>
+        <style>
+        .changelog {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .toggle-button {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
@@ -57,14 +57,28 @@
 </script>
 <h1 style="color: #00ff00;">The website from the cheese of all cheese (CheeseMan Himself)</h1>
 <h2 style="color: #00ff00;">This is a hub for my projects</h2>
-        <div class="changelog-menu">
-        <h2>Change Log</h2>
-        <ul>
-            <li>Version 1.0 - Initial release</li>
-            <li>Version 1.1 - Added new features</li>
-            <li>Version 1.2 - Bug fixes and improvements</li>
-        </ul>
+<h1>Change Log</h1>
+    <div class="toggle-button" onclick="toggleChangelog()">Show Change Log</div>
+    <div class="changelog" id="changelog">
+        <h2>Version 1.0.1</h2>
+        <p>Fixed minor bugs and improved performance.</p>
+        <h2>Version 1.0.0</h2>
+        <p>Initial release with basic features.</p>
     </div>
+
+    <script>
+        function toggleChangelog() {
+            const changelog = document.getElementById('changelog');
+            if (changelog.style.display === 'none' || changelog.style.display === '') {
+                changelog.style.display = 'block';
+                document.querySelector('.toggle-button').innerText = 'Hide Change Log';
+            } else {
+                changelog.style.display = 'none';
+                document.querySelector('.toggle-button').innerText = 'Show Change Log';
+            }
+        }
+    </script>
+
     <img src="https://i.ibb.co/nzjW2YQ/youtube-logo.png" width="128" height="90" alt="Unblocked games super mario 64 sm64 web cookie clicker mods cookie clicker modded sonic 3 air adventures with anxiety GBA game boy advance emulator school cheese free">
     <a href="https://www.youtube.com/@CheeseMan_GT/featured" style="display:inline-block; text-decoration:none; color:#00ff00; "><h1>Subscribe</h1></a></p>
   <img src="https://i.ibb.co/XWw9SXd/perfect-Cookie.webp" width="90" height="90" alt="Images blocked, if not blocked refresh">
