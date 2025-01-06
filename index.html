@@ -31,18 +31,18 @@
             return "Are you sure you want to leave?";
         };
     </script>
-        <style>
-        .changelog {
-            display: none;
-            background-color: none;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 10px;
+    <style>
+        body {
+            background: none;
+            color: #00ff00;
         }
-        .toggle-button {
+        #toggle {
+            font-size: 24px;
             cursor: pointer;
-            color: green;
-            text-decoration: underline;
+        }
+        #changelog {
+            display: none;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -57,26 +57,23 @@
 </script>
 <h1 style="color: #00ff00;">The website from the cheese of all cheese (CheeseMan Himself)</h1>
 <h2 style="color: #00ff00;">This is a hub for my projects</h2>
-<h1>Change Log</h1>
-    <div class="toggle-button" onclick="toggleChangelog()">Show Change Log</div>
-    <div class="changelog" id="changelog">
-        <h2>Version 1.0.1</h2>
-        <p>Fixed the changelog and added my failed website to the games.</p>
-        <h2>Version 1.0.0</h2>
-        <p>No longer in beta, added a changelog.</p>
+<div id="toggle">Toggle Change Log</div>
+    <div id="changelog">
+        <h2>Change Log</h2>
+        <ul>
+            <li>Version 1.0 - Initial release</li>
+            <li>Version 1.1 - Added new features</li>
+            <li>Version 1.2 - Bug fixes and improvements</li>
+        </ul>
     </div>
 
     <script>
-        function toggleChangelog() {
-            const changelog = document.getElementById('changelog');
-            if (changelog.style.display === 'none' || changelog.style.display === '') {
-                changelog.style.display = 'block';
-                document.querySelector('.toggle-button').innerText = 'Hide Change Log';
-            } else {
-                changelog.style.display = 'none';
-                document.querySelector('.toggle-button').innerText = 'Show Change Log';
-            }
-        }
+        const toggle = document.getElementById('toggle');
+        const changelog = document.getElementById('changelog');
+
+        toggle.addEventListener('click', () => {
+            changelog.style.display = changelog.style.display === 'none' ? 'block' : 'none';
+        });
     </script>
 
     <img src="https://i.ibb.co/nzjW2YQ/youtube-logo.png" width="128" height="90" alt="Unblocked games super mario 64 sm64 web cookie clicker mods cookie clicker modded sonic 3 air adventures with anxiety GBA game boy advance emulator school cheese free">
