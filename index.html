@@ -40,42 +40,37 @@
             font-size: 20px;
         }
     </style>
-        <script>
+    <script>
+        function toggleWarning() {
+            const toggle = document.getElementById('warningToggle').checked;
+            document.cookie = "warningEnabled=" + toggle + "; path=/";
+        }
+
         window.onload = function() {
-            const warningEnabled = getCookie("warningEnabled") === "true";
-            document.getElementById("warntoggle").checked = warningEnabled;
-
-            if (warningEnabled) {
-                window.onbeforeunload = function() {
-                    return "Are you sure you want to leave?";
-                };
-            }
-
-            document.getElementById("warntoggle").addEventListener("change", function() {
-                if (this.checked) {
-                    setCookie("warningEnabled", "true", 7);
-                    window.onbeforeunload = function() {
-                        return "Are you sure you want to leave?";
-                    };
-                } else {
-                    setCookie("warningEnabled", "false", 7);
-                    window.onbeforeunload = null;
+            const cookies = document.cookie.split(';');
+            cookies.forEach(cookie => {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'warningEnabled') {
+                    document.getElementById('warningToggle').checked = (value === 'true');
                 }
             });
         };
-
-        function setCookie(name, value, days) {
-            const expires = new Date(Date.now() + days * 864e5).toUTCString();
-            document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/';
-        }
-
-        function getCookie(name) {
-            return document.cookie.split('; ').reduce((r, v) => {
-                const parts = v.split('=');
-                return parts[0] === name ? decodeURIComponent(parts[1]) : r;
-            }, '');
-        }
     </script>
+    <script>
+    window.onbeforeunload = function() {
+        const cookies = document.cookie.split(';');
+        let warningEnabled = false;
+        cookies.forEach(cookie => {
+            const [name, value] = cookie.trim().split('=');
+            if (name === 'warningEnabled') {
+                warningEnabled = (value === 'true');
+            }
+        });
+        if (warningEnabled) {
+            return "Are you sure you want to leave this page?";
+        }
+    };
+</script>
 </head>
 <body>
 
@@ -97,6 +92,7 @@
             <li>Version 1.0.1 - Added the failed website (old version that was once the new version) to the games section. </li>
             <li>Version 1.0.2 - Added a settings page. </li>
             <li>Version 1.1.0 - HUGE UPDATE, Added a working Anti-GoGuardian (can be found in settings.) </li>
+            <li>Version 1.1.1 - Fixed Anti-GoGuardian. </li>
         </ul>
     </div>
 <div id="settingstoggle">Settings (CLICK)</div>
@@ -105,7 +101,7 @@
         <ul>
             <li>
                 <label>
-                    <input type="checkbox" id="warntoggle">
+                    <input type="checkbox" id="warningToggle" onclick="toggleWarning()">
                     Anti-GoGuardian Close (Can't be closed by GoGuardian.)
                 </label>
             </li>
