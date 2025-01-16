@@ -160,30 +160,35 @@
         document.getElementById('downloadCookies').addEventListener('click', function() {
             const cookies = document.cookie;
             const blob = new Blob([cookies], { type: 'text/plain' });
-            const link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = 'cookies.txt';
-            link.click();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cookies.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         });
 
         // Function to import cookies
         document.getElementById('importCookiesButton').addEventListener('click', function() {
-            const fileInput = document.getElementById('importCookies');
-            const file = fileInput.files[0];
+            document.getElementById('importCookies').click();
+        });
+
+        document.getElementById('importCookies').addEventListener('change', function(event) {
+            const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(event) {
-                    const cookies = event.target.result;
+                reader.onload = function(e) {
+                    const cookies = e.target.result;
                     const cookieArray = cookies.split('; ');
                     cookieArray.forEach(cookie => {
                         const [name, value] = cookie.split('=');
-                        document.cookie = `${name}=${value}; path=/;`;
+                        document.cookie = `${name}=${value}; path=/`;
                     });
                     alert('Cookies imported successfully!');
                 };
                 reader.readAsText(file);
-            } else {
-                alert('Please select a file to import.');
             }
         });
     </script>
