@@ -17,27 +17,31 @@
         }, 3500);
     </script>
     <script>
-        function saveKey(event) {
-            if (event.key === 'Enter') {
-                const key = document.getElementById('keyInput').value;
-                document.cookie = "minimizeKey=" + key;
-            }
+        function saveKey() {
+            const key = document.getElementById('keyInput').value;
+            document.cookie = "userKey=" + key + "; path=/";
         }
-    </script>
-    <script>
-        document.addEventListener('keydown', function(event) {
-            const cookies = document.cookie.split(';');
-            let minimizeKey = '';
-            cookies.forEach(cookie => {
-                const [key, value] = cookie.split('=');
-                if (key.trim() === 'minimizeKey') {
-                    minimizeKey = value;
-                }
-            });
-            if (event.key === minimizeKey) {
-                window.minimize(); // Note: This is a placeholder; actual minimize functionality may vary by browser.
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                saveKey();
             }
         });
+    </script>
+    <script>
+        window.onload = function() {
+            const cookies = document.cookie.split(';');
+            let userKey = '';
+            cookies.forEach(cookie => {
+                if (cookie.trim().startsWith('userKey=')) {
+                    userKey = cookie.split('=')[1];
+                }
+            });
+            document.addEventListener('keypress', function(event) {
+                if (event.key === userKey) {
+                    window.open("https://cvcsd.schoology.com/home", "_blank");
+                }
+            });
+        };
     </script>
     <style>
         body {
@@ -128,9 +132,11 @@
                     <input type="checkbox" id="warningToggle" onclick="toggleWarning()">
                     Anti-GoGuardian Close (Can't be closed by GoGuardian.)
                 </label>
+            </li>
+            <li>
                 <label>
-                    <input type="text" id="keyInput" placeholder="Type a key and press Enter" onkeydown="saveKey(event)">
-                    Panic key (Minimizes the window when pressed, use when teacher is walking by.)
+                    <input type="text" id="keyInput" placeholder="Type a key and press Enter">
+                    Panic key (opens schoology when you press the key you selected).
                 </label>
             </li>
         </ul>
