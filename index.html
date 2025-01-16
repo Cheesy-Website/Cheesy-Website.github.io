@@ -160,14 +160,10 @@
         document.getElementById('downloadCookies').addEventListener('click', function() {
             const cookies = document.cookie;
             const blob = new Blob([cookies], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'cookies.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'cookies.txt';
+            link.click();
         });
 
         // Function to import cookies
@@ -178,15 +174,16 @@
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     const cookies = event.target.result;
-                    cookies.split(';').forEach(cookie => {
+                    const cookieArray = cookies.split('; ');
+                    cookieArray.forEach(cookie => {
                         const [name, value] = cookie.split('=');
-                        document.cookie = `${name}=${value}; path=/`;
+                        document.cookie = `${name}=${value}; path=/;`;
                     });
                     alert('Cookies imported successfully!');
                 };
                 reader.readAsText(file);
             } else {
-                alert('Please select a file to import cookies.');
+                alert('Please select a file to import.');
             }
         });
     </script>
