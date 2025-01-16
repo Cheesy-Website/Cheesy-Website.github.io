@@ -21,27 +21,6 @@
             const key = document.getElementById('keyInput').value;
             document.cookie = "userKey=" + key + "; path=/";
         }
-        document.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                saveKey();
-            }
-        });
-    </script>
-    <script>
-        window.onload = function() {
-            const cookies = document.cookie.split(';');
-            let userKey = '';
-            cookies.forEach(cookie => {
-                if (cookie.trim().startsWith('userKey=')) {
-                    userKey = cookie.split('=')[1];
-                }
-            });
-            document.addEventListener('keypress', function(event) {
-                if (event.key === userKey) {
-                    window.open("https://cvcsd.schoology.com/home", "_blank");
-                }
-            });
-        };
     </script>
     <style>
         body {
@@ -82,7 +61,7 @@
             });
         };
     </script>
-    <script>
+<script>
     window.onbeforeunload = function() {
         const cookies = document.cookie.split(';');
         let warningEnabled = false;
@@ -96,6 +75,23 @@
             return "Are you sure you want to leave this page?";
         }
     };
+</script>
+<script>
+        window.onload = function() {
+            const cookies = document.cookie.split(';');
+            let userKey = '';
+            cookies.forEach(cookie => {
+                if (cookie.trim().startsWith('userKey=')) {
+                    userKey = cookie.split('=')[1];
+                }
+            });
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === userKey) {
+                    window.open("https://cvcsd.schoology.com/home", "_blank");
+                }
+            });
+        };
 </script>
 </head>
 <body>
@@ -135,7 +131,7 @@
             </li>
             <li>
                 <label>
-                    <input type="text" id="keyInput" placeholder="Type a key and press Enter">
+                    <input type="text" id="keyInput" onkeyup="saveKey()" placeholder="Type a key here...">
                     Panic key (opens schoology when you press the key you selected).
                 </label>
             </li>
