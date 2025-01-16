@@ -95,15 +95,6 @@
 </script>
 </head>
 <body>
-    <script>
-        document.getElementById('downloadCookies').addEventListener('click', function() {
-            // Logic to download cookies
-        });
-
-        document.getElementById('importCookiesButton').addEventListener('click', function() {
-            // Logic to import cookies
-        });
-    </script>
 
 
 
@@ -154,29 +145,49 @@
             </li>
             <li>
                 <label>
-                    <input type="file" id="importCookies" accept=".txt">
+                    <input type="file" id="importCookies" accept=".txt" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    <button id="importCookiesButton">Import Cookies</button>
                 </label>
             </li>
         </ul>
     </div>
     <script>
+        // Function to download cookies
         document.getElementById('downloadCookies').addEventListener('click', function() {
             const cookies = document.cookie;
             const blob = new Blob([cookies], { type: 'text/plain' });
-            const link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = 'cookies.txt';
-            link.click();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cookies.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         });
 
-        document.getElementById('importCookies').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const importedCookies = e.target.result;
-                document.cookie = importedCookies;
-            };
-            reader.readAsText(file);
+        // Function to import cookies
+        document.getElementById('importCookiesButton').addEventListener('click', function() {
+            const fileInput = document.getElementById('importCookies');
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const cookies = event.target.result;
+                    cookies.split(';').forEach(cookie => {
+                        const [name, value] = cookie.split('=');
+                        document.cookie = `${name}=${value}; path=/`;
+                    });
+                    alert('Cookies imported successfully!');
+                };
+                reader.readAsText(file);
+            } else {
+                alert('Please select a file to import cookies.');
+            }
         });
     </script>
 
