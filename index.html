@@ -16,6 +16,29 @@
             document.querySelector("link[rel='icon']").href = "https://i.ibb.co/NY8yC9c/download-1.png";
         }, 3500);
     </script>
+    <script>
+        function saveKey(event) {
+            if (event.key === 'Enter') {
+                const key = document.getElementById('keyInput').value;
+                document.cookie = "minimizeKey=" + key;
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener('keydown', function(event) {
+            const cookies = document.cookie.split(';');
+            let minimizeKey = '';
+            cookies.forEach(cookie => {
+                const [key, value] = cookie.split('=');
+                if (key.trim() === 'minimizeKey') {
+                    minimizeKey = value;
+                }
+            });
+            if (event.key === minimizeKey) {
+                window.minimize(); // Note: This is a placeholder; actual minimize functionality may vary by browser.
+            }
+        });
+    </script>
     <style>
         body {
             color: #00ff00;
@@ -104,6 +127,10 @@
                 <label>
                     <input type="checkbox" id="warningToggle" onclick="toggleWarning()">
                     Anti-GoGuardian Close (Can't be closed by GoGuardian.)
+                </label>
+                <label>
+                    <input type="text" id="keyInput" placeholder="Type a key and press Enter" onkeydown="saveKey(event)">
+                    Panic key (Minimizes the window when pressed, use when teacher is walking by.)
                 </label>
             </li>
         </ul>
