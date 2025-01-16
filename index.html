@@ -118,8 +118,7 @@
             <li>Version 1.1.2 - GAME UPDATE, Added A Dance Of Fire And Ice. </li>
             <li>Version 1.1.3 - Fixed Failed Website and ADOFAI not being seperated</li>
             <li>Version 1.1.4 - SETTINGS UPDATE, Added Panic Key (can be found in settings)</li>
-            <li>Version 1.1.5 - SETTINGS UPDATE, Added a way to download and import Cookies (can be found in settings)</li>
-            <li>Version 1.1.6 - BUG FIX, Had to remove Panic Key from CC and CC Chaos due to something with it conflicting and causing the 2 to not load (I might try to add it back later)</li>
+            <li>Version 1.1.5 - BUG FIX, Had to remove Panic Key from CC and CC Chaos due to something with it conflicting and causing the 2 to not load (I might try to add it back later)</li>
         </ul>
     </div>
 <div id="settingstoggle">Settings (CLICK)</div>
@@ -138,61 +137,9 @@
                     Panic key (opens schoology when you press the key you selected).
                 </label>
             </li>
-            <li>
-                <label>
-                    <button id="downloadCookies">Download Cookies</button>
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="file" id="importCookies" accept=".txt" />
-                </label>
-            </li>
-            <li>
-                <label>
-                    <button id="importCookiesButton">Import Cookies</button>
-                </label>
-            </li>
         </ul>
     </div>
-    <script>
-        // Function to download cookies
-        document.getElementById('downloadCookies').addEventListener('click', function() {
-            const cookies = document.cookie;
-            const blob = new Blob([cookies], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'cookies.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        });
-
-        // Function to import cookies
-        document.getElementById('importCookiesButton').addEventListener('click', function() {
-            document.getElementById('importCookies').click();
-        });
-
-        document.getElementById('importCookies').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const cookies = e.target.result;
-                    const cookieArray = cookies.split('; ');
-                    cookieArray.forEach(cookie => {
-                        const [name, value] = cookie.split('=');
-                        document.cookie = `${name}=${value}; path=/`;
-                    });
-                    alert('Cookies imported successfully!');
-                };
-                reader.readAsText(file);
-            }
-        });
-    </script>
-
+    
     <script>
         const changelogtoggle = document.getElementById('changelogtoggle');
         const changelog = document.getElementById('changelog');
