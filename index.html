@@ -149,17 +149,36 @@
             </li>
             <li>
                 <label>
-                          <button id="downloadCookies">Download Cookies</button>
+                    <button id="downloadCookies">Download Cookies</button>
                 </label>
             </li>
             <li>
                 <label>
-    <input type="file" id="importCookies" accept=".txt">
-    <button id="importCookiesButton">Import Cookies</button>
+                    <input type="file" id="importCookies" accept=".txt">
                 </label>
             </li>
         </ul>
     </div>
+    <script>
+        document.getElementById('downloadCookies').addEventListener('click', function() {
+            const cookies = document.cookie;
+            const blob = new Blob([cookies], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'cookies.txt';
+            link.click();
+        });
+
+        document.getElementById('importCookies').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const importedCookies = e.target.result;
+                document.cookie = importedCookies;
+            };
+            reader.readAsText(file);
+        });
+    </script>
 
     <script>
         const changelogtoggle = document.getElementById('changelogtoggle');
