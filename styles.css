@@ -8,8 +8,18 @@ src: url("https://cheesy-website.github.io/fonts/determinationsanswebregular-369
 body {
 
  font-family: 'utfont'; 
- font-size: 90px;
-  
+
+h1 {
+  font-size: 90px;
+}
+
+h2 {
+  font-size: 75px;
+}
+
+p {
+  font-size: 50px;
+}
   margin: 0;
   background: #00a624;
   background-image: url("https://i.ibb.co/BtyvbdQ/bgBlue.png");
