@@ -1,4 +1,3 @@
-body {
   @font-face {
 font-family: "utfont";
 src: url("https://cheesy-website.github.io/fonts/determinationsanswebregular-369x-webfont.woff") format("woff"),
@@ -6,6 +5,10 @@ src: url("https://cheesy-website.github.io/fonts/determinationsanswebregular-369
     font-weight: bold;
     font-style: normal;
 }
+body {
+
+ font-family: 'utfont'; 
+  
   margin: 0;
   background: #00a624;
   background-image: url("https://i.ibb.co/BtyvbdQ/bgBlue.png");
