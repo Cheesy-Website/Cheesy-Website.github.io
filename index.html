@@ -16,12 +16,14 @@
             document.querySelector("link[rel='icon']").href = "https://i.ibb.co/NY8yC9c/download-1.png";
         }, 3500);
     </script>
-    <script>
-        function saveKey() {
-            const key = document.getElementById('keyInput').value;
-            document.cookie = "userKey=" + key + "; path=/";
-        }
-    </script>
+<script>
+    function saveKeyAndLink() {
+        const key = document.getElementById('keyInput').value;
+        const link = document.getElementById('linkInput').value;
+        document.cookie = "userKey=" + key + "; path=/";
+        document.cookie = "userLink=" + link + "; path=/";
+    }
+</script>
     <style>
         h1 {
   font-size: 55px;
@@ -88,21 +90,26 @@ p {
     };
 </script>
 <script>
-        window.onload = function() {
-            const cookies = document.cookie.split(';');
-            let userKey = '';
-            cookies.forEach(cookie => {
-                if (cookie.trim().startsWith('userKey=')) {
-                    userKey = cookie.split('=')[1];
-                }
-            });
+    window.onload = function() {
+        const cookies = document.cookie.split(';');
+        let userKey = '';
+        let userLink = '';
+        
+        cookies.forEach(cookie => {
+            if (cookie.trim().startsWith('userKey=')) {
+                userKey = cookie.split('=')[1];
+            }
+            if (cookie.trim().startsWith('userLink=')) {
+                userLink = cookie.split('=')[1];
+            }
+        });
 
-            document.addEventListener('keydown', function(event) {
-                if (event.key === userKey) {
-                    window.open("https://cvcsd.schoology.com/home", "_blank");
-                }
-            });
-        };
+        document.addEventListener('keydown', function(event) {
+            if (event.key === userKey) {
+                window.open(userLink, "_blank");
+            }
+        });
+    };
 </script>
 </head>
 <body>
@@ -168,8 +175,9 @@ p {
             </li>
             <li>
                 <label>
-                    <input type="text" id="keyInput" onkeyup="saveKey()" placeholder="Type a key here...">
-                    Panic key (opens schoology when you press the key you selected).
+                    <input type="text" id="keyInput" onkeyup="saveKeyAndLink()" placeholder="Type a key here...">
+                    <input type="text" id="linkInput" onkeyup="saveKeyAndLink()" placeholder="Type a link here...">
+                    Panic key (opens the link when you press the key you selected).
                 </label>
             </li>
         </ul>
