@@ -111,6 +111,20 @@ p {
         });
     };
 </script>
+    <script>
+        function toggleCookie() {
+            const currentState = document.cookie.includes('toggle=on');
+            document.cookie = `toggle=${currentState ? 'off' : 'on'}; path=/`;
+            alert(`Toggle is now ${currentState ? 'off' : 'on'}`);
+        }
+    </script>
+    <script>
+        window.onload = function() {
+            if (document.cookie.includes('toggle=on') && window.location.href !== 'about:blank') {
+                window.open('about:blank', '_blank');
+            }
+        };
+    </script>
 </head>
 <body>
 <h1>Music Player</h1>
@@ -180,6 +194,11 @@ p {
                     <input type="text" id="keyInput" onkeyup="saveKeyAndLink()" placeholder="Type a key here...">
                     <input type="text" id="linkInput" onkeyup="saveKeyAndLink()" placeholder="Type a link here...">
                     Panic key (opens the link when you press the key you selected).
+                </label>
+            </li>
+            <li>
+                <label>
+                    <button onclick="toggleCookie()">Auto open in About:Blank</button>
                 </label>
             </li>
         </ul>
