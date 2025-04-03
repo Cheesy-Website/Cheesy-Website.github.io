@@ -10,6 +10,40 @@
     <link rel="icon" href= 
 "https://i.ibb.co/xX7XBVx/Cheese-Goober.webp" 
           type="image/x-icon">
+    <script src="https://cheesy-website.github.io/aboutBlank.js"></script>
+        <script>
+        function toggleFeature() {
+            const toggle = document.getElementById('featureToggle');
+            document.cookie = `featureEnabled=${toggle.checked}; path=/`;
+        }
+
+        function checkToggle() {
+            const cookies = document.cookie.split('; ');
+            const featureCookie = cookies.find(row => row.startsWith('featureEnabled='));
+            const featureEnabled = featureCookie ? featureCookie.split('=')[1] === 'true' : false;
+            document.getElementById('featureToggle').checked = featureEnabled;
+        }
+
+        window.onload = checkToggle;
+    </script>
+     <script>
+        function openAboutBlank() {
+            // This function is already set up and will be executed if conditions are met
+            console.log("Function openAboutBlank executed.");
+        }
+
+        function checkFeature() {
+            const cookies = document.cookie.split('; ');
+            const featureCookie = cookies.find(row => row.startsWith('featureEnabled='));
+            const featureEnabled = featureCookie ? featureCookie.split('=')[1] === 'true' : false;
+
+            if (featureEnabled && window.location.href !== "about:blank") {
+                openAboutBlank();
+            }
+        }
+
+        window.onload = checkFeature;
+    </script>
         <script>
         function toggleFeature() {
             const toggle = document.getElementById('featureToggle');
