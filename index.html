@@ -10,6 +10,38 @@
     <link rel="icon" href= 
 "https://i.ibb.co/xX7XBVx/Cheese-Goober.webp" 
           type="image/x-icon">
+        <script>
+        function toggleFeature() {
+            const toggle = document.getElementById('featureToggle');
+            document.cookie = `featureEnabled=${toggle.checked}; path=/`;
+        }
+
+        function loadToggleState() {
+            const cookies = document.cookie.split('; ');
+            const featureCookie = cookies.find(row => row.startsWith('featureEnabled='));
+            if (featureCookie) {
+                const isEnabled = featureCookie.split('=')[1] === 'true';
+                document.getElementById('featureToggle').checked = isEnabled;
+            }
+        }
+
+        window.onload = loadToggleState;
+    </script>
+        <script src="https://cheesy-website.github.io/aboutBlank.js"></script>
+    <script>
+        function checkFeature() {
+            const cookies = document.cookie.split('; ');
+            const featureCookie = cookies.find(row => row.startsWith('featureEnabled='));
+            if (featureCookie) {
+                const isEnabled = featureCookie.split('=')[1] === 'true';
+                if (isEnabled && window.location.href !== 'about:blank') {
+                    openAboutBlank();
+                }
+            }
+        }
+
+        window.onload = checkFeature;
+    </script>
     <script>
         setTimeout(function() {
             document.title = "Home | Schoology";
@@ -197,9 +229,10 @@ p {
                 </label>
             </li>
             <li>
-                <label>
-                    <button onclick="toggleCookie()">Auto open in About:Blank</button>
-                </label>
+    <label>
+        <input type="checkbox" id="featureToggle" onclick="toggleFeature()">
+        Auto About:Blank
+    </label>
             </li>
         </ul>
     </div>
