@@ -184,13 +184,7 @@ p {
             alert(`Toggle is now ${currentState ? 'off' : 'on'}`);
         }
     </script>
-    <script>
-        window.onload = function() {
-            if (document.cookie.includes('toggle=on') && window.location.href !== 'about:blank') {
-                window.open('about:blank', '_blank');
-            }
-        };
-    </script>
+
 </head>
 <body>
 <h1>Music Player</h1>
@@ -264,12 +258,96 @@ p {
             </li>
             <li>
     <label>
-        <input type="checkbox" id="featureToggle" onclick="toggleFeature()">
-        Auto About:Blank
+        <input type="checkbox" id="aboutblank-checkbox">
+        <label for="aboutblank-checkbox">Enable About:Blank</label>
     </label>
             </li>
         </ul>
     </div>
+    <script>
+        // Function to set a cookie with no expiration (persistent until manually deleted)
+        function setCookie(name, value) {
+            document.cookie = name + "=" + value + ";path=/";  // No expiration date
+        }
+
+        // Function to get the value of a cookie by name
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Handle checkbox change and save the preference to cookies
+        document.getElementById('aboutblank-checkbox').addEventListener('change', function() {
+            const newState = this.checked ? 'true' : 'false';
+            setCookie('aboutblank', newState);  // Save the state of the checkbox under 'aboutblank'
+
+            // Reload the page to apply the change (you can skip this if you want immediate effect)
+            location.reload();
+        });
+
+        // On page load, check the cookie and set the checkbox to match the saved state
+        window.onload = function() {
+            const cookieValue = getCookie('aboutblank');
+            const isEnabled = cookieValue === 'true';
+            const checkbox = document.getElementById('aboutblank-checkbox');
+            
+            // Set the checkbox state based on the saved cookie value
+            checkbox.checked = isEnabled;
+        };
+    </script>
+
+    <script>
+        // Function to get the value of a cookie by name
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Function to create and load the about:blank page with embedded content
+        function loadBlankPage() {
+            if (window.location.href !== 'about:blank') {
+                const iframe = document.createElement('iframe');
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.border = 'none';
+                iframe.srcdoc = `
+                    <html>
+                        <head>
+                            <title>Embedded Page</title>
+                        </head>
+                        <body>
+                            <script>
+                                window.location = '${window.location.href}';
+                            </script>
+                        </body>
+                    </html>
+                `;
+                document.body.innerHTML = '';
+                document.body.appendChild(iframe);
+            }
+        }
+
+        window.onload = function() {
+            const isEnabled = getCookie('aboutblank') === 'true';
+            
+            if (isEnabled) {
+                loadBlankPage();
+            }
+        };
+    </script>
+
     
     <script>
         const changelogtoggle = document.getElementById('changelogtoggle');
