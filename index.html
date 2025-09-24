@@ -194,10 +194,10 @@ body, h1, h2, h3, h4, h5, h6, p, li, a, div, span {
     };
 </script>
     <script>
-        function toggleCookie() {
-            const currentState = document.cookie.includes('toggle=on');
-            document.cookie = `toggle=${currentState ? 'off' : 'on'}; path=/`;
-            alert(`Toggle is now ${currentState ? 'off' : 'on'}`);
+        function Cookie() {
+            const currentState = document.cookie.includes('=on');
+            document.cookie = `=${currentState ? 'off' : 'on'}; path=/`;
+            alert(` is now ${currentState ? 'off' : 'on'}`);
         }
     </script>
 
@@ -233,9 +233,16 @@ body, h1, h2, h3, h4, h5, h6, p, li, a, div, span {
 </script>
 <h1 style="color: #00ff00;">The website from the cheese of all cheese (CheeseMan Himself)</h1>
 <h2 style="color: #00ff00;">This is a hub for my projects</h2>
-<div id="changelogtoggle">Change Log (CLICK)</div>
-    <div id="changelog">
-        <h2>Change Log</h2>
+<div id="changelog">Change Log (CLICK)</div>
+<div id="changelog">
+    <h2>Change Log</h2>
+    <ul>
+        <li>Version 1.1.8 - Minor update, I moved all of the oolder releases to the old release tab found inside the changelog.</li>
+    </ul>
+
+    <div id="oldreleasestoggle">Old Releases (CLICK)</div>
+
+    <div id="oldreleases" style="display:none;">
         <ul>
             <li>Version 0.9.9 - BETA: Testing out 1 last feature. </li>
             <li>Version 1.0.0 - Out of Beta 🥳🥳🥳, added a changelog, restored old website version. </li>
@@ -259,13 +266,14 @@ body, h1, h2, h3, h4, h5, h6, p, li, a, div, span {
             <li>Version 1.1.7 - Minor update, I added a small black border to all of the text so its way easier to read.</li>
         </ul>
     </div>
-<div id="settingstoggle">Settings (CLICK)</div>
+</div>
+<div id="settings">Settings (CLICK)</div>
     <div id="settings">
         <h2>Settings</h2>
         <ul>
             <li>
                 <label>
-                    <input type="checkbox" id="warningToggle" onclick="toggleWarning()">
+                    <input type="checkbox" id="warning" onclick="Warning()">
                     Anti-GoGuardian Close (Can't be closed by GoGuardian.)
                 </label>
             </li>
@@ -281,16 +289,21 @@ body, h1, h2, h3, h4, h5, h6, p, li, a, div, span {
     </div>
     
     <script>
-        const changelogtoggle = document.getElementById('changelogtoggle');
+        const changelog = document.getElementById('changelogtoggle');
         const changelog = document.getElementById('changelog');
         const settingstoggle = document.getElementById('settingstoggle');
         const settings = document.getElementById('settings');
+        const oldreleasestoggle = document.getElementById('oldreleasestoggle');
+        const oldreleases = document.getElementById('oldreleases');
 
         changelogtoggle.addEventListener('click', () => {
             changelog.style.display = changelog.style.display === 'none' ? 'block' : 'none';
         });
         settingstoggle.addEventListener('click', () => {
             settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
+        });
+        oldreleasestoggle.addEventListener('click', () => {
+            oldreleases.style.display = oldreleases.style.display === 'none' ? 'block' : 'none';
         });
     </script>
 
