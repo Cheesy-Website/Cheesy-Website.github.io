@@ -237,9 +237,9 @@ body, h1, h2, h3, h4, h5, h6, p, li, a, div, span {
 <div id="changelog">
     <h2>Change Log</h2>
     
-    <div id="oldreleasestoggle">Old Releases (CLICK)</div>
+    <div id="oldupdatestoggle">Old Updates (CLICK)</div>
 
-    <div id="oldreleases" style="display:none;">
+    <div id="oldupdates" style="display:none;">
         <ul>
             <li>Version 0.9.9 - BETA: Testing out 1 last feature. </li>
             <li>Version 1.0.0 - Out of Beta 🥳🥳🥳, added a changelog, restored old website version. </li>
@@ -294,8 +294,8 @@ body, h1, h2, h3, h4, h5, h6, p, li, a, div, span {
         const changelog = document.getElementById('changelog');
         const settingstoggle = document.getElementById('settingstoggle');
         const settings = document.getElementById('settings');
-        const oldreleasestoggle = document.getElementById('oldreleasestoggle');
-        const oldreleases = document.getElementById('oldreleases');
+        const oldupdatestoggle = document.getElementById('oldupdatestoggle');
+        const oldupdates = document.getElementById('oldupdates');
 
         changelogtoggle.addEventListener('click', () => {
             changelog.style.display = changelog.style.display === 'none' ? 'block' : 'none';
@@ -303,8 +303,8 @@ body, h1, h2, h3, h4, h5, h6, p, li, a, div, span {
         settingstoggle.addEventListener('click', () => {
             settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
         });
-        oldreleasestoggle.addEventListener('click', () => {
-            oldreleases.style.display = oldreleases.style.display === 'none' ? 'block' : 'none';
+        oldupdatestoggle.addEventListener('click', () => {
+            oldupdates.style.display = oldupdates.style.display === 'none' ? 'block' : 'none';
         });
     </script>
 
