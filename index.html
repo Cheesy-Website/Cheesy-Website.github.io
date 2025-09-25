@@ -78,7 +78,7 @@ body, h1, h2, h3, h4, h5, h6, p, li, a, div, span {
     </style>
     <script>
         function toggleWarning() {
-            const toggle = document.getElementById('warningToggle').checked;
+            const toggle = document.getElementById('warning').checked;
             document.cookie = "warningEnabled=" + toggle + "; path=/";
         }
 
@@ -210,7 +210,7 @@ body, h1, h2, h3, h4, h5, h6, p, li, a, div, span {
         <ul>
             <li>
                 <label>
-                    <input type="checkbox" id="warningToggle" onclick="Warning()">
+                    <input type="checkbox" id="warning" onclick="toggleWarning()">
                     Anti-GoGuardian Close (Can't be closed by GoGuardian.)
                 </label>
             </li>
