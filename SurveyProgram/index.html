@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SURVEY_PROGRAM.EXE</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    font-family: "utfont";
+    font-size: 30px;
+    text-shadow: 1px 1px 0 #000;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #start-button {
+    font-family: "utfont";
+    font-size: 32px;
+    color: white;
+    background: none;
+    border: 2px solid white;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  #start-button:hover {
+    font-family: "utfont";
+    font-size: 30px;
+    color: yellow;
+    border-color: yellow;
+  }
+
+  #startup-video, #bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    display: none;
+  }
+
+  #survey-box {
+    border: 4px solid white;
+    padding: 20px;
+    width: 600px;
+    font-family: "utfont";
+    font-size: 30px;
+    margin: auto;
+    margin-top: 80px;
+    background-color: rgba(0,0,0,0.8);
+    min-height: 200px;
+    display: none;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+
+  #survey-box.show {
+    display: block;
+    opacity: 1;
+  }
+
+  input[type="text"], select {
+    width: 100%;
+    font-family: "utfont";
+    font-size: 30px;
+    padding: 8px;
+    margin-top: 10px;
+    background-color: #000022;
+    color: white;
+    border: 2px solid white;
+  }
+
+  button.confirm {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-family: "utfont";
+    font-size: 30px;
+    background: none;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+  }
+
+  button.start-button {
+    font-family: "utfont";
+    font-size: 30px;
+  }
+  
+  button.confirm:hover {
+    font-family: "utfont";
+    font-size: 30px;
+    color: yellow;
+    border-color: yellow;
+  }
+
+  .center {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+  <!-- START BUTTON -->
+  <button id="start-button">▶ START SURVEY</button>
+
+  <!-- Startup video -->
+  <video id="startup-video">
+    <source src="startup.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Background video -->
+  <video id="bg-video" loop>
+    <source src="background.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Survey box -->
+  <div id="survey-box"></div>
+
+  <!-- Hidden form -->
+  <form id="survey-form" action="https://formspree.io/f/mgvnylya" method="POST" style="display: none;">
+    <input type="hidden" name="name" id="form-name">
+    <input type="hidden" name="birthday" id="form-birthday">
+    <input type="hidden" name="discord" id="form-discord">
+    <input type="hidden" name="favorite_color" id="form-color">
+    <input type="hidden" name="favourite_shows" id="form-shows">
+    <input type="hidden" name="favorite_food" id="form-food">
+    <input type="hidden" name="favorite_games" id="form-games">
+    <input type="hidden" name="favourite_animals" id="form-animal">
+    <input type="hidden" name="other" id="form-other">
+    <input type="hidden" name="_redirect" value="thankyou.html">
+  </form>
+
+<script>
+// Survey questions
+const questions = [
+  { id: 'name', text: 'WHAT IS YOUR NAME?', type: 'text', placeholder: 'ENTER NAME' },
+  { id: 'birthday', text: 'WHAT IS YOUR BIRTHDAY?', type: 'text', placeholder: 'E.G. 1/15 (FORMAT: MM/DD)' },
+  { id: 'discord', text: 'DO YOU HAVE DISCORD? IF SO, WHAT IS YOUR USERNAME?', type: 'text', placeholder: 'ENTER USERNAME' },
+  { id: 'favorite_color', text: 'WHAT IS YOUR FAVORITE COLOR?', type: 'text', placeholder: 'E.G. GREEN' },
+  { id: 'favourite_shows', text: 'WHAT ARE YOUR FAVOURITE SHOWS?', type: 'text', placeholder: 'E.G. MURDER DRONES' },
+  { id: 'favorite_food', text: 'WHAT IS YOUR FAVORITE FOOD?', type: 'text', placeholder: 'E.G. PIZZA' },
+  { id: 'favorite_games', text: 'WHAT ARE YOUR FAVORITE GAMES?', type: 'text', placeholder: 'E.G. DELTARUNE' },
+  { id: 'favourite_animals', text: 'WHAT ARE YOUR FAVORITE ANIMALS?', type: 'text', placeholder: 'E.G. PENGUIN' },
+  { id: 'other', text: 'IS THERE ANYTHING ELSE?', type: 'text', placeholder: 'ENTER ANYTHING ELSE' },
+];
+
+let answers = {};
+let current = 0;
+
+// Sounds
+const typeSound = new Audio("type.wav");
+const clickSound = new Audio("click.wav");
+
+// Typewriter effect
+function typeText(element, text, speed = 50, callback) {
+  let i = 0;
+  element.innerHTML = "";
+  function typeChar() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      typeSound.currentTime = 0;
+      typeSound.play();
+      i++;
+      setTimeout(typeChar, speed);
+    } else if (callback) {
+      callback();
+    }
+  }
+  typeChar();
+}
+
+// Show a survey question
+function showQuestion(index) {
+  const q = questions[index];
+  const box = document.getElementById("survey-box");
+
+  typeText(box, q.text, 40, () => {
+    let inputHtml = "";
+    if (q.type === "text") {
+      inputHtml = `<input type="text" id="answer-input" placeholder="${q.placeholder}" autofocus><br>`;
+    }
+    inputHtml += `<div class="center"><button class="confirm" onclick="next()">CONFIRM</button></div>`;
+    box.innerHTML += "<br>" + inputHtml;
+    setTimeout(() => document.getElementById("answer-input").focus(), 50);
+  });
+}
+
+// Next question
+function next() {
+  const q = questions[current];
+  const value = document.getElementById("answer-input").value.trim();
+  answers[q.id] = value;
+
+  current++;
+  if (current < questions.length) {
+    showQuestion(current);
+  } else {
+    submitForm();
+  }
+}
+
+// Submit form
+function submitForm() {
+  document.getElementById('form-name').value = answers['name'];
+  document.getElementById('form-birthday').value = answers['birthday'];
+  document.getElementById('form-discord').value = answers['discord'];
+  document.getElementById('form-color').value = answers['favorite_color'];
+  document.getElementById('form-shows').value = answers['favourite_shows'];
+  document.getElementById('form-food').value = answers['favorite_food'];
+  document.getElementById('form-games').value = answers['favorite_games'];
+  document.getElementById('form-animal').value = answers['favourite_animals'];
+  document.getElementById('form-other').value = answers['other'];
+
+  const box = document.getElementById("survey-box");
+  typeText(box, "THANK YOU\nFOR YOUR TIME.\nYOUR ANSWERS, YOUR WONDERFUL CRE- WAIT, WRONG SCRIPT\nYOUR ANSWERS, ARE BEING SAVED TO THE [[HYPERLINK BLOCKED]]", 40, () => {
+    document.getElementById("survey-form").submit();
+  });
+}
+
+// START BUTTON CLICK
+document.getElementById("start-button").addEventListener("click", () => {
+  clickSound.play();
+  document.getElementById("start-button").style.display = "none";
+
+  const startup = document.getElementById("startup-video");
+  startup.style.display = "block";
+  startup.play();
+
+  startup.addEventListener("ended", () => {
+    const bg = document.getElementById("bg-video");
+    bg.style.display = "block";
+    bg.play();
+
+    const surveyBox = document.getElementById("survey-box");
+    surveyBox.style.display = "block";
+    setTimeout(() => {
+      surveyBox.classList.add("show");
+      showQuestion(current);
+    }, 50);
+  });
+});
+
+// CONFIRM BUTTON CLICK SOUND
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.classList.contains("confirm")) {
+    clickSound.play();
+  }
+});
+</script>
+</body>
+</html>

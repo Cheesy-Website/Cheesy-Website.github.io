@@ -1,0 +1,197 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sonic 3 AIR Mods</title>
+<link rel="shortcut icon" href="add/addons.png" />
+<script>
+    window.onbeforeunload = function() {
+        const cookies = document.cookie.split(';');
+        let warningEnabled = false;
+        cookies.forEach(cookie => {
+            const [name, value] = cookie.trim().split('=');
+            if (name === 'warningEnabled') {
+                warningEnabled = (value === 'true');
+            }
+        });
+        if (warningEnabled) {
+            return "Are you sure you want to leave this page?";
+        }
+    };
+</script>
+    <script>
+        window.onload = function() {
+            const cookies = document.cookie.split(';');
+            let userKey = '';
+            cookies.forEach(cookie => {
+                if (cookie.trim().startsWith('userKey=')) {
+                    userKey = cookie.split('=')[1];
+                }
+            });
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === userKey) {
+                    window.open("https://cvcsd.schoology.com/home", "_blank");
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<div class="navbar" style="  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  background-color: #404040;
+  border: 3px solid #262626;">
+  <a href="#">Sources</a>
+  <a href="#Direct">Directions</a>
+  <a href="#Addons">Addons</a>
+</div>
+</body>
+
+<body>
+<style>
+.content {
+  max-width: 500px;
+  margin: auto;
+}
+</style>
+<style>
+.content {
+  max-width: 500px;
+  margin: auto;
+}
+</style>
+<style>
+#random{
+  
+  /* ENHANCEMENT */
+  background-image: url('https://i.ibb.co/BtyvbdQ/bgBlue.png');
+  background-size: 512x512;
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
+</style>
+<script>
+function randombg(){
+  var random= Math.floor(Math.random() * 6) + 0;
+  var bigSize = ["url('https://i.ibb.co/BtyvbdQ/bgBlue.png')",
+                 "url('https://i.ibb.co/BtyvbdQ/bgBlue.png')",
+                 "url('https://i.ibb.co/BtyvbdQ/bgBlue.png')",
+                 "url('https://i.ibb.co/BtyvbdQ/bgBlue.png')",
+                 "url('https://i.ibb.co/BtyvbdQ/bgBlue.png')"];
+  document.getElementById("random").style.backgroundImage=bigSize[random];
+}
+</script>
+<body onload="randombg()">
+	<!-- <div id="random" ></div> --> 
+<div style="background-image: url('add/bgBlue.jpg'); width=100%; height=100%" bgproperties="fixed" id="random">
+<br>
+<div class="content" style="  background-color: #cccccc;
+  border: 3px solid #262626;">
+  <!-- Page content -->
+  <h1 id="Sources">Mod Sources</h1>
+<a target="_blank" href="https://gamebanana.com/games/6878">GameBannana</a>
+<br>
+
+
+<h2>Directions</h2>
+<a>Find the mod you want, then click on the "Download" button next to it</a>
+<br>
+<a>Then, go to Sonic 3 AIR main menu, then select "Exit"</a>
+<br>
+<a>Then, on the next screen there will be a few folders, enter the mods folder</a>
+<br>
+<a>Then click the import button in the top right (the up arrow) and select the zip file of the mod you want to install</a>
+<br>
+<a>Then click "Restart Game"</a>
+<br>
+<a>Then once you are on the main menu again, then select "Mods"</a>
+<br>
+<a>Then in the mod menu use the arrow keys to go to the mod you want to enable, hold A while hovered over the mod you want to enable, then press left arrow then hit enter</a>
+<br>
+<a>If you want to disable a mod then hold A on the mod you want to disable, and press right arrow</a>
+<br>
+<br>
+<h1>Mods</h1>
+
+<h1>My own mods</h1>
+<a>Suggest Mods <a href="https://docs.google.com/forms/d/e/1FAIpQLSfhGU3BDxEh4cXNt7zW8DUV_KEMYdCxrNKf75FuPatyQtj0GA/viewform?usp=sf_link">Here</a></a>
+
+<h2>Green Super Sonic over normal Sonic</h2>
+    <a href="https://drive.google.com/uc?export=download&id=18ypcXkRJ9MFRayJbo91brw10Uqx2uvR9" target="_blank">
+        <button>Download</button>
+    </a>
+
+
+
+<!-- javascript: (function () {Game.LoadMod('LINK');}()); -->
+</body>
