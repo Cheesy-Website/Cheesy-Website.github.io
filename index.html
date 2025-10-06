@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,280 +8,287 @@
     <link rel="stylesheet" href="styles.css">
     <meta name="description" content="Unblocked Games For School.">
     <meta name="keywords" content="Unblocked games, cheesy-website, A Dance Of Fire And Ice, ADOFAI, ADOFAI Unblocked, A Dance Of Fire And Ice Unblocked, cheesy website, sonic 3 air, sonic 3 air unblocked, mario 64, mario 64 unblocked, classic mario unblocked, classic mario, mario, mario unblocked, cookie clicker mods, cookie clicker unblocked, adventures with anxiety unblocked, cheeseman_gt, cheeseman, GBA, GBA emulator, GBA roms, gameboy advance emulator, gameboy advance, gameboy advance roms, gameboy advance unblocked, gameboy advance emulator unblocked">
-    <link rel="icon" href= 
-"https://i.ibb.co/xX7XBVx/Cheese-Goober.webp" 
-          type="image/x-icon">
+    <link rel="icon" href="https://i.ibb.co/xX7XBVx/Cheese-Goober.webp" type="image/x-icon">
 
-    <script>
-        setTimeout(function() {
-            document.title = "Home | Schoology";
-            document.querySelector("link[rel='icon']").href = "https://i.ibb.co/NY8yC9c/download-1.png";
-        }, 3500);
-    </script>
-<script>
-    function saveKeyAndLink() {
-        const key = document.getElementById('keyInput').value;
-        const link = document.getElementById('linkInput').value;
-        document.cookie = "userKey=" + key + "; path=/";
-        document.cookie = "userLink=" + link + "; path=/";
-    }
-</script>
     <style>
-        h1 {
-  font-size: 55px;
-}
-
-h2 {
-  font-size: 45px;
-}
-
-p {
-  font-size: 40px;
-}
         body {
             color: #00ff00;
         }
-        #changelogtoggle {
-            font-size: 40px;
-            cursor: pointer;
+
+        h1 {
+            font-size: 55px;
         }
+
+        h2 {
+            font-size: 45px;
+        }
+
+        p {
+            font-size: 40px;
+        }
+
+        #changelogtoggle,
         #settingstoggle {
             font-size: 40px;
             cursor: pointer;
         }
-        #changelog {
-            background: #000000;
-            display: none;
-            font-size: 40px;
-        }
+
+        #changelog,
         #settings {
             background: #000000;
             display: none;
             font-size: 40px;
         }
-body, h1, h2, h3, h4, h5, h6, p, li, a, div, span {
-    text-shadow: 
-        -2px -2px 0 #000,  
-         2px -2px 0 #000,
-        -2px  2px 0 #000,
-         2px  2px 0 #000,
-        -2px  0px 0 #000,
-         2px  0px 0 #000,
-         0px -2px 0 #000,
-         0px  2px 0 #000,
-        -3px -3px 0 #000,
-         3px  3px 0 #000;
-}
 
-}
-
+        body, h1, h2, h3, h4, h5, h6, p, li, a, div, span {
+            text-shadow: 
+                -2px -2px 0 #000,  
+                 2px -2px 0 #000,
+                -2px  2px 0 #000,
+                 2px  2px 0 #000,
+                -2px  0px 0 #000,
+                 2px  0px 0 #000,
+                 0px -2px 0 #000,
+                 0px  2px 0 #000,
+                -3px -3px 0 #000,
+                 3px  3px 0 #000;
+        }
     </style>
+
     <script>
+        // Change title and icon after 3.5s
+        setTimeout(function() {
+            document.title = "Home | Schoology";
+            document.querySelector("link[rel='icon']").href = "https://i.ibb.co/NY8yC9c/download-1.png";
+        }, 3500);
+
+        // Save key and link in cookies
+        function saveKeyAndLink() {
+            const key = document.getElementById('keyInput').value;
+            const link = document.getElementById('linkInput').value;
+            document.cookie = "userKey=" + key + "; path=/";
+            document.cookie = "userLink=" + link + "; path=/";
+        }
+
+        // Toggle warning cookie
         function toggleWarning() {
             const toggle = document.getElementById('warning').checked;
             document.cookie = "warningEnabled=" + toggle + "; path=/";
         }
 
-        window.onload = function() {
-            const cookies = document.cookie.split(';');
-            cookies.forEach(cookie => {
-                const [name, value] = cookie.trim().split('=');
-                if (name === 'warningEnabled') {
-                    document.getElementById('warningToggle').checked = (value === 'true');
-                }
-            });
-        };
-    </script>
-<script>
-    window.onbeforeunload = function() {
-        const cookies = document.cookie.split(';');
-        let warningEnabled = false;
-        cookies.forEach(cookie => {
-            const [name, value] = cookie.trim().split('=');
-            if (name === 'warningEnabled') {
-                warningEnabled = (value === 'true');
-            }
-        });
-        if (warningEnabled) {
-            return "Are you sure you want to leave this page?";
-        }
-    };
-</script>
-<script>
-    window.onload = function() {
-        const cookies = document.cookie.split(';');
-        let userKey = '';
-        let userLink = '';
-        
-        cookies.forEach(cookie => {
-            if (cookie.trim().startsWith('userKey=')) {
-                userKey = cookie.split('=')[1];
-            }
-            if (cookie.trim().startsWith('userLink=')) {
-                userLink = cookie.split('=')[1];
-            }
-        });
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === userKey) {
-                window.open(userLink, "_blank");
-            }
-        });
-    };
-</script>
-    <script>
+        // Toggle generic cookie
         function Cookie() {
             const currentState = document.cookie.includes('=on');
             document.cookie = `=${currentState ? 'off' : 'on'}; path=/`;
             alert(` is now ${currentState ? 'off' : 'on'}`);
         }
-    </script>
 
+        // Window load: initialize cookies
+        window.onload = function() {
+            const cookies = document.cookie.split(';');
+            let userKey = '';
+            let userLink = '';
+            
+            cookies.forEach(cookie => {
+                const [name, value] = cookie.trim().split('=');
+
+                if (name === 'warningEnabled') {
+                    document.getElementById('warning').checked = (value === 'true');
+                }
+                if (name === 'userKey') {
+                    userKey = value;
+                }
+                if (name === 'userLink') {
+                    userLink = value;
+                }
+            });
+
+            // Panic key functionality
+            document.addEventListener('keydown', function(event) {
+                if (event.key === userKey) {
+                    window.open(userLink, "_blank");
+                }
+            });
+        };
+
+        // Warn on page unload
+        window.onbeforeunload = function() {
+            const cookies = document.cookie.split(';');
+            let warningEnabled = false;
+            cookies.forEach(cookie => {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'warningEnabled') {
+                    warningEnabled = (value === 'true');
+                }
+            });
+            if (warningEnabled) {
+                return "Are you sure you want to leave this page?";
+            }
+        };
+
+        // Toggle elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const changelogtoggle = document.getElementById('changelogtoggle');
+            const changelog = document.getElementById('changelog');
+            const settingstoggle = document.getElementById('settingstoggle');
+            const settings = document.getElementById('settings');
+            const oldupdatestoggle = document.getElementById('oldupdatestoggle');
+            const oldupdates = document.getElementById('oldupdates');
+
+            changelogtoggle.addEventListener('click', () => {
+                changelog.style.display = changelog.style.display === 'none' ? 'block' : 'none';
+            });
+            settingstoggle.addEventListener('click', () => {
+                settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
+            });
+            oldupdatestoggle.addEventListener('click', () => {
+                oldupdates.style.display = oldupdates.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+
+        // Change font
+        function changeFont(fontUrl) {
+            document.getElementById('fontStyle').setAttribute('href', fontUrl);
+        }
+    </script>
 </head>
 <body>
-<!-- <h1>Music Player</h1>
-    <select id="songSelector" onchange="changeSong()">
-        <option value="song3.mp3">Undertale Shop Music</option>
-        <option value="song2.mp3">Outsider Trading Theme</option>
-        <option value="song1.mp3">Elevator Music</option>
-        <option value="song4.mp3">Battleblock theater theme</option>
-    </select>
+    <h1 style="color: #00ff00;">The website from the cheese of all cheese (CheeseMan Himself)</h1>
+    <h2 style="color: #00ff00;">This is a hub for my projects</h2>
 
-    <audio id="audioPlayer" controls autoplay loop>
-        <source src="song3.mp3" type="audio/mpeg">
-        Your browser does not support the audio tag.
-    </audio>
-
-    <script>
-        function changeSong() {
-            var selector = document.getElementById("songSelector");
-            var audioPlayer = document.getElementById("audioPlayer");
-            audioPlayer.src = selector.value;
-            audioPlayer.play();
-        }
-    </script> -->
-
-
-<script>
-    function changeFont(fontUrl) {
-        document.getElementById('fontStyle').setAttribute('href', fontUrl);
-    }
-</script>
-<h1 style="color: #00ff00;">The website from the cheese of all cheese (CheeseMan Himself)</h1>
-<h2 style="color: #00ff00;">This is a hub for my projects</h2>
-<div id="changelogtoggle">Change Log (CLICK)</div>
-<div id="changelog">
-    <h2>Change Log</h2>
-    
-    <div id="oldupdatestoggle">Old Updates (CLICK)</div>
-
-    <div id="oldupdates" style="display:none;">
+    <div id="changelogtoggle">Change Log (CLICK)</div>
+    <div id="changelog">
+        <h2>Change Log</h2>
+        <div id="oldupdatestoggle">Old Updates (CLICK)</div>
+        <div id="oldupdates" style="display:none;">
+            <ul>
+                <li>Version 0.9.9 - BETA: Testing out 1 last feature.</li>
+                <li>Version 1.0.0 - Out of Beta 🥳, added a changelog, restored old website version.</li>
+                <li>Version 1.0.1 - Added the failed website to the games section.</li>
+                <li>Version 1.0.2 - Added a settings page.</li>
+                <li>Version 1.0.3 - HUGE UPDATE, Added a working Anti-GoGuardian (can be found in settings).</li>
+                <li>Version 1.0.4 - Fixed Anti-GoGuardian.</li>
+                <li>Version 1.0.5 - GAME UPDATE, Added A Dance Of Fire And Ice.</li>
+                <li>Version 1.0.6 - Fixed Failed Website and ADOFAI not being separated.</li>
+                <li>Version 1.0.7 - SETTINGS UPDATE, Added Panic Key (can be found in settings).</li>
+                <li>Version 1.0.8 - BUG FIX, Had to remove Panic Key from CC and CC Chaos due to conflicts.</li>
+                <li>Version 1.0.9 - HUGE UPDATE, Updated website hosting.</li>
+                <li>Version 1.1.0 - REVERT+GAME UPDATE, Netlify doesn't support all scripts, added Sonic Robo Blast 2.</li>
+                <li>Version 1.1.1 - Fixed custom font code, now uses Undertale font.</li>
+                <li>Version 1.1.2 - NEW STUFF, Added music player (WIP) and preview website version.</li>
+                <li>Version 1.1.3 - REVAMP, Panic Key now allows selecting a link to open.</li>
+                <li>Version 1.1.4 - Added a way to suggest games for the website.</li>
+                <li>Version 1.1.5 - NEW GAME, Added DELTARUNE chapters 1-4.</li>
+                <li>Version 1.1.5.5 - Minor update, fixed DELTARUNE scaling issue.</li>
+                <li>Version 1.1.6 - Disabled music player temporarily.</li>
+                <li>Version 1.1.7 - Added black border to all text for readability.</li>
+                <li>Version 1.1.8 - Moved older updates to the old updates tab.</li>
+                <li>Version 1.1.9 - NEW GAME, Added UNDERTALE with known quirks.</li>
+            </ul>
+        </div>
         <ul>
-            <li>Version 0.9.9 - BETA: Testing out 1 last feature. </li>
-            <li>Version 1.0.0 - Out of Beta 🥳🥳🥳, added a changelog, restored old website version. </li>
-            <li>Version 1.0.1 - Added the failed website (old version that was once the new version) to the games section. </li>
-            <li>Version 1.0.2 - Added a settings page. </li>
-            <li>Version 1.0.3 - HUGE UPDATE, Added a working Anti-GoGuardian (can be found in settings.) </li>
-            <li>Version 1.0.4 - Fixed Anti-GoGuardian. </li>
-            <li>Version 1.0.5 - GAME UPDATE, Added A Dance Of Fire And Ice. </li>
-            <li>Version 1.0.6 - Fixed Failed Website and ADOFAI not being seperated</li>
-            <li>Version 1.0.7 - SETTINGS UPDATE, Added Panic Key (can be found in settings)</li>
-            <li>Version 1.0.8 - BUG FIX, Had to remove Panic Key from CC and CC Chaos due to something with it conflicting and causing the 2 to not load (I might try to add it back later)</li>
-            <li>Version 1.0.9 - HUGE UPDATE, Updated the website hosting, I hope this works.</li>
-            <li>Version 1.1.0 - REVERT+GAME UPDATE, Netlify doesn't support all of my website's scripts such as panic key so I had to revert it, it was also just a nightmare to use. I also added in Sonic Robo Blast 2.</li>
-            <li>Version 1.1.1 - Back in the beta I tried to add custom font to my website but failed, I fixed the code and now the font is changed to be the Undertale font, eventually I will add a way to change between fonts.</li>
-            <li>Version 1.1.2 - NEW STUFF, Added a music player, its still a wip but its good enough for now, I also made a preview version of my website mainly used for me to test updates.</li>
-            <li>Version 1.1.3 - REVAMP, I revamped the Panic Key so now you can select a link to open for it aswell.</li>
-            <li>Version 1.1.4 - NEW STUFF, I added a way to suggest games and stuff I should add to my website.</li>
-            <li>Version 1.1.5 - NEW GAME, I added DELTARUNE chapters 1-4 to my website, it will look a little strange though, but I cant fix it right now.</li>
-            <li>Version 1.1.5.5 - Minor update, I did my best to fix the DELTARUNE scaling issue (it's a quick tutorial)</li>
-            <li>Version 1.1.6 - Minor update, I had to disable the music player for now as it was getting people in trouble, I might add it back later when I get a better system for it.</li>
-            <li>Version 1.1.7 - Minor update, I added a small black border to all of the text so its way easier to read.</li>
-            <li>Version 1.1.8 - Minor update, I moved all of the older updates to the old updates tab found inside the changelog.</li>
-			<li>Version 1.1.9 - NEW GAME, I added UNDERTALE to my website, this was a pain in the ass so dont expect it to work perfectly, also you need to follow the DELTARUNE tutorial on how to fix the screen stretching if you want to fullscreen it or stop it from showing the exception thing that I literally can't remove.</li>
+            <li>Version 1.2.0 - HUGE UPDATE, trying Netlify again with remade code.</li>
         </ul>
     </div>
-    <ul>
-        <li>Version 1.2.0 - HUGE UPDATE, I am trying out netlify again now that I have remade the code to support it, I hope this works as it took me hours.</li>
-    </ul>
-</div>
-<div id="settingstoggle">Settings (CLICK)</div>
+
+    <div id="settingstoggle">Settings (CLICK)</div>
     <div id="settings">
         <h2>Settings</h2>
         <ul>
             <li>
                 <label>
                     <input type="checkbox" id="warning" onclick="toggleWarning()">
-                    Anti-GoGuardian Close (Can't be closed by GoGuardian.)
+                    Anti-GoGuardian Close (Can't be closed by GoGuardian)
                 </label>
             </li>
             <li>
                 <label>
                     <input type="text" id="keyInput" onkeyup="saveKeyAndLink()" placeholder="Type a key here...">
                     <input type="text" id="linkInput" onkeyup="saveKeyAndLink()" placeholder="Type a link here...">
-                    Panic key (opens the link when you press the key you selected).
+                    Panic key (opens the link when you press the key you selected)
                 </label>
             </li>
-
         </ul>
     </div>
-    
-    <script>
-        const changelogtoggle = document.getElementById('changelogtoggle');
-        const changelog = document.getElementById('changelog');
-        const settingstoggle = document.getElementById('settingstoggle');
-        const settings = document.getElementById('settings');
-        const oldupdatestoggle = document.getElementById('oldupdatestoggle');
-        const oldupdates = document.getElementById('oldupdates');
 
-        changelogtoggle.addEventListener('click', () => {
-            changelog.style.display = changelog.style.display === 'none' ? 'block' : 'none';
-        });
-        settingstoggle.addEventListener('click', () => {
-            settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
-        });
-        oldupdatestoggle.addEventListener('click', () => {
-            oldupdates.style.display = oldupdates.style.display === 'none' ? 'block' : 'none';
-        });
-    </script>
+    <!-- Project Links -->
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeOgUaJ-cPFj3vbaGRGF9TII_4GlZXjlbAPVeYaaTn9xR_NcQ/viewform?usp=sharing" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
+        <h1>Suggest Things</h1>
+    </a>
+    <img src="https://i.ibb.co/nzjW2YQ/youtube-logo.png" width="128" height="90" alt="">
+    <a href="https://www.youtube.com/@CheeseMan_GT/featured" style="display:inline-block; text-decoration:none; color:#00ff00;">
+        <h1>Subscribe</h1>
+    </a>
+    <img src="https://i.ibb.co/XWw9SXd/perfect-Cookie.webp" width="90" height="90" alt="">
+    <a href="Cookie-Clicker-2.052-web-version-CHAOS-EDITION-/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
+        <h1>Cookie Clicker Chaos Edition</h1>
+    </a>
+    <a href="https://drive.google.com/uc?export=download&id=1YIO3iMKorRLUnhDDY142xd_Ah4Fd5vEB" style="display:inline-block; text-decoration:none; color:#00ff00;">
+        <h1>Download CC Chaos</h1>
+    </a>
 
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeOgUaJ-cPFj3vbaGRGF9TII_4GlZXjlbAPVeYaaTn9xR_NcQ/viewform?usp=sharing" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;"><h1>Suggest Things</h1></a></p>
-    <img src="https://i.ibb.co/nzjW2YQ/youtube-logo.png" width="128" height="90" alt="Unblocked games super mario 64 sm64 web cookie clicker mods cookie clicker modded sonic 3 air adventures with anxiety GBA game boy advance emulator school cheese free">
-    <a href="https://www.youtube.com/@CheeseMan_GT/featured" style="display:inline-block; text-decoration:none; color:#00ff00; "><h1>Subscribe</h1></a></p>
-  <img src="https://i.ibb.co/XWw9SXd/perfect-Cookie.webp" width="90" height="90" alt="Images blocked, if not blocked refresh">
-    <a href="https://cheesy-website.netlify.app/Cookie-Clicker-2.052-web-version-CHAOS-EDITION-/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
-  <h1>Cookie Clicker Chaos Edition</h1>
-</a>
-<a href="https://drive.google.com/uc?export=download&id=1YIO3iMKorRLUnhDDY142xd_Ah4Fd5vEB" style="display:inline-block; text-decoration:none; color:#00ff00;">
-  <h1>Download CC Chaos</h1>
-</a>
-</p>
+    <img src="https://i.ibb.co/fCNNd0J/Cookie.png" width="90" height="90" alt="">
+    <a href="cookie-clicker-v2.052-web-version-NORMAL-/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
+        <h1>Cookie Clicker</h1>
+    </a>
+    <a href="https://drive.google.com/uc?export=download&id=1rqvwBwxxTzfPVDBKyGscM1CuygUHMqbB" style="display:inline-block; text-decoration:none; color:#00ff00;">
+        <h1>Download CC Normal</h1>
+    </a>
 
+    <img src="https://i.ibb.co/PQw993X/GBA.png" width="150" height="87" alt="">
+    <a href="GBA-Emulator/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
+        <h1>GBA Emulator</h1>
+    </a>
+    <a href="https://drive.google.com/drive/folders/0B4dzhuEovDOMWlJCeFhxcGZxZE0?resourcekey=0-9NxXjgDjfTVhLGTiYApVcA&usp=drive_link" style="display:inline-block; text-decoration:none; color:#00ff00;">
+        <h1>GBA Roms</h1>
+    </a>
 
-  <img src="https://i.ibb.co/fCNNd0J/Cookie.png" width="90" height="90" alt="Images blocked, if not blocked refresh">
-    <a href="https://cheesy-website.netlify.app/cookie-clicker-v2.052-web-version-NORMAL-/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;"><h1>Cookie Clicker</h1></a>
-   <a href="https://drive.google.com/uc?export=download&id=1rqvwBwxxTzfPVDBKyGscM1CuygUHMqbB" style="display:inline-block; text-decoration:none; color:#00ff00;"><h1>Download CC Normal</h1></a></p>
-   <img src="https://i.ibb.co/PQw993X/GBA.png" width="150" height="87" alt="Images blocked, if not blocked refresh">
-    <a href="https://cheesy-website.netlify.app/GBA-Emulator/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;"><h1>GBA Emulator</h1></a>
-    <a href="https://drive.google.com/drive/folders/0B4dzhuEovDOMWlJCeFhxcGZxZE0?resourcekey=0-9NxXjgDjfTVhLGTiYApVcA&usp=drive_link" style="display:inline-block; text-decoration:none; color:#00ff00;"><h1>GBA Roms</h1></a></p>
-   <img src="https://i.ibb.co/ZxNnbvB/SM64.png" width="176" height="72" alt="Images blocked, if not blocked refresh">
-    <a href="https://cheesy-website.netlify.app/SM64-WEB/" style="display:inline-block; text-decoration:none; color:#00ff00; "><h1>Super Mario 64</h1></a></p>
-       <img src="https://i.ibb.co/YfPVqvS/S3AIR.jpg" width="125.25" height="111" alt="Images blocked, if not blocked refresh">
-     <a href="https://cheesy-website.netlify.app/Sonic3AIR/sonic3air_web.html" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;"><h1>Sonic3AIR</h1></a>
-    <a href="https://cheesy-website.netlify.app/Sonic3AIR-Mods/" style="display:inline-block; text-decoration:none; color:#00ff00;"><h1>Get Mods</h1></a></p>
-       <img src="https://i.ibb.co/VQByjc8/anxiety.png" width="200" height="105" alt="Images blocked, if not blocked refresh">
-    <a href="https://cheesy-website.netlify.app/anxiety/" style="display:inline-block; text-decoration:none; color:#00ff00; "><h1>Adventures with anxiety</h1></a></p>
-           <img src="https://i.ibb.co/MZNKcQZ/Mario-Classic.png" width="130" height="119" alt="Images blocked, if not blocked refresh">
-    <a href="https://cheesy-website.netlify.app/Classic-Mario/" style="display:inline-block; text-decoration:none; color:#00ff00; "><h1>Classic Mario</h1></a></p>
-  <img src="https://i.ibb.co/xX7XBVx/Cheese-Goober.webp" width="90" height="90" alt="Images blocked, if not blocked refresh">
-    <a href="https://stanthecheeseman.github.io/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;"><h1>Failed website</h1></a></p>
-    <img src="https://i.ibb.co/9hwh8m7/download-2025-01-08-T131300-076.jpg" width="120" height="120" alt="Images blocked, if not blocked refresh">
-    <a href="https://cheesy-website.netlify.app/A-Dance-Of-Fire-And-Ice/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;"><h1>A Dance Of Fire And Ice</h1></a></p>
-      <img src="https://i.ibb.co/p6sQTXV7/Screenshot-2025-01-30-7-51-37-AM.png" width="200" height="125" alt="Images blocked, if not blocked refresh">
-    <a href="https://cheesy-website.netlify.app/srb2web/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;"><h1>Sonic Robo-Blast 2</h1></a></p>
-              <img src="https://i.ibb.co/2YWmc6DH/Undertale.png" width="90" height="90" alt="Images blocked, if not blocked refresh">
-    <a href="https://cheesy-website.netlify.app/webport-hosting/Undertale" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;"><h1>UNDERTALE</h1></a></p>
-      <img src="https://i.ibb.co/YFV95f0S/image.png" width="90" height="90" alt="Images blocked, if not blocked refresh">
-    <a href="https://cheesy-website.netlify.app/Deltarune-Webport/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;"><h1>DELTARUNE</h1></a></p>
+    <img src="https://i.ibb.co/ZxNnbvB/SM64.png" width="176" height="72" alt="">
+    <a href="SM64-WEB/" style="display:inline-block; text-decoration:none; color:#00ff00;">
+        <h1>Super Mario 64</h1>
+    </a>
+
+    <img src="https://i.ibb.co/YfPVqvS/S3AIR.jpg" width="125.25" height="111" alt="">
+    <a href="Sonic3AIR/sonic3air_web.html" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
+        <h1>Sonic3AIR</h1>
+    </a>
+    <a href="Sonic3AIR-Mods/" style="display:inline-block; text-decoration:none; color:#00ff00;">
+        <h1>Get Mods</h1>
+    </a>
+
+    <img src="https://i.ibb.co/VQByjc8/anxiety.png" width="200" height="105" alt="">
+    <a href="anxiety/" style="display:inline-block; text-decoration:none; color:#00ff00;">
+        <h1>Adventures with anxiety</h1>
+    </a>
+
+    <img src="https://i.ibb.co/MZNKcQZ/Mario-Classic.png" width="130" height="119" alt="">
+    <a href="Classic-Mario/" style="display:inline-block; text-decoration:none; color:#00ff00;">
+        <h1>Classic Mario</h1>
+    </a>
+
+    <img src="https://i.ibb.co/xX7XBVx/Cheese-Goober.webp" width="90" height="90" alt="">
+    <a href="https://stanthecheeseman.github.io/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
+        <h1>Failed Website (Might not work still.)</h1>
+    </a>
+
+    <img src="https://i.ibb.co/9hwh8m7/download-2025-01-08-T131300-076.jpg" width="120" height="120" alt="">
+    <a href="A-Dance-Of-Fire-And-Ice/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
+        <h1>A Dance Of Fire And Ice</h1>
+    </a>
+
+    <img src="https://i.ibb.co/p6sQTXV7/Screenshot-2025-01-30-7-51-37-AM.png" width="200" height="125" alt="">
+    <a href="srb2web/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
+        <h1>Sonic Robo-Blast 2</h1>
+    </a>
+
+    <img src="https://i.ibb.co/2YWmc6DH/Undertale.png" width="90" height="90" alt="">
+    <a href="webport-hosting/Undertale" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
+        <h1>UNDERTALE</h1>
+    </a>
+
+    <img src="https://i.ibb.co/YFV95f0S/image.png" width="90" height="90" alt="">
+    <a href="Deltarune-Webport/" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
+        <h1>DELTARUNE</h1>
+    </a>
 </body>
 </html>
