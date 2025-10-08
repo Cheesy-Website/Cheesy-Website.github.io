@@ -148,12 +148,27 @@
     );
   }
 
+  // Your function to replace the current page with an about:blank iframe
+  function replaceWithAboutBlank(url) {
+    document.open();
+    document.write(
+      '<iframe src="' + url + '" width="100%" height="100%" style="border:none;"></iframe>'
+    );
+    document.close();
+  }
+
   // Check for cookie "Blank"
   if (getCookie("Blank")) {
+    // If not already running inside about:blank, replace current page
+    if (window.location.href !== "about:blank") {
+      replaceWithAboutBlank(window.location.href);
+    }
+
+    // Intercept all link clicks and redirect them via about:blank
     document.addEventListener("click", function(e) {
       const target = e.target.closest("a[href]");
       if (target) {
-        e.preventDefault(); // stop normal link behavior
+        e.preventDefault();
         openInAboutBlank(target.href);
       }
     });
