@@ -140,31 +140,26 @@
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
 
-  // Your function to open URLs in about:blank with iframe
+  // Function to wrap a URL in about:blank with an iframe
   function openInAboutBlank(url) {
     const newWindow = window.open('about:blank', '_blank');
     newWindow.document.write(
       '<iframe src="' + url + '" width="100%" height="100%" style="border:none;"></iframe>'
     );
+    newWindow.document.close();
   }
 
-  // Your function to replace the current page with an about:blank iframe
-  function replaceWithAboutBlank(url) {
-    document.open();
-    document.write(
-      '<iframe src="' + url + '" width="100%" height="100%" style="border:none;"></iframe>'
-    );
-    document.close();
-  }
-
-  // Check for cookie "Blank"
   if (getCookie("Blank")) {
-    // If not already running inside about:blank, replace current page
+    // If we’re not already in about:blank
     if (window.location.href !== "about:blank") {
-      replaceWithAboutBlank(window.location.href);
+      // Open this page inside about:blank in a new tab
+      openInAboutBlank(window.location.href);
+
+      // Close the current tab (may require user gesture for some browsers)
+      window.close();
     }
 
-    // Intercept all link clicks and redirect them via about:blank
+    // Intercept link clicks
     document.addEventListener("click", function(e) {
       const target = e.target.closest("a[href]");
       if (target) {
