@@ -133,48 +133,33 @@
 
         
 (function() {
+  // Helper: read a cookie by name
   function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
 
+  // Function to wrap a URL in about:blank with an iframe
   function openInAboutBlank(url) {
     const newWindow = window.open('about:blank', '_blank');
-    newWindow.document.write(`
-      <html>
-        <head>
-          <style>
-            html, body {
-              margin: 0;
-              padding: 0;
-              height: 100%;
-              width: 100%;
-              overflow: hidden;
-              background: black; /* optional */
-            }
-            iframe {
-              border: none;
-              width: 100%;
-              height: 100%;
-              display: block;
-            }
-          </style>
-        </head>
-        <body>
-          <iframe src="${url}"></iframe>
-        </body>
-      </html>
-    `);
+    newWindow.document.write(
+      '<iframe src="' + url + '" width="100%" height="100%" style="border:none;"></iframe>'
+    );
     newWindow.document.close();
   }
 
   if (getCookie("Blank")) {
+    // If we’re not already in about:blank
     if (window.location.href !== "about:blank") {
+      // Open this page inside about:blank in a new tab
       openInAboutBlank(window.location.href);
-      try { window.close(); } catch(e) {}
+
+      // Close the current tab (may require user gesture for some browsers)
+      window.close();
     }
 
+    // Intercept link clicks
     document.addEventListener("click", function(e) {
       const target = e.target.closest("a[href]");
       if (target) {
@@ -274,7 +259,7 @@
             <li>
                 <label>
                     <input type="checkbox" id="Blank" onclick="toggleBlank()">
-                    Open in about blank (!!YOU NEED TO ENABLE POPUPS FOR THIS TO WORK!!)
+                    Open in about blank (Makes links open in about blank)
                 </label>
             </li>
         </ul>
