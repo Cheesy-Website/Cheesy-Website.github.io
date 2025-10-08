@@ -131,7 +131,7 @@
             }
         };
 
-        <script>
+        
 (function() {
   // Helper: read a cookie by name
   function getCookie(name) {
@@ -159,10 +159,10 @@
     });
   }
 })();
-</script>
 
 
-        // Toggle elements
+
+        
         document.addEventListener('DOMContentLoaded', function() {
             const changelogtoggle = document.getElementById('changelogtoggle');
             const changelog = document.getElementById('changelog');
@@ -243,6 +243,12 @@
                     <input type="text" id="keyInput" onkeyup="saveKeyAndLink()" placeholder="Type a key here...">
                     <input type="text" id="linkInput" onkeyup="saveKeyAndLink()" placeholder="Type a link here...">
                     Panic key (opens the link when you press the key you selected)
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" id="Blank" onclick="toggleBlank()">
+                    Open in about blank (Makes links open in about blank)
                 </label>
             </li>
         </ul>
