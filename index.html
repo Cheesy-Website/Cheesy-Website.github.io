@@ -151,7 +151,7 @@
               height: 100%;
               width: 100%;
               overflow: hidden;
-              background: black; /* optional */
+              background: black;
             }
             iframe {
               border: none;
@@ -170,20 +170,22 @@
   }
 
   if (getCookie("Blank")) {
-    if (window.location.href !== "about:blank") {
-      openInAboutBlank(window.location.href);
-      try { window.close(); } catch(e) {}
-    }
-
     document.addEventListener("click", function(e) {
       const target = e.target.closest("a[href]");
       if (target) {
-        e.preventDefault();
-        openInAboutBlank(target.href);
+        const url = target.href;
+
+        // Only hijack *real* links (external or full navigations)
+        // Don’t interfere with your internal toggle buttons
+        if (new URL(url, window.location.href).origin !== window.location.origin) {
+          e.preventDefault();
+          openInAboutBlank(url);
+        }
       }
     });
   }
 })();
+
 
 
 
