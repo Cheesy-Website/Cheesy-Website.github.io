@@ -151,7 +151,7 @@
               height: 100%;
               width: 100%;
               overflow: hidden;
-              background: black;
+              background: black; /* optional */
             }
             iframe {
               border: none;
@@ -170,32 +170,16 @@
   }
 
   if (getCookie("Blank")) {
-    // Wrap the current page in an iframe without breaking toggles
-    const bodyChildren = Array.from(document.body.children);
-    const wrapper = document.createElement('div');
-    wrapper.style.position = 'fixed';
-    wrapper.style.top = '0';
-    wrapper.style.left = '0';
-    wrapper.style.width = '100%';
-    wrapper.style.height = '100%';
-    wrapper.style.margin = '0';
-    wrapper.style.padding = '0';
-    wrapper.style.zIndex = '9999';
-    wrapper.style.background = 'black';
-    wrapper.style.pointerEvents = 'none'; // let internal UI still be clickable
+    if (window.location.href !== "about:blank") {
+      openInAboutBlank(window.location.href);
+      try { window.close(); } catch(e) {}
+    }
 
-    bodyChildren.forEach(el => {
-      wrapper.appendChild(el);
-    });
-    document.body.appendChild(wrapper);
-
-    // Intercept link clicks
     document.addEventListener("click", function(e) {
       const target = e.target.closest("a[href]");
       if (target) {
-        const url = target.href;
         e.preventDefault();
-        openInAboutBlank(url);
+        openInAboutBlank(target.href);
       }
     });
   }
@@ -205,25 +189,39 @@
 
 
 
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            const changelogtoggle = document.getElementById('changelogtoggle');
-            const changelog = document.getElementById('changelog');
-            const settingstoggle = document.getElementById('settingstoggle');
-            const settings = document.getElementById('settings');
-            const oldupdatestoggle = document.getElementById('oldupdatestoggle');
-            const oldupdates = document.getElementById('oldupdates');
 
-            changelogtoggle.addEventListener('click', () => {
-                changelog.style.display = changelog.style.display === 'none' ? 'block' : 'none';
-            });
-            settingstoggle.addEventListener('click', () => {
-                settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
-            });
-            oldupdatestoggle.addEventListener('click', () => {
-                oldupdates.style.display = oldupdates.style.display === 'none' ? 'block' : 'none';
-            });
-        });
+        
+document.addEventListener('DOMContentLoaded', () => {
+  // Use event delegation for toggles
+  document.body.addEventListener('click', (e) => {
+    const target = e.target;
+
+    // Toggle changelog
+    if (target.id === 'changelogtoggle') {
+      const changelog = document.getElementById('changelog');
+      if (changelog) changelog.style.display = changelog.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Toggle settings
+    if (target.id === 'settingstoggle') {
+      const settings = document.getElementById('settings');
+      if (settings) settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Toggle old updates
+    if (target.id === 'oldupdatestoggle') {
+      const oldupdates = document.getElementById('oldupdates');
+      if (oldupdates) oldupdates.style.display = oldupdates.style.display === 'none' ? 'block' : 'none';
+    }
+  });
+
+  // Optionally hide all content by default
+  ['changelog', 'settings', 'oldupdates'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && !el.style.display) el.style.display = 'none';
+  });
+});
+
 
         // Change font
         function changeFont(fontUrl) {
