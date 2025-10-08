@@ -170,21 +170,37 @@
   }
 
   if (getCookie("Blank")) {
+    // Wrap the current page in an iframe without breaking toggles
+    const bodyChildren = Array.from(document.body.children);
+    const wrapper = document.createElement('div');
+    wrapper.style.position = 'fixed';
+    wrapper.style.top = '0';
+    wrapper.style.left = '0';
+    wrapper.style.width = '100%';
+    wrapper.style.height = '100%';
+    wrapper.style.margin = '0';
+    wrapper.style.padding = '0';
+    wrapper.style.zIndex = '9999';
+    wrapper.style.background = 'black';
+    wrapper.style.pointerEvents = 'none'; // let internal UI still be clickable
+
+    bodyChildren.forEach(el => {
+      wrapper.appendChild(el);
+    });
+    document.body.appendChild(wrapper);
+
+    // Intercept link clicks
     document.addEventListener("click", function(e) {
       const target = e.target.closest("a[href]");
       if (target) {
         const url = target.href;
-
-        // Only hijack *real* links (external or full navigations)
-        // Don’t interfere with your internal toggle buttons
-        if (new URL(url, window.location.href).origin !== window.location.origin) {
-          e.preventDefault();
-          openInAboutBlank(url);
-        }
+        e.preventDefault();
+        openInAboutBlank(url);
       }
     });
   }
 })();
+
 
 
 
