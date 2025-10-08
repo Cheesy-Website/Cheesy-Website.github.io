@@ -149,16 +149,6 @@
     newWindow.document.close();
   }
 
-  if (getCookie("Blank")) {
-    // If we’re not already in about:blank
-    if (window.location.href !== "about:blank") {
-      // Open this page inside about:blank in a new tab
-      openInAboutBlank(window.location.href);
-
-      // Close the current tab (may require user gesture for some browsers)
-      window.close();
-    }
-
     // Intercept link clicks
     document.addEventListener("click", function(e) {
       const target = e.target.closest("a[href]");
