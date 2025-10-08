@@ -126,13 +126,36 @@
   }
 
   // Function to wrap a URL in about:blank with an iframe
-  function openInAboutBlank(url) {
-    const newWindow = window.open('about:blank', '_blank');
-    newWindow.document.write(
-      '<iframe src="' + url + '" width="100%" height="100%" style="border:none;"></iframe>'
-    );
-    newWindow.document.close();
-  }
+function openInAboutBlank(url) {
+  const newWindow = window.open('about:blank', '_blank');
+  newWindow.document.write(`
+    <html>
+      <head>
+        <style>
+          html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: black; /* optional */
+          }
+          iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            display: block; /* removes inline-block gaps causing border */
+          }
+        </style>
+      </head>
+      <body>
+        <iframe src="${url}"></iframe>
+      </body>
+    </html>
+  `);
+  newWindow.document.close();
+}
+
 
     // Intercept link clicks
     document.addEventListener("click", function(e) {
