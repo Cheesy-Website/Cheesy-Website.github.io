@@ -187,41 +187,25 @@
 
 
 
-
-
-
         
-document.addEventListener('DOMContentLoaded', () => {
-  // Use event delegation for toggles
-  document.body.addEventListener('click', (e) => {
-    const target = e.target;
+        document.addEventListener('DOMContentLoaded', function() {
+            const changelogtoggle = document.getElementById('changelogtoggle');
+            const changelog = document.getElementById('changelog');
+            const settingstoggle = document.getElementById('settingstoggle');
+            const settings = document.getElementById('settings');
+            const oldupdatestoggle = document.getElementById('oldupdatestoggle');
+            const oldupdates = document.getElementById('oldupdates');
 
-    // Toggle changelog
-    if (target.id === 'changelogtoggle') {
-      const changelog = document.getElementById('changelog');
-      if (changelog) changelog.style.display = changelog.style.display === 'none' ? 'block' : 'none';
-    }
-
-    // Toggle settings
-    if (target.id === 'settingstoggle') {
-      const settings = document.getElementById('settings');
-      if (settings) settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
-    }
-
-    // Toggle old updates
-    if (target.id === 'oldupdatestoggle') {
-      const oldupdates = document.getElementById('oldupdates');
-      if (oldupdates) oldupdates.style.display = oldupdates.style.display === 'none' ? 'block' : 'none';
-    }
-  });
-
-  // Optionally hide all content by default
-  ['changelog', 'settings', 'oldupdates'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el && !el.style.display) el.style.display = 'none';
-  });
-});
-
+            changelogtoggle.addEventListener('click', () => {
+                changelog.style.display = changelog.style.display === 'none' ? 'block' : 'none';
+            });
+            settingstoggle.addEventListener('click', () => {
+                settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
+            });
+            oldupdatestoggle.addEventListener('click', () => {
+                oldupdates.style.display = oldupdates.style.display === 'none' ? 'block' : 'none';
+            });
+        });
 
         // Change font
         function changeFont(fontUrl) {
