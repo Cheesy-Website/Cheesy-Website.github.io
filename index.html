@@ -174,15 +174,18 @@ function openInAboutBlank(url) {
   newWindow.document.close();
 }
 
-
-    // Intercept link clicks
-    document.addEventListener("click", function(e) {
-      const target = e.target.closest("a[href]");
-      if (target) {
-        e.preventDefault();
-        openInAboutBlank(target.href);
-      }
-    });
+// Intercept link clicks, but only if "Blank" is enabled
+document.addEventListener("click", function(e) {
+  const target = e.target.closest("a[href]");
+  if (target) {
+    const blankEnabled = getCookie("Blank") === "true";
+    if (blankEnabled) {
+      e.preventDefault();
+      openInAboutBlank(target.href);
+    }
+    // otherwise, let the link work normally
+  }
+});
   }
 )();
 
