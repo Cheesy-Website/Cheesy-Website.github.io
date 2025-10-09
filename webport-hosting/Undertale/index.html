@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <!-- Changed base href to your GitHub jsDelivr CDN link -->
-    <base href="https://cdn.jsdelivr.net/gh/Cheesy-Website/Cheesy-Website.github.io@tree/main/webport-hosting/Undertale">
+    <base href="https://cdn.jsdelivr.net/gh/Cheesy-Website/Cheesy-Website.github.io/webport-hosting/Undertale/">
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -401,6 +401,18 @@
     <div id="message-container">
       <div id="messages"></div>
     </div>
+<script id="tick-worker" type="javascript/worker">
+  let interval;
+  onmessage = function(e) {
+    if (e.data.run) {
+      interval = setInterval(() => {
+        postMessage('tick');
+      }, 1000 / e.data.fps);
+    } else {
+      clearInterval(interval);
+    }
+  };
+</script>
 
     <script>
       const blob = new Blob([document.querySelector('#tick-worker').textContent]);
@@ -409,14 +421,7 @@
       worker.onmessage = function () {
         GM_tick(performance.now());
       }
-
-      const isMultiplayer = function () {
-        if (typeof GM_is_multiplayer !== 'function') {
-          return false;
-        }
-        return GM_is_multiplayer() !== 0;
-      }
-
+		
       document.addEventListener('visibilitychange', function () {
         if (!isMultiplayer()) {
           return;
@@ -431,7 +436,7 @@
 
     <script>
       // Instead of merging parts, directly load the fused game.unx file
-     window.gameUnxUrl = "https://cheesy-website.netlify.app/webport-hosting/Undertale/game.unx";
+     window.gameUnxUrl = "game.unx";
 
 
       // Override fetch so all game.unx requests use the fused file URL
