@@ -11,6 +11,69 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="HandheldFriendly" content="true" />
     <title>Five Nights at Freddy's World</title>
+
+	    <script>
+        // Change title and icon after 3.5s
+        setTimeout(function() {
+            document.title = "Home | Schoology";
+            document.querySelector("link[rel='icon']").href = "https://i.ibb.co/NY8yC9c/download-1.png";
+        }, 3500);
+
+        function toggleBlank() {
+            const toggle = document.getElementById('Blank').checked;
+            document.cookie = "Blank=" + toggle + "; path=/";
+        }
+
+        // Toggle generic cookie
+        function Cookie() {
+            const currentState = document.cookie.includes('=on');
+            document.cookie = `=${currentState ? 'off' : 'on'}; path=/`;
+            alert(` is now ${currentState ? 'off' : 'on'}`);
+        }
+
+        // Window load: initialize cookies
+        window.onload = function() {
+            const cookies = document.cookie.split(';');
+            let userKey = '';
+            let userLink = '';
+            
+            cookies.forEach(cookie => {
+                const [name, value] = cookie.trim().split('=');
+
+                if (name === 'warningEnabled') {
+                    document.getElementById('warning').checked = (value === 'true');
+                }
+                if (name === 'userKey') {
+                    userKey = value;
+                }
+                if (name === 'userLink') {
+                    userLink = value;
+                }
+            });
+
+            // Panic key functionality
+            document.addEventListener('keydown', function(event) {
+                if (event.key === userKey) {
+                    window.open(userLink, "_blank");
+                }
+            });
+        };
+
+        // Warn on page unload
+        window.onbeforeunload = function() {
+            const cookies = document.cookie.split(';');
+            let warningEnabled = false;
+            cookies.forEach(cookie => {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'warningEnabled') {
+                    warningEnabled = (value === 'true');
+                }
+            });
+            if (warningEnabled) {
+                return "Are you sure you want to leave this page?";
+            }
+        };
+		</script>
 </head>
 
 <body>
