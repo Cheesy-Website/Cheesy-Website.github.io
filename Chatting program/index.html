@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SURVEY_CHAT.EXE</title>
+<style>
+  @font-face {
+    font-family: "utfont";
+    src: url("https://cheesy-website.netlify.app/fonts/determinationsanswebregular-369x-webfont.woff") format("woff"),
+         url("https://cheesy-website.netlify.app/fonts/determinationsanswebregular-369x.ttf") format("truetype");
+  }
+
+  body {
+    background: black;
+    color: white;
+    font-family: "utfont";
+    font-size: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+  }
+
+  #nickname-screen, #chat-screen {
+    width: 640px;
+    max-width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #chat-box {
+    border: 3px solid white;
+    width: 100%;
+    height: 400px;
+    background-color: rgba(0,0,20,0.9);
+    padding: 10px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+
+  .msg {
+    margin: 6px 0;
+  }
+
+  input, button {
+    font-family: "utfont";
+    font-size: 24px;
+    color: white;
+    background: black;
+    border: 2px solid white;
+    padding: 6px 10px;
+    margin: 2px;
+  }
+
+  button:hover {
+    color: yellow;
+    border-color: yellow;
+    cursor: pointer;
+  }
+
+  #chat-form {
+    display: flex;
+    width: 100%;
+  }
+
+  #chat-input {
+    flex: 1;
+  }
+</style>
+</head>
+<body>
+
+<div id="nickname-screen">
+  <div>ENTER NICKNAME:</div>
+  <input type="text" id="nickname-input" placeholder="YOUR NAME">
+  <div>ROOM CODE (leave empty for public):</div>
+  <input type="text" id="room-input" placeholder="ROOM CODE">
+  <button id="join-btn">JOIN CHAT</button>
+</div>
+
+<div id="chat-screen" style="display:none;">
+  <div id="chat-box"></div>
+  <form id="chat-form">
+    <input id="chat-input" placeholder="TYPE MESSAGE...">
+    <button type="submit">SEND</button>
+  </form>
+  <button id="change-nickname-btn">CHANGE NICKNAME</button>
+</div>
+
+<audio id="type-sound" src="type.wav"></audio>
+<audio id="click-sound" src="click.wav"></audio>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // --- Replace these placeholders with your actual Supabase project ---
+  const SUPABASE_URL = "https://jynzopjzhmpmkeooqyrt.supabase.co";
+  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5bnpvcGp6aG1wbWtlb29xeXJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE1NTYzODEsImV4cCI6MjA3NzEzMjM4MX0.o7rmQM3uEpaU8vXihOjIZDt8Vg8A2TX23sd1K51I80s";
+
+  const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  let nickname = "";
+  let room = "public";
+
+  const nicknameScreen = document.getElementById("nickname-screen");
+  const chatScreen = document.getElementById("chat-screen");
+  const chatBox = document.getElementById("chat-box");
+  const nicknameInput = document.getElementById("nickname-input");
+  const roomInput = document.getElementById("room-input");
+  const joinBtn = document.getElementById("join-btn");
+  const chatInput = document.getElementById("chat-input");
+  const chatForm = document.getElementById("chat-form");
+  const changeNickBtn = document.getElementById("change-nickname-btn");
+
+  const typeSound = document.getElementById("type-sound");
+  const clickSound = document.getElementById("click-sound");
+
+  // Helper to play sounds
+  function playClick() { clickSound.currentTime = 0; clickSound.play(); }
+  function playType() { typeSound.currentTime = 0; typeSound.play(); }
+
+  // Join chat
+  joinBtn.onclick = () => {
+    nickname = nicknameInput.value.trim() || "Anon" + Math.floor(Math.random()*1000);
+    room = roomInput.value.trim() || "public";
+    nicknameScreen.style.display = "none";
+    chatScreen.style.display = "flex";
+    subscribeToRoom(room);
+  };
+
+  // Change nickname
+  changeNickBtn.onclick = () => {
+    const newNick = prompt("Enter new nickname:", nickname);
+    if(newNick) nickname = newNick;
+  };
+
+  // Render message
+  function renderMessage(msg) {
+    const div = document.createElement("div");
+    div.className = "msg";
+    div.textContent = msg.sender + ": " + msg.content;
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    playType();
+  }
+
+  // Send message
+  chatForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const text = chatInput.value.trim();
+    if(!text) return;
+    await supabase.from("messages").insert([{ sender: nickname, content: text, room: room }]);
+    chatInput.value = "";
+    playClick();
+  };
+
+  // Subscribe to room messages
+  async function subscribeToRoom(roomName) {
+    const { data: messages } = await supabase.from("messages").select("*").eq("room", roomName).order("id", {ascending:true});
+    chatBox.innerHTML = "";
+    messages.forEach(renderMessage);
+
+    supabase.channel("room-"+roomName)
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages", filter: `room=eq.${roomName}` },
+          payload => renderMessage(payload.new))
+      .subscribe();
+  }
+</script>
+
+</body>
+</html>
