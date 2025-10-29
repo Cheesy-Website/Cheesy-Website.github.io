@@ -100,7 +100,8 @@
   const SUPABASE_URL = "https://jynzopjzhmpmkeooqyrt.supabase.co";
   const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5bnpvcGp6aG1wbWtlb29xeXJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE1NTYzODEsImV4cCI6MjA3NzEzMjM4MX0.o7rmQM3uEpaU8vXihOjIZDt8Vg8A2TX23sd1K51I80s";
 
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  // ✅ use different variable name so we don’t shadow the global
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
   let nickname = "";
   let room = "public";
@@ -152,18 +153,18 @@
     e.preventDefault();
     const text = chatInput.value.trim();
     if(!text) return;
-    await supabase.from("messages").insert([{ sender: nickname, content: text, room: room }]);
+    await sb.from("messages").insert([{ sender: nickname, content: text, room: room }]);
     chatInput.value = "";
     playClick();
   };
 
   // Subscribe to room messages
   async function subscribeToRoom(roomName) {
-    const { data: messages } = await supabase.from("messages").select("*").eq("room", roomName).order("id", {ascending:true});
+    const { data: messages } = await sb.from("messages").select("*").eq("room", roomName).order("id", {ascending:true});
     chatBox.innerHTML = "";
     messages.forEach(renderMessage);
 
-    supabase.channel("room-"+roomName)
+    sb.channel("room-"+roomName)
       .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages", filter: `room=eq.${roomName}` },
           payload => renderMessage(payload.new))
       .subscribe();
