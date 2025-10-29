@@ -11,25 +11,58 @@
   }
 
   body {
-    background: black;
+    margin: 0;
+    padding: 0;
+    background-color: black;
     color: white;
     font-family: "utfont";
     font-size: 28px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     height: 100vh;
-    margin: 0;
-    padding: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #start-button {
+    font-family: "utfont";
+    font-size: 32px;
+    color: white;
+    background: none;
+    border: 2px solid white;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  #start-button:hover {
+    color: yellow;
+    border-color: yellow;
+  }
+
+  #startup-video, #bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    display: none;
   }
 
   #nickname-screen, #chat-screen {
     width: 640px;
     max-width: 95%;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+
+  #nickname-screen.show, #chat-screen.show {
+    display: flex;
+    opacity: 1;
   }
 
   #chat-box {
@@ -74,6 +107,22 @@
 </head>
 <body>
 
+<!-- Start Button -->
+<button id="start-button">▶ START CHAT</button>
+
+<!-- Startup video -->
+<video id="startup-video">
+  <source src="startup.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<!-- Background video -->
+<video id="bg-video" loop>
+  <source src="background.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<!-- Chat UI -->
 <div id="nickname-screen">
   <div>ENTER NICKNAME:</div>
   <input type="text" id="nickname-input" placeholder="YOUR NAME">
@@ -82,7 +131,7 @@
   <button id="join-btn">JOIN CHAT</button>
 </div>
 
-<div id="chat-screen" style="display:none;">
+<div id="chat-screen">
   <div id="chat-box"></div>
   <form id="chat-form">
     <input id="chat-input" placeholder="TYPE MESSAGE...">
@@ -96,11 +145,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-  // --- Replace these placeholders with your actual Supabase project ---
-  const SUPABASE_URL = "https://jynzopjzhmpmkeooqyrt.supabase.co";
-  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5bnpvcGp6aG1wbWtlb29xeXJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE1NTYzODEsImV4cCI6MjA3NzEzMjM4MX0.o7rmQM3uEpaU8vXihOjIZDt8Vg8A2TX23sd1K51I80s";
-
-  // ✅ use different variable name so we don’t shadow the global
+  const SUPABASE_URL = "your-url-here";
+  const SUPABASE_KEY = "your-anon-key-here";
   const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
   let nickname = "";
@@ -119,26 +165,24 @@
   const typeSound = document.getElementById("type-sound");
   const clickSound = document.getElementById("click-sound");
 
-  // Helper to play sounds
   function playClick() { clickSound.currentTime = 0; clickSound.play(); }
   function playType() { typeSound.currentTime = 0; typeSound.play(); }
 
-  // Join chat
   joinBtn.onclick = () => {
+    playClick();
     nickname = nicknameInput.value.trim() || "Anon" + Math.floor(Math.random()*1000);
     room = roomInput.value.trim() || "public";
+    nicknameScreen.classList.remove("show");
     nicknameScreen.style.display = "none";
-    chatScreen.style.display = "flex";
+    chatScreen.classList.add("show");
     subscribeToRoom(room);
   };
 
-  // Change nickname
   changeNickBtn.onclick = () => {
     const newNick = prompt("Enter new nickname:", nickname);
     if(newNick) nickname = newNick;
   };
 
-  // Render message
   function renderMessage(msg) {
     const div = document.createElement("div");
     div.className = "msg";
@@ -148,7 +192,6 @@
     playType();
   }
 
-  // Send message
   chatForm.onsubmit = async (e) => {
     e.preventDefault();
     const text = chatInput.value.trim();
@@ -158,7 +201,6 @@
     playClick();
   };
 
-  // Subscribe to room messages
   async function subscribeToRoom(roomName) {
     const { data: messages } = await sb.from("messages").select("*").eq("room", roomName).order("id", {ascending:true});
     chatBox.innerHTML = "";
@@ -169,6 +211,25 @@
           payload => renderMessage(payload.new))
       .subscribe();
   }
+
+  // --- Startup Sequence ---
+  const startButton = document.getElementById("start-button");
+  const startup = document.getElementById("startup-video");
+  const bg = document.getElementById("bg-video");
+
+  startButton.addEventListener("click", () => {
+    playClick();
+    startButton.style.display = "none";
+    startup.style.display = "block";
+    startup.play();
+
+    startup.addEventListener("ended", () => {
+      bg.style.display = "block";
+      bg.play();
+      nicknameScreen.style.display = "flex";
+      setTimeout(() => nicknameScreen.classList.add("show"), 100);
+    });
+  });
 </script>
 
 </body>
