@@ -165,6 +165,9 @@
   const typeSound = document.getElementById("type-sound");
   const clickSound = document.getElementById("click-sound");
 
+  // 🔒 Blacklisted words — add your own here
+  const blacklist = ["fuck", "shit", "bitch", "dick", "pussy"];
+
   function playClick() { clickSound.currentTime = 0; clickSound.play(); }
   function playType() { typeSound.currentTime = 0; typeSound.play(); }
 
@@ -192,10 +195,25 @@
     playType();
   }
 
+  // 🧹 Censor helper function
+  function censorText(text) {
+    let result = text;
+    blacklist.forEach(word => {
+      const regex = new RegExp(word, "gi");
+      result = result.replace(regex, "****");
+    });
+    return result;
+  }
+
+  // 📨 Sending messages (with bad word filter)
   chatForm.onsubmit = async (e) => {
     e.preventDefault();
-    const text = chatInput.value.trim();
+    let text = chatInput.value.trim();
     if(!text) return;
+
+    // Censor message text before sending
+    text = censorText(text);
+
     await sb.from("messages").insert([{ sender: nickname, content: text, room: room }]);
     chatInput.value = "";
     playClick();
