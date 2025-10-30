@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CHATTING_PROGRAM.EXE</title>
+<title>SURVEY_CHAT.EXE</title>
 <style>
   @font-face {
     font-family: "utfont";
@@ -183,9 +183,9 @@
 
   // 🔒 Bad-word filter
   const blacklist = [
-    "fuck", "shit", "bitch", "asshole", "bastard", "slut", "whore",
-    "nigger", "faggot", "cunt", "dick", "pussy", "retard",
-    "kike", "chink", "spic", "tranny", "cock", "nigga"
+    "fuck","shit","bitch","asshole","bastard","slut","whore",
+    "nigger","faggot","cunt","dick","pussy","retard",
+    "kike","chink","spic","tranny","cock","nigga"
   ];
 
   function playClick() { clickSound.currentTime = 0; clickSound.play(); }
@@ -219,16 +219,23 @@
     e.preventDefault();
     let text = chatInput.value.trim();
     if (!text) return;
-
     text = censorText(text);
-
     await sb.from("messages").insert([{ sender: nickname, content: text, room: room }]);
     chatInput.value = "";
     playClick();
   };
 
-  function renderMessage(msg) {
-    // Add a retro-style line if sender changed
+  // ✨ Typewriter Effect
+  async function typeWriter(element, text, speed = 25) {
+    element.textContent = "";
+    for (let i = 0; i < text.length; i++) {
+      element.textContent += text[i];
+      playType();
+      await new Promise(res => setTimeout(res, speed));
+    }
+  }
+
+  async function renderMessage(msg) {
     if (lastSender !== null && lastSender !== msg.sender) {
       const line = document.createElement("div");
       line.className = "separator";
@@ -238,10 +245,11 @@
 
     const div = document.createElement("div");
     div.className = "msg";
-    div.textContent = msg.sender + ": " + msg.content;
     chatBox.appendChild(div);
     chatBox.scrollTop = chatBox.scrollHeight;
-    playType();
+
+    await typeWriter(div, msg.sender + ": " + msg.content);
+    chatBox.scrollTop = chatBox.scrollHeight;
 
     lastSender = msg.sender;
   }
@@ -255,7 +263,9 @@
 
     chatBox.innerHTML = "";
     lastSender = null;
-    messages.forEach(renderMessage);
+    for (const msg of messages) {
+      await renderMessage(msg);
+    }
 
     sb.channel("room-" + roomName)
       .on("postgres_changes", {
