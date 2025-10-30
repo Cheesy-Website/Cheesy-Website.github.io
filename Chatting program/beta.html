@@ -39,6 +39,26 @@
     border-color: yellow;
   }
 
+  #skip-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-family: "utfont";
+    font-size: 22px;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid white;
+    padding: 6px 12px;
+    cursor: pointer;
+    z-index: 5;
+    display: none;
+  }
+
+  #skip-button:hover {
+    color: yellow;
+    border-color: yellow;
+  }
+
   #startup-video, #bg-video {
     position: fixed;
     top: 0;
@@ -109,6 +129,7 @@
 
 <!-- Start Button -->
 <button id="start-button">▶ START CHAT</button>
+<button id="skip-button">SKIP INTRO</button>
 
 <!-- Startup video -->
 <video id="startup-video">
@@ -133,8 +154,8 @@
 
 <div id="chat-screen">
   <div id="chat-box"></div>
-  <form id="chat-form">
-    <input id="chat-input" placeholder="TYPE MESSAGE...">
+  <form id="chat-form" autocomplete="off">
+    <input id="chat-input" placeholder="TYPE MESSAGE..." autocomplete="off">
     <button type="submit">SEND</button>
   </form>
   <button id="change-nickname-btn">CHANGE NICKNAME</button>
@@ -166,7 +187,7 @@
   const clickSound = document.getElementById("click-sound");
 
   // 🔒 Blacklisted words — add your own here
-  const blacklist = ["fuck", "shit", "bitch", "dick", "pussy"];
+  const blacklist = ["test12345", "fuck", "shit", "bitch"];
 
   function playClick() { clickSound.currentTime = 0; clickSound.play(); }
   function playType() { typeSound.currentTime = 0; typeSound.play(); }
@@ -215,7 +236,7 @@
     text = censorText(text);
 
     await sb.from("messages").insert([{ sender: nickname, content: text, room: room }]);
-    chatInput.value = "";
+    chatInput.value = ""; // clears input
     playClick();
   };
 
@@ -232,21 +253,33 @@
 
   // --- Startup Sequence ---
   const startButton = document.getElementById("start-button");
+  const skipButton = document.getElementById("skip-button");
   const startup = document.getElementById("startup-video");
   const bg = document.getElementById("bg-video");
+
+  function startChatInterface() {
+    startup.pause();
+    startup.style.display = "none";
+    skipButton.style.display = "none";
+    bg.style.display = "block";
+    bg.play();
+    nicknameScreen.style.display = "flex";
+    setTimeout(() => nicknameScreen.classList.add("show"), 100);
+  }
 
   startButton.addEventListener("click", () => {
     playClick();
     startButton.style.display = "none";
     startup.style.display = "block";
     startup.play();
+    skipButton.style.display = "block";
 
-    startup.addEventListener("ended", () => {
-      bg.style.display = "block";
-      bg.play();
-      nicknameScreen.style.display = "flex";
-      setTimeout(() => nicknameScreen.classList.add("show"), 100);
-    });
+    startup.addEventListener("ended", startChatInterface);
+  });
+
+  skipButton.addEventListener("click", () => {
+    playClick();
+    startChatInterface();
   });
 </script>
 
