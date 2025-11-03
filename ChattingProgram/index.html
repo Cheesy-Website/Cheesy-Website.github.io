@@ -122,11 +122,9 @@
 </head>
 <body>
 
-<!-- Start and Skip Buttons -->
 <button id="start-button">▶ START CHAT</button>
 <button id="skip-button">SKIP INTRO</button>
 
-<!-- Startup and Background Videos -->
 <video id="startup-video">
   <source src="startup.mp4" type="video/mp4">
   Your browser does not support the video tag.
@@ -137,7 +135,6 @@
   Your browser does not support the video tag.
 </video>
 
-<!-- Chat UI -->
 <div id="nickname-screen">
   <div>ENTER NICKNAME:</div>
   <input type="text" id="nickname-input" placeholder="YOUR NAME">
@@ -181,7 +178,7 @@ const changeNickBtn = document.getElementById("change-nickname-btn");
 const typeSound = document.getElementById("type-sound");
 const clickSound = document.getElementById("click-sound");
 
-// 🔒 Bad-word filter
+// Bad-word filter
 const blacklist = [
   "fuck","shit","bitch","asshole","bastard","slut","whore",
   "nigger","faggot","cunt","dick","pussy","retard",
@@ -225,81 +222,57 @@ chatForm.onsubmit = async (e) => {
   playClick();
 };
 
-// Parse BBCode [color=#HEX]...[/color] to HTML
+// BBCode color parser
 function parseBBColor(text) {
   return text.replace(/\[color=(#[0-9A-Fa-f]{6})\](.*?)\[\/color\]/g, '<span style="color:$1">$2</span>');
 }
 
-async function typeWriter(element, text, totalDuration = 2500, allowHTML = false) {
-  element.innerHTML = "";
-  const len = text.length;
-  if (len === 0) return;
-  const speed = Math.max(totalDuration / len, 10); // minimum delay
-
-  for (let i = 0; i < len; i++) {
-    if (allowHTML) {
-      element.innerHTML = text.slice(0, i + 1);
-    } else {
-      element.textContent = text.slice(0, i + 1);
-    }
-
-    // Scroll dynamically: if user is near the bottom, keep it pinned
-    const isAtBottom = (chatBox.scrollTop + chatBox.clientHeight) >= (chatBox.scrollHeight - 10);
-    if (isAtBottom) chatBox.scrollTop = chatBox.scrollHeight;
-
-    playType();
-    await new Promise(res => setTimeout(res, speed));
-  }
-
-  // Make sure we finish scrolled to bottom
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-
+// Render message
 async function renderMessage(msg, useTypewriter = true) {
   if (lastSender !== null && lastSender !== msg.sender) {
-    const line = document.createElement("div");
-    line.className = "separator";
-    line.textContent = "────────────────────────────";
-    chatBox.appendChild(line);
+    const sep = document.createElement("div");
+    sep.className = "separator";
+    sep.textContent = "────────────────────────────";
+    chatBox.appendChild(sep);
   }
 
   const div = document.createElement("div");
   div.className = "msg";
   chatBox.appendChild(div);
 
-  // Parse name and content separately
-  const senderHTML = parseBBColor(msg.sender); // always show instantly
+  const senderHTML = parseBBColor(msg.sender);
   const contentHTML = parseBBColor(msg.content);
 
-  // Display sender instantly
+  // Name always shown instantly
   const senderSpan = document.createElement("span");
   senderSpan.innerHTML = senderHTML + ": ";
   div.appendChild(senderSpan);
 
-  if (useTypewriter) {
-    // Typewriter for message content only
-    const contentSpan = document.createElement("span");
-    div.appendChild(contentSpan);
+  const contentSpan = document.createElement("span");
+  div.appendChild(contentSpan);
 
-    for (const char of contentHTML) {
-      contentSpan.innerHTML += char;
-      chatBox.scrollTop = chatBox.scrollHeight;
+  if (useTypewriter) {
+    // Split content into text nodes safely
+    const parser = new DOMParser();
+    const parsed = parser.parseFromString(`<span>${contentHTML}</span>`, "text/html");
+    const nodes = Array.from(parsed.body.firstChild.childNodes);
+
+    for (const node of nodes) {
+      contentSpan.appendChild(node.cloneNode(true));
+      const isAtBottom = (chatBox.scrollTop + chatBox.clientHeight) >= (chatBox.scrollHeight - 10);
+      if (isAtBottom) chatBox.scrollTop = chatBox.scrollHeight;
       playType();
-      await new Promise(r => setTimeout(r, Math.max(2500 / contentHTML.length, 10)));
+      await new Promise(r => setTimeout(r, Math.max(2500 / nodes.length, 10)));
     }
   } else {
-    const contentSpan = document.createElement("span");
     contentSpan.innerHTML = contentHTML;
-    div.appendChild(contentSpan);
     chatBox.scrollTop = chatBox.scrollHeight;
   }
 
   lastSender = msg.sender;
 }
 
-
-// 💬 Subscribe to room and handle messages
+// Subscribe to room
 async function subscribeToRoom(roomName) {
   const { data: messages } = await sb
     .from("messages")
@@ -310,12 +283,10 @@ async function subscribeToRoom(roomName) {
   chatBox.innerHTML = "";
   lastSender = null;
 
-  // Old messages instantly
   for (const msg of messages) {
-    await renderMessage(msg, false);
+    await renderMessage(msg, false); // old messages instantly
   }
 
-  // New messages typewriter
   sb.channel("room-" + roomName)
     .on("postgres_changes", {
       event: "INSERT",
@@ -326,7 +297,7 @@ async function subscribeToRoom(roomName) {
     .subscribe();
 }
 
-// --- Startup sequence ---
+// Startup sequence
 const startButton = document.getElementById("start-button");
 const skipButton = document.getElementById("skip-button");
 const startup = document.getElementById("startup-video");
