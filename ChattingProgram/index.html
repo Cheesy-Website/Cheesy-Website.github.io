@@ -256,7 +256,6 @@ async function typeWriter(element, text, totalDuration = 2500, allowHTML = false
 }
 
 
-// 🧱 Render message
 async function renderMessage(msg, useTypewriter = true) {
   if (lastSender !== null && lastSender !== msg.sender) {
     const line = document.createElement("div");
@@ -269,18 +268,36 @@ async function renderMessage(msg, useTypewriter = true) {
   div.className = "msg";
   chatBox.appendChild(div);
 
-  const senderParsed = parseBBColor(msg.sender);
-  const contentParsed = parseBBColor(msg.content);
+  // Parse name and content separately
+  const senderHTML = parseBBColor(msg.sender); // always show instantly
+  const contentHTML = parseBBColor(msg.content);
+
+  // Display sender instantly
+  const senderSpan = document.createElement("span");
+  senderSpan.innerHTML = senderHTML + ": ";
+  div.appendChild(senderSpan);
 
   if (useTypewriter) {
-    await typeWriter(div, `${senderParsed}: ${contentParsed}`, 2500, true);
+    // Typewriter for message content only
+    const contentSpan = document.createElement("span");
+    div.appendChild(contentSpan);
+
+    for (const char of contentHTML) {
+      contentSpan.innerHTML += char;
+      chatBox.scrollTop = chatBox.scrollHeight;
+      playType();
+      await new Promise(r => setTimeout(r, Math.max(2500 / contentHTML.length, 10)));
+    }
   } else {
-    div.innerHTML = `${senderParsed}: ${contentParsed}`;
+    const contentSpan = document.createElement("span");
+    contentSpan.innerHTML = contentHTML;
+    div.appendChild(contentSpan);
     chatBox.scrollTop = chatBox.scrollHeight;
   }
 
   lastSender = msg.sender;
 }
+
 
 // 💬 Subscribe to room and handle messages
 async function subscribeToRoom(roomName) {
