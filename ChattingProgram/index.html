@@ -225,14 +225,13 @@
     playClick();
   };
 
-  // ✨ Typewriter Effect (always 5 seconds total)
-  async function typeWriter(element, text, totalDuration = 5000) {
+  // ✨ Typewriter Effect (always 2.5 seconds total)
+  async function typeWriter(element, text, totalDuration = 2500) {
     element.textContent = "";
     const len = text.length;
     if (len === 0) return;
 
-  // Calculate delay so total typing takes 5 seconds
-    const speed = totalDuration / len;
+    const speed = Math.max(totalDuration / len, 10); // minimum delay
 
     for (let i = 0; i < len; i++) {
       element.textContent += text[i];
@@ -241,8 +240,8 @@
     }
   }
 
-
-  async function renderMessage(msg) {
+  // 🧱 Render message (option to skip typing)
+  async function renderMessage(msg, useTypewriter = true) {
     if (lastSender !== null && lastSender !== msg.sender) {
       const line = document.createElement("div");
       line.className = "separator";
@@ -255,12 +254,17 @@
     chatBox.appendChild(div);
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    await typeWriter(div, msg.sender + ": " + msg.content);
-    chatBox.scrollTop = chatBox.scrollHeight;
+    if (useTypewriter) {
+      await typeWriter(div, msg.sender + ": " + msg.content);
+    } else {
+      div.textContent = msg.sender + ": " + msg.content;
+    }
 
+    chatBox.scrollTop = chatBox.scrollHeight;
     lastSender = msg.sender;
   }
 
+  // 💬 Subscribe and load room
   async function subscribeToRoom(roomName) {
     const { data: messages } = await sb
       .from("messages")
@@ -270,17 +274,20 @@
 
     chatBox.innerHTML = "";
     lastSender = null;
+
+    // Load all existing messages instantly (no typewriter)
     for (const msg of messages) {
-      await renderMessage(msg);
+      await renderMessage(msg, false);
     }
 
+    // Use typewriter only for *new* incoming messages
     sb.channel("room-" + roomName)
       .on("postgres_changes", {
         event: "INSERT",
         schema: "public",
         table: "messages",
         filter: `room=eq.${roomName}`
-      }, payload => renderMessage(payload.new))
+      }, payload => renderMessage(payload.new, true))
       .subscribe();
   }
 
