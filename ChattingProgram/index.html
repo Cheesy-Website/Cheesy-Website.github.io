@@ -225,15 +225,22 @@
     playClick();
   };
 
-  // ✨ Typewriter Effect
-  async function typeWriter(element, text, speed = 25) {
+  // ✨ Typewriter Effect (always 5 seconds total)
+  async function typeWriter(element, text, totalDuration = 5000) {
     element.textContent = "";
-    for (let i = 0; i < text.length; i++) {
+    const len = text.length;
+    if (len === 0) return;
+
+  // Calculate delay so total typing takes 5 seconds
+    const speed = totalDuration / len;
+
+    for (let i = 0; i < len; i++) {
       element.textContent += text[i];
       playType();
       await new Promise(res => setTimeout(res, speed));
     }
   }
+
 
   async function renderMessage(msg) {
     if (lastSender !== null && lastSender !== msg.sender) {
