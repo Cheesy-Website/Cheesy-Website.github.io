@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.json">
+    <title>Cheesy-Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Unblocked Games For School.">
+    <meta name="keywords" content="Unblocked games, UNDERTALE, UNDERTALE WEB, UNDERTALE UNBLOCKED, DELTARUNE, DELTARUNE WEB, DELTARUNE UNBLOCKED, cheesy-website, A Dance Of Fire And Ice, ADOFAI, ADOFAI Unblocked, A Dance Of Fire And Ice Unblocked, cheesy website, sonic 3 air, sonic 3 air unblocked, mario 64, mario 64 unblocked, classic mario unblocked, classic mario, mario, mario unblocked, cookie clicker mods, cookie clicker unblocked, adventures with anxiety unblocked, cheeseman_gt, cheeseman, GBA, GBA emulator, GBA roms, gameboy advance emulator, gameboy advance, gameboy advance roms, gameboy advance unblocked, gameboy advance emulator unblocked">
+    <link rel="icon" href="https://i.ibb.co/xX7XBVx/Cheese-Goober.webp" type="image/x-icon">
+
+    <style>
+        body {
+            color: #00ff00;
+        }
+
+        h1 {
+            font-size: 55px;
+        }
+
+        h2 {
+            font-size: 45px;
+        }
+
+        p {
+            font-size: 40px;
+        }
+
+        #changelogtoggle,
+        #settingstoggle {
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        #changelog,
+        #settings {
+            background: #000000;
+            display: none;
+            font-size: 40px;
+        }
+
+        body, h1, h2, h3, h4, h5, h6, p, li, a, div, span {
+            text-shadow: 
+                -2px -2px 0 #000,  
+                 2px -2px 0 #000,
+                -2px  2px 0 #000,
+                 2px  2px 0 #000,
+                -2px  0px 0 #000,
+                 2px  0px 0 #000,
+                 0px -2px 0 #000,
+                 0px  2px 0 #000,
+                -3px -3px 0 #000,
+                 3px  3px 0 #000;
+        }
+    </style>
+
+    <script>
+        // Change title and icon after 3.5s
+        setTimeout(function() {
+            document.title = "Home | Schoology";
+            document.querySelector("link[rel='icon']").href = "https://i.ibb.co/NY8yC9c/download-1.png";
+        }, 3500);
+
+        // Save key and link in cookies
+        function saveKeyAndLink() {
+            const key = document.getElementById('keyInput').value;
+            const link = document.getElementById('linkInput').value;
+            document.cookie = "userKey=" + key + "; path=/";
+            document.cookie = "userLink=" + link + "; path=/";
+        }
+
+        // Toggle warning cookie
+        function toggleWarning() {
+            const toggle = document.getElementById('warning').checked;
+            document.cookie = "warningEnabled=" + toggle + "; path=/";
+        }
+
+        function toggleBlank() {
+            const toggle = document.getElementById('Blank').checked;
+            document.cookie = "Blank=" + toggle + "; path=/";
+        }
+
+        // Toggle generic cookie
+        function Cookie() {
+            const currentState = document.cookie.includes('=on');
+            document.cookie = `=${currentState ? 'off' : 'on'}; path=/`;
+            alert(` is now ${currentState ? 'off' : 'on'}`);
+        }
+
+        // Window load: initialize cookies
+        window.onload = function() {
+            const cookies = document.cookie.split(';');
+            let userKey = '';
+            let userLink = '';
+            
+            cookies.forEach(cookie => {
+                const [name, value] = cookie.trim().split('=');
+
+                if (name === 'warningEnabled') {
+                    document.getElementById('warning').checked = (value === 'true');
+                }
+                if (name === 'userKey') {
+                    userKey = value;
+                }
+                if (name === 'userLink') {
+                    userLink = value;
+                }
+                if (name === 'Blank') {
+                    document.getElementById('Blank').checked = (value === 'true');
+                }
+            });
+
+            // Panic key functionality
+            document.addEventListener('keydown', function(event) {
+                if (event.key === userKey) {
+                    window.open(userLink, "_blank");
+                }
+            });
+        };
+
+        // Warn on page unload
+        window.onbeforeunload = function() {
+            const cookies = document.cookie.split(';');
+            let warningEnabled = false;
+            cookies.forEach(cookie => {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'warningEnabled') {
+                    warningEnabled = (value === 'true');
+                }
+            });
+            if (warningEnabled) {
+                return "Are you sure you want to leave this page?";
+            }
+        };
+
+        
+(function() {
+  // Helper: read a cookie by name
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  // Function to wrap a URL in about:blank with an iframe
+function openInAboutBlank(url) {
+  const newWindow = window.open('about:blank', '_blank');
+  newWindow.document.write(`
+    <html>
+      <head>
+        <style>
+          html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: black; /* optional */
+          }
+          iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            display: block; /* removes inline-block gaps causing border */
+          }
+        </style>
+      </head>
+      <body>
+        <iframe src="${url}"></iframe>
+      </body>
+    </html>
+  `);
+  newWindow.document.close();
+}
+
+// Intercept link clicks, but only if "Blank" is enabled
+document.addEventListener("click", function(e) {
+  const target = e.target.closest("a[href]");
+  if (target) {
+    const blankEnabled = getCookie("Blank") === "true";
+    if (blankEnabled) {
+      e.preventDefault();
+      openInAboutBlank(target.href);
+    }
+    // otherwise, let the link work normally
+  }
+});
+  }
+)();
+
+
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const changelogtoggle = document.getElementById('changelogtoggle');
+            const changelog = document.getElementById('changelog');
+            const settingstoggle = document.getElementById('settingstoggle');
+            const settings = document.getElementById('settings');
+            const oldupdatestoggle = document.getElementById('oldupdatestoggle');
+            const oldupdates = document.getElementById('oldupdates');
+
+            changelogtoggle.addEventListener('click', () => {
+                changelog.style.display = changelog.style.display === 'none' ? 'block' : 'none';
+            });
+            settingstoggle.addEventListener('click', () => {
+                settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
+            });
+            oldupdatestoggle.addEventListener('click', () => {
+                oldupdates.style.display = oldupdates.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+
+        // Change font
+        function changeFont(fontUrl) {
+            document.getElementById('fontStyle').setAttribute('href', fontUrl);
+        }
+    </script>
+</head>
+<body>
+    <h1 style="color: #00ff00;">Brennan's Big Beautiful Belicious Blavourful Bariety Bread</h1>
+    <h2 style="color: #00ff00;">Much bread, very bread.</h2>
+
+    <img src="https://i.ibb.co/fCNNd0J/Cookie.png" width="90" height="90" alt="">
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
+        <h1>Strawberry Banana</h1>
+    </a> </p>
+    
+</body>
+</html>
