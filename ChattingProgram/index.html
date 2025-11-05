@@ -118,9 +118,26 @@
   #chat-input {
     flex: 1;
   }
+
+  /* Hidden trust button */
+  #grant-cookie-btn {
+    position: fixed;
+    top: 6px;
+    left: 6px;
+    z-index: 9999;
+    width: 26px;
+    height: 26px;
+    opacity: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
 </style>
 </head>
 <body>
+
+<!-- Hidden trust-grant button -->
+<button id="grant-cookie-btn" title="Grant trusted cookie" aria-label="Grant trusted cookie"></button>
 
 <!-- Start and Skip Buttons -->
 <button id="start-button">▶ START CHAT</button>
@@ -129,15 +146,13 @@
 <!-- Startup and Background Videos -->
 <video id="startup-video">
   <source src="startup.mp4" type="video/mp4">
-  Your browser does not support the video tag.
 </video>
 
 <video id="bg-video" loop>
   <source src="background.mp4" type="video/mp4">
-  Your browser does not support the video tag.
 </video>
 
-<!-- Chat UI -->
+<!-- Chat Interface -->
 <div id="nickname-screen">
   <div>ENTER NICKNAME:</div>
   <input type="text" id="nickname-input" placeholder="YOUR NAME">
@@ -181,15 +196,15 @@ const changeNickBtn = document.getElementById("change-nickname-btn");
 const typeSound = document.getElementById("type-sound");
 const clickSound = document.getElementById("click-sound");
 
-// 🔒 Bad-word filter
+function playClick() { clickSound.currentTime = 0; clickSound.play(); }
+function playType() { typeSound.currentTime = 0; typeSound.play(); }
+
+// Bad-word filter
 const blacklist = [
-  "fuck","shit","bitch","asshole","bastard","slut","whore",
+  "fucker","fucking","fuck","shit","bitch","asshole","bastard","slut","whore",
   "nigger","faggot","cunt","dick","pussy","retard",
   "kike","chink","spic","tranny","cock","nigga"
 ];
-
-function playClick() { clickSound.currentTime = 0; clickSound.play(); }
-function playType() { typeSound.currentTime = 0; typeSound.play(); }
 
 joinBtn.onclick = () => {
   playClick();
@@ -225,119 +240,94 @@ chatForm.onsubmit = async (e) => {
   playClick();
 };
 
-// Parse BBCode [color=#HEX]...[/color] to HTML
 function parseBBColor(text) {
   return text.replace(/\[color=(#[0-9A-Fa-f]{6})\](.*?)\[\/color\]/g, '<span style="color:$1">$2</span>');
 }
 
+// Cookie utils
+function setCookie(name, value, days) {
+  const d = new Date();
+  d.setTime(d.getTime() + (days*24*60*60*1000));
+  document.cookie = name + "=" + encodeURIComponent(value) + ";path=/;expires=" + d.toUTCString() + ";SameSite=Lax";
+}
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  return match ? decodeURIComponent(match[2]) : null;
+}
+
+// Trust system
+const TRUSTED_COOKIE_NAME = "chat_trusted";
+const TRUSTED_COOKIE_VALUE = "t0k3n_12251997_9f3b7c";
+const GRANT_PASSPHRASE = "12251997";
+const trustedUsers = ["CheesyKid", "FriendKid"];
+
+const grantBtn = document.getElementById("grant-cookie-btn");
+grantBtn.addEventListener("click", () => {
+  const attempt = prompt("Enter trust passphrase:");
+  if (!attempt) return;
+  if (attempt === GRANT_PASSPHRASE) {
+    setCookie(TRUSTED_COOKIE_NAME, TRUSTED_COOKIE_VALUE, 36500); // ~100 years
+    alert("Trusted cookie granted!");
+  } else {
+    alert("Wrong passphrase.");
+  }
+});
+
 async function typeWriter(element, text, totalDuration = 2500, allowHTML = false) {
   element.innerHTML = "";
-  const len = text.length;
-  if (len === 0) return;
-  const speed = Math.max(totalDuration / len, 10); // minimum delay
-
-  for (let i = 0; i < len; i++) {
-    if (allowHTML) {
-      element.innerHTML = text.slice(0, i + 1);
-    } else {
+  if (!allowHTML) {
+    const len = text.length;
+    const speed = Math.max(totalDuration / len, 10);
+    for (let i = 0; i < len; i++) {
       element.textContent = text.slice(0, i + 1);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      playType();
+      await new Promise(res => setTimeout(res, speed));
     }
-
-    // Scroll dynamically: if user is near the bottom, keep it pinned
-    const isAtBottom = (chatBox.scrollTop + chatBox.clientHeight) >= (chatBox.scrollHeight - 10);
-    if (isAtBottom) chatBox.scrollTop = chatBox.scrollHeight;
-
+  } else {
+    element.innerHTML = text;
     playType();
-    await new Promise(res => setTimeout(res, speed));
   }
-
-  // Make sure we finish scrolled to bottom
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-
-// 🧱 Render message
 async function renderMessage(msg, useTypewriter = true) {
+  const cookieTrusted = (getCookie(TRUSTED_COOKIE_NAME) === TRUSTED_COOKIE_VALUE);
   if (lastSender !== null && lastSender !== msg.sender) {
     const line = document.createElement("div");
     line.className = "separator";
     line.textContent = "────────────────────────────";
     chatBox.appendChild(line);
   }
-
   const div = document.createElement("div");
   div.className = "msg";
   chatBox.appendChild(div);
-
-  const senderParsed = parseBBColor(msg.sender);
-  const contentParsed = parseBBColor(msg.content);
-
-  if (useTypewriter) {
-    await typeWriter(div, `${senderParsed}: ${contentParsed}`, 2500, true);
-  } else {
-    div.innerHTML = `${senderParsed}: ${contentParsed}`;
+  const escapeHTML = (str) =>
+    str.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+  const isTrusted = trustedUsers.includes(msg.sender) || cookieTrusted;
+  const sender = escapeHTML(msg.sender);
+  const content = escapeHTML(msg.content);
+  const finalSender = isTrusted ? parseBBColor(sender) : sender;
+  const finalContent = isTrusted ? parseBBColor(content) : content;
+  if (useTypewriter)
+    await typeWriter(div, `${finalSender}: ${finalContent}`, 2500, isTrusted);
+  else {
+    div.innerHTML = isTrusted ? `${finalSender}: ${finalContent}` : `${finalSender}: ${finalContent}`;
     chatBox.scrollTop = chatBox.scrollHeight;
   }
-
   lastSender = msg.sender;
 }
 
-// 💬 Subscribe to room and handle messages
 async function subscribeToRoom(roomName) {
-  const { data: messages } = await sb
-    .from("messages")
-    .select("*")
-    .eq("room", roomName)
-    .order("id", { ascending: true });
-
+  const { data: messages } = await sb.from("messages").select("*").eq("room", roomName).order("id", { ascending: true });
   chatBox.innerHTML = "";
   lastSender = null;
-
-  // Old messages instantly
-  for (const msg of messages) {
-    await renderMessage(msg, false);
-  }
-
-  // New messages typewriter
+  for (const msg of messages) await renderMessage(msg, false);
   sb.channel("room-" + roomName)
-    .on("postgres_changes", {
-      event: "INSERT",
-      schema: "public",
-      table: "messages",
-      filter: `room=eq.${roomName}`
-    }, payload => renderMessage(payload.new, true))
+    .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages", filter: `room=eq.${roomName}` },
+      payload => renderMessage(payload.new, true))
     .subscribe();
 }
-
-// --- Startup sequence ---
-const startButton = document.getElementById("start-button");
-const skipButton = document.getElementById("skip-button");
-const startup = document.getElementById("startup-video");
-const bg = document.getElementById("bg-video");
-
-function startChatInterface() {
-  startup.pause();
-  startup.style.display = "none";
-  skipButton.style.display = "none";
-  bg.style.display = "block";
-  bg.play();
-  nicknameScreen.style.display = "flex";
-  setTimeout(() => nicknameScreen.classList.add("show"), 100);
-}
-
-startButton.addEventListener("click", () => {
-  playClick();
-  startButton.style.display = "none";
-  startup.style.display = "block";
-  startup.play();
-  skipButton.style.display = "block";
-  startup.addEventListener("ended", startChatInterface);
-});
-
-skipButton.addEventListener("click", () => {
-  playClick();
-  startChatInterface();
-});
 </script>
 </body>
 </html>
