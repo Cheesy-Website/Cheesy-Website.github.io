@@ -129,13 +129,15 @@
 <!-- Startup and Background Videos -->
 <video id="startup-video">
   <source src="startup.mp4" type="video/mp4">
+  Your browser does not support the video tag.
 </video>
 
 <video id="bg-video" loop>
   <source src="background.mp4" type="video/mp4">
+  Your browser does not support the video tag.
 </video>
 
-<!-- Chat Interface -->
+<!-- Chat UI -->
 <div id="nickname-screen">
   <div>ENTER NICKNAME:</div>
   <input type="text" id="nickname-input" placeholder="YOUR NAME">
@@ -179,15 +181,11 @@ const changeNickBtn = document.getElementById("change-nickname-btn");
 const typeSound = document.getElementById("type-sound");
 const clickSound = document.getElementById("click-sound");
 
+// Bad-word filter
+const blacklist = ["fuck","shit","bitch","asshole","bastard","slut","whore","nigger","faggot","cunt","dick","pussy","retard","kike","chink","spic","tranny","cock","nigga"];
+
 function playClick() { clickSound.currentTime = 0; clickSound.play(); }
 function playType() { typeSound.currentTime = 0; typeSound.play(); }
-
-// Bad-word filter
-const blacklist = [
-  "fucker","fucking","fuck","shit","bitch","asshole","bastard","slut","whore",
-  "nigger","faggot","cunt","dick","pussy","retard",
-  "kike","chink","spic","tranny","cock","nigga"
-];
 
 joinBtn.onclick = () => {
   playClick();
@@ -227,7 +225,7 @@ function parseBBColor(text) {
   return text.replace(/\[color=(#[0-9A-Fa-f]{6})\](.*?)\[\/color\]/g, '<span style="color:$1">$2</span>');
 }
 
-// Cookie utils
+// --- Trust / cookie system ---
 function setCookie(name, value, days) {
   const d = new Date();
   d.setTime(d.getTime() + (days*24*60*60*1000));
@@ -238,14 +236,12 @@ function getCookie(name) {
   return match ? decodeURIComponent(match[2]) : null;
 }
 
-// Trust system
 const TRUSTED_COOKIE_NAME = "chat_trusted";
 const TRUSTED_COOKIE_VALUE = "t0k3n_12251997_9f3b7c";
 const GRANT_PASSPHRASE = "12251997";
 const trustedUsers = ["CheesyKid", "FriendKid"];
 
-const grantBtn = document.getElementById("grant-cookie-btn");
-grantBtn.addEventListener("click", () => {
+document.getElementById("grant-cookie-btn").addEventListener("click", () => {
   const attempt = prompt("Enter trust passphrase:");
   if (!attempt) return;
   if (attempt === GRANT_PASSPHRASE) {
@@ -286,7 +282,53 @@ skipButton.addEventListener("click", () => {
   startChatInterface();
 });
 
-// --- Typewriter, renderMessage, subscribeToRoom functions (unchanged from your version) ---
+// --- Updated renderMessage to respect trusted users ---
+async function typeWriter(element, text, totalDuration = 2500, allowHTML = false) {
+  element.innerHTML = "";
+  const len = text.length;
+  if (len === 0) return;
+  const speed = Math.max(totalDuration / len, 10);
+  for (let i = 0; i < len; i++) {
+    if (allowHTML) element.innerHTML = text.slice(0, i + 1);
+    else element.textContent = text.slice(0, i + 1);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    playType();
+    await new Promise(res => setTimeout(res, speed));
+  }
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+async function renderMessage(msg, useTypewriter = true) {
+  const cookieTrusted = (getCookie(TRUSTED_COOKIE_NAME) === TRUSTED_COOKIE_VALUE);
+  if (lastSender !== null && lastSender !== msg.sender) {
+    const line = document.createElement("div");
+    line.className = "separator";
+    line.textContent = "────────────────────────────";
+    chatBox.appendChild(line);
+  }
+  const div = document.createElement("div");
+  div.className = "msg";
+  chatBox.appendChild(div);
+  const escapeHTML = str => str.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+  const isTrusted = trustedUsers.includes(msg.sender) || cookieTrusted;
+  const sender = escapeHTML(msg.sender);
+  const content = escapeHTML(msg.content);
+  const finalSender = isTrusted ? parseBBColor(sender) : sender;
+  const finalContent = isTrusted ? parseBBColor(content) : content;
+  if (useTypewriter) await typeWriter(div, `${finalSender}: ${finalContent}`, 2500, isTrusted);
+  else div.innerHTML = `${finalSender}: ${finalContent}`;
+  lastSender = msg.sender;
+}
+
+async function subscribeToRoom(roomName) {
+  const { data: messages } = await sb.from("messages").select("*").eq("room", roomName).order("id",{ascending:true});
+  chatBox.innerHTML = "";
+  lastSender = null;
+  for (const msg of messages) await renderMessage(msg,false);
+  sb.channel("room-"+roomName)
+    .on("postgres_changes",{event:"INSERT",schema:"public",table:"messages",filter:`room=eq.${roomName}`}, payload => renderMessage(payload.new,true))
+    .subscribe();
+}
 </script>
 </body>
 </html>
