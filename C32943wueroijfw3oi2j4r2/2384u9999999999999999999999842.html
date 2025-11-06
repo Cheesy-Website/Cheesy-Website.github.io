@@ -181,19 +181,51 @@ const changeNickBtn = document.getElementById("change-nickname-btn");
 const typeSound = document.getElementById("type-sound");
 const clickSound = document.getElementById("click-sound");
 
-// 🔒 Bad-word filter
+// 🔒 Enhanced Bad-word filter
 const blacklist = [
   "fuck","shit","bitch","asshole","bastard","slut","whore",
   "nigger","faggot","cunt","dick","pussy","retard",
   "kike","chink","spic","tranny","cock","nigga"
 ];
 
-function playClick() { clickSound.currentTime = 0; clickSound.play(); }
-function playType() { typeSound.currentTime = 0; typeSound.play(); }
+// Normalize text: lowercase, remove non-alphabetic characters for checking
+function normalizeText(text) {
+  return text.toLowerCase().replace(/[^a-z]/g, '');
+}
+
+// Check if text contains any bad word (even if obfuscated)
+function containsBadWord(text) {
+  const normalized = normalizeText(text);
+  return blacklist.some(word => normalized.includes(word));
+}
+
+// Censor message text for chat
+function censorText(text) {
+  let result = text;
+  blacklist.forEach(word => {
+    // Match word even if characters are separated by non-alphabetic characters
+    const pattern = word.split("").join("[^a-zA-Z]*");
+    const regex = new RegExp(pattern, "gi");
+    result = result.replace(regex, "****");
+  });
+  return result;
+}
 
 joinBtn.onclick = () => {
   playClick();
-  nickname = nicknameInput.value.trim() || "Anon" + Math.floor(Math.random()*1000);
+  
+  let inputNick = nicknameInput.value.trim() || "Anon" + Math.floor(Math.random() * 1000);
+
+  // Trim to 390 chars max
+  if (inputNick.length > 390) inputNick = inputNick.slice(0, 390);
+
+  // Check for bad words in nickname
+  if (containsBadWord(inputNick)) {
+    alert("Your nickname contains inappropriate language. Please choose another one.");
+    return;
+  }
+
+  nickname = inputNick;
   room = roomInput.value.trim() || "public";
   nicknameScreen.classList.remove("show");
   nicknameScreen.style.display = "none";
@@ -203,17 +235,23 @@ joinBtn.onclick = () => {
 
 changeNickBtn.onclick = () => {
   const newNick = prompt("Enter new nickname:", nickname);
-  if (newNick) nickname = newNick;
+  if (!newNick) return;
+
+  if (newNick.length > 390) {
+    alert("Nickname cannot be longer than 390 characters.");
+    return;
+  }
+
+  if (containsBadWord(newNick)) {
+    alert("Nickname contains inappropriate language. Please choose another one.");
+    return;
+  }
+
+  nickname = newNick;
 };
 
-function censorText(text) {
-  let result = text;
-  blacklist.forEach(word => {
-    const regex = new RegExp("\\b" + word + "\\b", "gi");
-    result = result.replace(regex, "****");
-  });
-  return result;
-}
+function playClick() { clickSound.currentTime = 0; clickSound.play(); }
+function playType() { typeSound.currentTime = 0; typeSound.play(); }
 
 chatForm.onsubmit = async (e) => {
   e.preventDefault();
@@ -254,7 +292,6 @@ async function typeWriter(element, text, totalDuration = 2500, allowHTML = false
   // Make sure we finish scrolled to bottom
   chatBox.scrollTop = chatBox.scrollHeight;
 }
-
 
 // 🧱 Render message
 async function renderMessage(msg, useTypewriter = true) {
