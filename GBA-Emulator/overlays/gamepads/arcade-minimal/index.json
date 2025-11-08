@@ -1,0 +1,181 @@
+[
+  {
+    "id": 14,
+    "x": 0.04375,
+    "y": 0.80208333333,
+    "circle": true,
+    "width": 0.0525,
+    "height": 0.0875
+  },
+  {
+    "id": 15,
+    "x": 0.19375,
+    "y": 0.80208333333,
+    "circle": true,
+    "width": 0.0525,
+    "height": 0.0875
+  },
+  {
+    "id": 12,
+    "x": 0.11845,
+    "y": 0.67708333333,
+    "circle": true,
+    "width": 0.0525,
+    "height": 0.0875
+  },
+  {
+    "id": 13,
+    "x": 0.11845,
+    "y": 0.92708333333,
+    "circle": true,
+    "width": 0.0525,
+    "height": 0.0875
+  },
+  {
+    "id": 9,
+    "x": 0.9,
+    "y": 0.1,
+    "circle": true,
+    "width": 0.06375,
+    "height": 0.105,
+    "src": "start.png"
+  },
+  {
+    "id": 5,
+    "x": 0.935,
+    "y": 0.788,
+    "circle": true,
+    "width": 0.06375,
+    "height": 0.105,
+    "src": "button-blue.png"
+  },
+  {
+    "x": 0.785,
+    "y": 0.838,
+    "circle": true,
+    "width": 0.06375,
+    "height": 0.105,
+    "src": "button-white.png"
+  },
+  {
+    "id": 1,
+    "x": 0.635,
+    "y": 0.891,
+    "circle": true,
+    "width": 0.06375,
+    "height": 0.105,
+    "src": "button-red.png"
+  },
+  {
+    "id": 3,
+    "x": 0.615,
+    "y": 0.6492,
+    "circle": true,
+    "width": 0.06375,
+    "height": 0.105,
+    "src": "button-red.png"
+  },
+  {
+    "id": 2,
+    "x": 0.76,
+    "y": 0.5992,
+    "circle": true,
+    "width": 0.06375,
+    "height": 0.105,
+    "src": "button-white.png"
+  },
+  {
+    "id": 4,
+    "x": 0.91,
+    "y": 0.5492,
+    "circle": true,
+    "width": 0.06375,
+    "height": 0.105,
+    "src": "button-blue.png"
+  },
+  {
+    "x": 0.48,
+    "y": 0.95833333333,
+    "circle": true,
+    "width": 0.025,
+    "height": 0.04166666667,
+    "src": "next.png"
+  },
+  {
+    "x": 0.04375,
+    "y": 0.9270833333333,
+    "circle": true,
+    "width": 0.03125,
+    "height": 0.0520833333333
+  },
+  {
+    "x": 0.19375,
+    "y": 0.67708333333,
+    "circle": true,
+    "width": 0.03125,
+    "height": 0.0520833333333
+  },
+  {
+    "x": 0.04375,
+    "y": 0.67708333333,
+    "circle": true,
+    "width": 0.03125,
+    "height": 0.0520833333333
+  },
+  {
+    "x": 0.19375,
+    "y": 0.9270833333333,
+    "circle": true,
+    "width": 0.03125,
+    "height": 0.0520833333333
+  },
+  {
+    "x": 0.11845,
+    "y": 0.8021,
+    "circle": true,
+    "width": 0.127575,
+    "height": 0.212625,
+    "src": "analog-background.png"
+  },
+  {
+    "x": 0.5,
+    "y": 0.1,
+    "circle": true,
+    "width": 0.025,
+    "height": 0.04166666666,
+    "src": "rgui.png"
+  },
+  {
+    "x": 0.3,
+    "y": 0.1,
+    "circle": true,
+    "width": 0.025,
+    "height": 0.04166666666,
+    "src": "rotate.png"
+  },
+  {
+    "x": 0.7,
+    "y": 0.1,
+    "circle": true,
+    "width": 0.025,
+    "height": 0.04166666666,
+    "src": "4button.png"
+  },
+  {
+    "id": 8,
+    "x": 0.06,
+    "y": 0.1,
+    "circle": true,
+    "width": 0.025,
+    "height": 0.04166666666,
+    "src": "coin.png"
+  },
+  {
+    "x": 0.11845,
+    "y": 0.8021,
+    "circle": true,
+    "width": 0.08,
+    "height": 0.14,
+    "src": "analog-stick.png"
+  }
+]

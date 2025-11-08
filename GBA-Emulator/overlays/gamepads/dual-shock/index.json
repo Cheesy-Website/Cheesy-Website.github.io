@@ -1,0 +1,209 @@
+[
+  {
+    "id": 14,
+    "x": 0.04375,
+    "y": 0.352083333333,
+    "circle": true,
+    "width": 0.0525,
+    "height": 0.0875,
+    "src": "dpad-left.png"
+  },
+  {
+    "id": 15,
+    "x": 0.19375,
+    "y": 0.352083333333,
+    "circle": true,
+    "width": 0.0525,
+    "height": 0.0875,
+    "src": "dpad-right.png"
+  },
+  {
+    "id": 12,
+    "x": 0.11875,
+    "y": 0.227083333333,
+    "circle": true,
+    "width": 0.0525,
+    "height": 0.0875,
+    "src": "dpad-up.png"
+  },
+  {
+    "id": 13,
+    "x": 0.11875,
+    "y": 0.4770833333333,
+    "circle": true,
+    "width": 0.0525,
+    "height": 0.0875,
+    "src": "dpad-down.png"
+  },
+  {
+    "id": 9,
+    "x": 0.94375,
+    "y": 0.94791666666667,
+    "circle": false,
+    "width": 0.04375,
+    "height": 0.052083333333,
+    "src": "start.png"
+  },
+  {
+    "id": 8,
+    "x": 0.05625,
+    "y": 0.94791666666667,
+    "circle": false,
+    "width": 0.04375,
+    "height": 0.052083333333,
+    "src": "select.png"
+  },
+  {
+    "x": 0.95625,
+    "y": 0.352083333333,
+    "circle": true,
+    "width": 0.04375,
+    "height": 0.0729166666667,
+    "src": "a.png"
+  },
+  {
+    "id": 1,
+    "x": 0.88125,
+    "y": 0.4770833333333,
+    "circle": true,
+    "width": 0.04375,
+    "height": 0.0729166666667,
+    "src": "b.png"
+  },
+  {
+    "id": 2,
+    "x": 0.88125,
+    "y": 0.227083333333,
+    "circle": true,
+    "width": 0.04375,
+    "height": 0.0729166666667,
+    "src": "x.png"
+  },
+  {
+    "id": 3,
+    "x": 0.80625,
+    "y": 0.352083333333,
+    "circle": true,
+    "width": 0.04375,
+    "height": 0.0729166666667,
+    "src": "y.png"
+  },
+  {
+    "id": 4,
+    "x": 0.0925,
+    "y": 0.052083333333,
+    "circle": false,
+    "width": 0.0625,
+    "height": 0.052083333333,
+    "src": "l1.png"
+  },
+  {
+    "x": 0.2625,
+    "y": 0.052083333333,
+    "circle": false,
+    "width": 0.0625,
+    "height": 0.052083333333,
+    "src": "l2.png"
+  },
+  {
+    "id": 5,
+    "x": 0.9075,
+    "y": 0.052083333333,
+    "circle": false,
+    "width": 0.0625,
+    "height": 0.052083333333,
+    "src": "r1.png"
+  },
+  {
+    "x": 0.7375,
+    "y": 0.052083333333,
+    "circle": false,
+    "width": 0.0625,
+    "height": 0.052083333333,
+    "src": "r2.png"
+  },
+  {
+    "x": 0.0375,
+    "y": 0.2166666667,
+    "circle": false,
+    "width": 0.0375,
+    "height": 0.0625
+  },
+  {
+    "x": 0.2,
+    "y": 0.2166666667,
+    "circle": false,
+    "width": 0.0375,
+    "height": 0.0625
+  },
+  {
+    "x": 0.0375,
+    "y": 0.4875,
+    "circle": false,
+    "width": 0.0375,
+    "height": 0.0625
+  },
+  {
+    "x": 0.2,
+    "y": 0.4875,
+    "circle": false,
+    "width": 0.0375,
+    "height": 0.0625
+  },
+  {
+    "x": 0.60125,
+    "y": 0.11708333333334,
+    "circle": false,
+    "width": 0.025,
+    "height": 0.04166666667,
+    "src": "next.png"
+  },
+  {
+    "x": 0.5,
+    "y": 0.11708333333334,
+    "circle": true,
+    "width": 0.025,
+    "height": 0.04166666666,
+    "src": "rgui.png"
+  },
+  {
+    "x": 0.40125,
+    "y": 0.11708333333334,
+    "circle": true,
+    "width": 0.025,
+    "height": 0.04166666666,
+    "src": "rotate.png"
+  },
+  {
+    "x": 0.71845,
+    "y": 0.75208333333,
+    "circle": true,
+    "width": 0.127575,
+    "height": 0.212625,
+    "src": "thumbstick-background.png"
+  },
+  {
+    "x": 0.28845,
+    "y": 0.75208333333,
+    "circle": true,
+    "width": 0.127575,
+    "height": 0.212625,
+    "src": "thumbstick-background.png"
+  },
+  {
+    "x": 0.28845,
+    "y": 0.75208333333,
+    "circle": true,
+    "width": 0.083,
+    "height": 0.136,
+    "src": "thumbstick-pad.png"
+  },
+  {
+    "x": 0.71845,
+    "y": 0.75208333333,
+    "circle": true,
+    "width": 0.083,
+    "height": 0.136,
+    "src": "thumbstick-pad.png"
+  }
+]

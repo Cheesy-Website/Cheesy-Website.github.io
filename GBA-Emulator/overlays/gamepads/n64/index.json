@@ -1,0 +1,125 @@
+[
+  {
+    "id": 9,
+    "x": 0.498,
+    "y": 0.8,
+    "circle": true,
+    "width": 0.0375,
+    "height": 0.0625,
+    "src": "start.png"
+  },
+  {
+    "x": 0.83625,
+    "y": 0.68333333333,
+    "circle": true,
+    "width": 0.0325,
+    "height": 0.05416666666667,
+    "src": "downc.png"
+  },
+  {
+    "x": 0.75,
+    "y": 0.814583333333,
+    "circle": true,
+    "width": 0.0425,
+    "height": 0.0708,
+    "src": "a.png"
+  },
+  {
+    "id": 1,
+    "x": 0.665,
+    "y": 0.65516666667,
+    "circle": true,
+    "width": 0.0425,
+    "height": 0.0708,
+    "src": "b.png"
+  },
+  {
+    "x": 0.83625,
+    "y": 0.47,
+    "circle": true,
+    "width": 0.03,
+    "height": 0.05,
+    "src": "upc.png"
+  },
+  {
+    "x": 0.7675,
+    "y": 0.57,
+    "circle": true,
+    "width": 0.03,
+    "height": 0.05,
+    "src": "leftc.png"
+  },
+  {
+    "x": 0.905,
+    "y": 0.57,
+    "circle": true,
+    "width": 0.03,
+    "height": 0.05,
+    "src": "rightc.png"
+  },
+  {
+    "x": 0.0625,
+    "y": 0.052083333333,
+    "circle": false,
+    "width": 0.0625,
+    "height": 0.052083333333,
+    "src": "z.png"
+  },
+  {
+    "id": 5,
+    "x": 0.9375,
+    "y": 0.052083333333,
+    "circle": false,
+    "width": 0.0625,
+    "height": 0.052083333333,
+    "src": "r.png"
+  },
+  {
+    "x": 0.5,
+    "y": 0.94533333333,
+    "circle": false,
+    "width": 0.0234375,
+    "height": 0.04166666667,
+    "src": "next.png"
+  },
+  {
+    "x": 0.16845,
+    "y": 0.70208333333,
+    "circle": true,
+    "width": 0.127575,
+    "height": 0.212625,
+    "src": "thumbstick-background.png"
+  },
+  {
+    "x": 0.5,
+    "y": 0.11708333333334,
+    "circle": true,
+    "width": 0.025,
+    "height": 0.04166666666,
+    "src": "rgui.png"
+  },
+  {
+    "x": 0.30125,
+    "y": 0.11708333333334,
+    "circle": true,
+    "width": 0.025,
+    "height": 0.04166666666,
+    "src": "rotate.png"
+  },
+  {
+    "x": 0.70125,
+    "y": 0.11708333333334,
+    "circle": true,
+    "width": 0.025,
+    "height": 0.04166666666,
+    "src": "digital-icon.png"
+  },
+  {
+    "x": 0.16845,
+    "y": 0.70208333333,
+    "circle": true,
+    "width": 0.083,
+    "height": 0.136,
+    "src": "thumbstick-pad.png"
+  }
+]
