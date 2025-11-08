@@ -2,33 +2,24 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="index.css">
-  <link rel="manifest" href="manifest.json">
-<title>Home | Schoology</title>
-      <link rel="icon" href= 
-"https://i.ibb.co/NY8yC9c/download-1.png" 
-          type="image/x-icon">
+  <title>gametime-player</title>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  </script>
 </head>
 <body>
-<script>
-    window.onbeforeunload = function() {
-        return "Anti-GoGuardian measures have been triggered, if this wasnt from go guardian then click yes to close";
-    };
-</script>
   <div class="draghint hidden screen" id="draghint">
     <input type="file" id="chooser" class="chooser"/>
     <div class="dragtext">
-      <h1>drag the game or click anywhere to select the game from files to play</h1>
+      <h1>drag a game here to play</h1>
     </div>
   </div>
-      <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js');
-            });
-        }
-    </script>
   <div id="loading" class="message screen"><h1>loading ...</h1></div>
   <div id="error" class="message hidden screen">
     <h1>error!</h1>
@@ -62,8 +53,10 @@
       <pre id="av-info"></pre>
     </div>
   </div>
+  <script src="jspm_packages/github/jmcriffey/bower-traceur-runtime@0.0.91/traceur-runtime.min.js"></script>
   <script src="jspm_packages/system.js"></script>
   <script src="config.js"></script>
+  <script src="build.js"></script>
   <script>System.import('./index.coffee!')</script>
 </body>
 </html>

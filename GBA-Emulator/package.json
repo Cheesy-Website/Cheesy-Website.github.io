@@ -34,6 +34,10 @@
       "traceur": "github:jmcriffey/bower-traceur@0.0.91",
       "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.91"
     },
+    "buildConfig": {
+      "transpileES6": true,
+      "minify": true
+    },
     "overrides": {
       "github:mohayonao/web-audio-api-shim@0.3.0": {
         "main": "build/web-audio-api-shim.js",
@@ -52,18 +56,18 @@
     "chai": "^3.2.0",
     "chai-as-promised": "^5.1.0",
     "coffee-script": "^1.9.3",
+    "html-inline": "^1.1.1",
+    "html-minifier": "^0.7.2",
     "http-server": "^0.8.0",
     "ini": "^1.3.4",
     "jspm": "^0.16.11",
     "lodash": "^3.10.1",
-    "mocha": "^2.2.5",
-    "systemjs-builder": "^0.12.2",
-    "wd": "^0.3.12"
+    "mocha": "^2.2.5"
   },
   "scripts": {
     "start": "http-server",
     "install": "jspm install -y",
-    "test": "npm run build && ava",
-    "build": "jspm bundle index.coffee!"
+    "build": "jspm bundle index.coffee! build.js --inject --skip-source-maps",
+    "test": "npm run build && ava"
   }
 }
