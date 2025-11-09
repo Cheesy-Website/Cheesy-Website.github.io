@@ -5,4 +5,4 @@ https://cheesy-website.github.io/<br>
 
 https://cheesy-website.netlify.app/<br>
 
-https://cheesy-website-git-main-cheesy-websites-projects.vercel.app/
+https://cheesy-website.vercel.app/ (NOT FULLY SUPPORTED)
