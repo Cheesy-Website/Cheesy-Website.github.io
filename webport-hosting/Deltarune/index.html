@@ -48,6 +48,123 @@
         });
     };
   </script>
+  
+  <style>
+    /* Console styles */
+    #console-wrapper {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 300px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      font-family: monospace;
+      font-size: 14px;
+      display: none;
+      z-index: 9999;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    #console-header {
+      background: #444;
+      padding: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #console-output {
+      height: calc(100% - 30px);
+      overflow-y: auto;
+      padding: 5px;
+      white-space: pre-wrap;
+    }
+
+    #console-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      padding: 5px;
+    }
+
+    #console-input:focus {
+      outline: none;
+    }
+  </style>
+  
+  <script>
+    // Console Script
+    const consoleWrapper = document.createElement('div');
+    consoleWrapper.id = 'console-wrapper';
+    document.body.appendChild(consoleWrapper);
+
+    const consoleHeader = document.createElement('div');
+    consoleHeader.id = 'console-header';
+    consoleHeader.textContent = 'Console (Click to Hide)';
+    consoleWrapper.appendChild(consoleHeader);
+
+    const consoleOutput = document.createElement('div');
+    consoleOutput.id = 'console-output';
+    consoleWrapper.appendChild(consoleOutput);
+
+    const consoleInput = document.createElement('input');
+    consoleInput.id = 'console-input';
+    consoleInput.placeholder = 'Type a command...';
+    consoleWrapper.appendChild(consoleInput);
+
+    let consoleVisible = false;
+
+    // Toggle Console Visibility
+    function toggleConsole() {
+      consoleVisible = !consoleVisible;
+      consoleWrapper.style.display = consoleVisible ? 'block' : 'none';
+    }
+
+    // Handle Input
+    consoleInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        const command = consoleInput.value.trim();
+        if (command) {
+          executeCommand(command);
+        }
+        consoleInput.value = '';
+      }
+    });
+
+    function executeCommand(command) {
+      const output = document.createElement('div');
+      output.textContent = `> ${command}`;
+      consoleOutput.appendChild(output);
+
+      try {
+        const result = eval(command);
+        if (result !== undefined) {
+          const resultOutput = document.createElement('div');
+          resultOutput.textContent = `Result: ${result}`;
+          consoleOutput.appendChild(resultOutput);
+        }
+      } catch (e) {
+        const errorOutput = document.createElement('div');
+        errorOutput.textContent = `Error: ${e.message}`;
+        consoleOutput.appendChild(errorOutput);
+      }
+
+      // Scroll to the bottom
+      consoleOutput.scrollTop = consoleOutput.scrollHeight;
+    }
+
+    // Open the console on Ctrl + ~
+    document.addEventListener('keydown', function(event) {
+      if (event.ctrlKey && event.key === '~') {
+        toggleConsole();
+      }
+    });
+  </script>
 </head>
 
 <body>
