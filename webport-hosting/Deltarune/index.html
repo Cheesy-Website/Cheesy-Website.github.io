@@ -98,9 +98,11 @@
   </style>
   
   <script>
-    // Console Script
+  document.addEventListener('DOMContentLoaded', () => {
+    // Create console elements
     const consoleWrapper = document.createElement('div');
     consoleWrapper.id = 'console-wrapper';
+    consoleWrapper.style.display = 'none'; // hidden initially
     document.body.appendChild(consoleWrapper);
 
     const consoleHeader = document.createElement('div');
@@ -119,52 +121,52 @@
 
     let consoleVisible = false;
 
-    // Toggle Console Visibility
+    // Toggle console
     function toggleConsole() {
       consoleVisible = !consoleVisible;
       consoleWrapper.style.display = consoleVisible ? 'block' : 'none';
+      if (consoleVisible) consoleInput.focus();
     }
 
-    // Handle Input
+    consoleHeader.addEventListener('click', toggleConsole);
+
+    // Execute commands
     consoleInput.addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
         const command = consoleInput.value.trim();
-        if (command) {
-          executeCommand(command);
+        if (!command) return;
+        const outputLine = document.createElement('div');
+        outputLine.textContent = '> ' + command;
+        consoleOutput.appendChild(outputLine);
+
+        try {
+          const result = eval(command);
+          if (result !== undefined) {
+            const resultLine = document.createElement('div');
+            resultLine.textContent = 'Result: ' + result;
+            consoleOutput.appendChild(resultLine);
+          }
+        } catch (e) {
+          const errorLine = document.createElement('div');
+          errorLine.textContent = 'Error: ' + e.message;
+          consoleOutput.appendChild(errorLine);
         }
+
+        consoleOutput.scrollTop = consoleOutput.scrollHeight;
         consoleInput.value = '';
       }
     });
 
-    function executeCommand(command) {
-      const output = document.createElement('div');
-      output.textContent = `> ${command}`;
-      consoleOutput.appendChild(output);
-
-      try {
-        const result = eval(command);
-        if (result !== undefined) {
-          const resultOutput = document.createElement('div');
-          resultOutput.textContent = `Result: ${result}`;
-          consoleOutput.appendChild(resultOutput);
-        }
-      } catch (e) {
-        const errorOutput = document.createElement('div');
-        errorOutput.textContent = `Error: ${e.message}`;
-        consoleOutput.appendChild(errorOutput);
-      }
-
-      // Scroll to the bottom
-      consoleOutput.scrollTop = consoleOutput.scrollHeight;
-    }
-
-    // Open the console on Ctrl + ~
-    document.addEventListener('keydown', function(event) {
-      if (event.ctrlKey && event.key === '~') {
+    // Toggle console with Ctrl + Backquote (`) — works on all layouts
+    document.addEventListener('keydown', (event) => {
+      if (event.ctrlKey && event.code === 'Backquote') {
+        event.preventDefault(); // prevent weird scrolling
         toggleConsole();
       }
     });
-  </script>
+  });
+</script>
+
 </head>
 
 <body>
