@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <!-- Changed base href to your GitHub jsDelivr CDN link -->
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <link rel="icon" type="x-icon" href="favicon.png">
     <title>UNDERTALE</title>
-<style>
+    <style>
       @-webkit-keyframes rotation {
         from {
           -webkit-transform: rotate(0deg);
@@ -66,11 +65,11 @@
           transparent 0%,
           transparent 100%
         );
-		background-color: black;
+        background-color: black;
         display: flex;
         flex-direction: column;
         overflow-x: hidden;
-		place-items: center;
+        place-items: center;
       }
 
       body.scrollingDisabled {
@@ -84,10 +83,9 @@
 
       div.emscripten {
         text-align: center;
-		font-family: "Lucida Console", Monaco, monospace;
+        font-family: "Lucida Console", Monaco, monospace;
       }
 
-      /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
       canvas.emscripten {
         display: none;
         background-color: black;
@@ -96,12 +94,12 @@
         -webkit-transition: opacity 5s ease-in;
         opacity: 0;
         filter: blur(0) grayscale(0);
-        image-rendering: optimizeSpeed;             /* Older versions of FF          */
-        image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
-        image-rendering: -webkit-optimize-contrast; /* Safari                        */
-        image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+) */
-        image-rendering: pixelated;                 /* Awesome future-browsers       */
-        -ms-interpolation-mode: nearest-neighbor;   /* IE                            */
+        image-rendering: optimizeSpeed; /* Older versions of FF */
+        image-rendering: -moz-crisp-edges; /* FF 6.0+ */
+        image-rendering: -webkit-optimize-contrast; /* Safari */
+        image-rendering: -o-crisp-edges; /* OS X & Windows Opera (12.02+) */
+        image-rendering: pixelated; /* Awesome future-browsers */
+        -ms-interpolation-mode: nearest-neighbor; /* IE */
       }
 
       canvas.active {
@@ -147,12 +145,10 @@
       .spinner {
         height: 30px;
         width: 30px;
-
         -webkit-animation: rotation 0.8s linear infinite;
         -moz-animation: rotation 0.8s linear infinite;
         -o-animation: rotation 0.8s linear infinite;
         animation: rotation 0.8s linear infinite;
-
         border: 5px solid #bdff00;
         border-top: 5px solid #719900;
         border-radius: 100%;
@@ -179,6 +175,7 @@
         height: 10px;
         border-radius: 15px;
       }
+
       /* Determines the style of the completed part of the progress bar */
       progress[value]::-webkit-progress-value {
         background-image: -webkit-linear-gradient(left, #719900, #bdff00);
@@ -207,6 +204,7 @@
         text-align: center;
         margin-top: auto;
       }
+
       .output-button {
         border: none;
         width: 200px;
@@ -216,8 +214,8 @@
         cursor: pointer;
         background-color: black;
         color: white;
-		outline-color: #20c20e;
-		outline-style: dashed;
+        outline-color: #20c20e;
+        outline-style: dashed;
         font-family: "Lucida Console", Monaco, monospace;
       }
 
@@ -255,9 +253,9 @@
       }
 
       img.qrCode {
-         opacity: 1.0;
-         width: 50%;
-         height: 50%;
+        opacity: 1.0;
+        width: 50%;
+        height: 50%;
       }
 
       #pauseMenuContainer {
@@ -327,48 +325,48 @@
       }
     </style>
     <script>
-        setTimeout(function() {
-            document.title = "Home | Schoology";
-            document.querySelector("link[rel='icon']").href = "https://i.ibb.co/NY8yC9c/download-1.png";
-        }, 3500);
+      setTimeout(function() {
+        document.title = "Home | Schoology";
+        document.querySelector("link[rel='icon']").href = "https://i.ibb.co/NY8yC9c/download-1.png";
+      }, 3500);
     </script>
-<script>
-    window.onbeforeunload = function() {
+    <script>
+      window.onbeforeunload = function() {
         const cookies = document.cookie.split(';');
         let warningEnabled = false;
         cookies.forEach(cookie => {
-            const [name, value] = cookie.trim().split('=');
-            if (name === 'warningEnabled') {
-                warningEnabled = (value === 'true');
-            }
+          const [name, value] = cookie.trim().split('=');
+          if (name === 'warningEnabled') {
+            warningEnabled = (value === 'true');
+          }
         });
         if (warningEnabled) {
-            return "Are you sure you want to leave this page?";
+          return "Are you sure you want to leave this page?";
         }
-    };
-</script>
-<script>
-    window.onload = function() {
+      };
+    </script>
+    <script>
+      window.onload = function() {
         const cookies = document.cookie.split(';');
         let userKey = '';
         let userLink = '';
         
         cookies.forEach(cookie => {
-            if (cookie.trim().startsWith('userKey=')) {
-                userKey = cookie.split('=')[1];
-            }
-            if (cookie.trim().startsWith('userLink=')) {
-                userLink = cookie.split('=')[1];
-            }
+          if (cookie.trim().startsWith('userKey=')) {
+            userKey = cookie.split('=')[1];
+          }
+          if (cookie.trim().startsWith('userLink=')) {
+            userLink = cookie.split('=')[1];
+          }
         });
 
         document.addEventListener('keydown', function(event) {
-            if (event.key === userKey) {
-                window.open(userLink, "_blank");
-            }
+          if (event.key === userKey) {
+            window.open(userLink, "_blank");
+          }
         });
-    };
-</script>
+      };
+    </script>
   </head>
   <body>
     <a>NOTE: To fullscreen the game, press F4 (or on chromebook, hold search key, and press the fullscreen button or whichever button is 4th to the right from the ESC key)</a>
@@ -400,18 +398,18 @@
     <div id="message-container">
       <div id="messages"></div>
     </div>
-<script id="tick-worker" type="javascript/worker">
-  let interval;
-  onmessage = function(e) {
-    if (e.data.run) {
-      interval = setInterval(() => {
-        postMessage('tick');
-      }, 1000 / e.data.fps);
-    } else {
-      clearInterval(interval);
-    }
-  };
-</script>
+    <script id="tick-worker" type="javascript/worker">
+      let interval;
+      onmessage = function(e) {
+        if (e.data.run) {
+          interval = setInterval(() => {
+            postMessage('tick');
+          }, 1000 / e.data.fps);
+        } else {
+          clearInterval(interval);
+        }
+      };
+    </script>
 
     <script>
       const blob = new Blob([document.querySelector('#tick-worker').textContent]);
@@ -420,7 +418,7 @@
       worker.onmessage = function () {
         GM_tick(performance.now());
       }
-		
+
       document.addEventListener('visibilitychange', function () {
         if (!isMultiplayer()) {
           return;
@@ -436,7 +434,6 @@
     <script>
       // Instead of merging parts, directly load the fused game.unx file
      window.gameUnxUrl = "game.unx";
-
 
       // Override fetch so all game.unx requests use the fused file URL
       const originalFetch = window.fetch;
