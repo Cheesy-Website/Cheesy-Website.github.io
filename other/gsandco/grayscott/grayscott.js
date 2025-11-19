@@ -376,13 +376,13 @@ var worldToForm = function()
 var init_controls = function()
 {
     $("#sld_replenishment").slider({
-        value: feed, min: 0, max:0.1, step:0.001,
+        value: feed, min: -100000, max:100000, step:0.001,
         change: function(event, ui) {$("#replenishment").html(ui.value); feed = ui.value; updateShareString();},
         slide: function(event, ui) {$("#replenishment").html(ui.value); feed = ui.value; updateShareString();}
     });
     $("#sld_replenishment").slider("value", feed);
     $("#sld_diminishment").slider({
-        value: kill, min: 0, max:0.073, step:0.001,
+        value: kill, min: -100000, max:100000, step:0.001,
         change: function(event, ui) {$("#diminishment").html(ui.value); kill = ui.value; updateShareString();},
         slide: function(event, ui) {$("#diminishment").html(ui.value); kill = ui.value; updateShareString();}
     });
