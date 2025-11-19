@@ -355,10 +355,23 @@ $(document).bind('webkitfullscreenchange mozfullscreenchange fullscreenchange', 
 
 var worldToForm = function()
 {
-    //document.ex.sldReplenishment.value = feed * 1000;
-    $("#sld_replenishment").slider("value", feed);
-    $("#sld_diminishment").slider("value", kill);
+    var feedSlider = $("#sld_replenishment");
+    var killSlider = $("#sld_diminishment");
+
+    var feedMax = feedSlider.slider("option", "max");
+    var feedMin = feedSlider.slider("option", "min");
+    var killMax = killSlider.slider("option", "max");
+    var killMin = killSlider.slider("option", "min");
+
+    // Only update slider handle if value is within slider bounds
+    if (feed >= feedMin && feed <= feedMax) feedSlider.slider("value", feed);
+    if (kill >= killMin && kill <= killMax) killSlider.slider("value", kill);
+
+    // Always update the numeric display
+    $("#replenishment").html(feed);
+    $("#diminishment").html(kill);
 }
+
 
 var init_controls = function()
 {
