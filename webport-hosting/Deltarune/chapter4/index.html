@@ -293,6 +293,18 @@
   <body>
     <canvas id="canvas" class="emscripten"></canvas>
 
+    <div id="pauseMenuContainer" hidden>
+      <div id="pauseMenuBorder">
+        <div id="pauseMenu">
+          <button id="resumeButton" onclick="resume()">
+            Resume
+          </button>
+          <button id="quitButton" onclick="quitIfSupported()">
+            Quit
+          </button>
+        </div>
+        </div>
+    </div>
     <div class="loading" id="loadingScreen">
       <div class="spinner" id="spinner"></div>
       <div id="status">Merging files...</div>
