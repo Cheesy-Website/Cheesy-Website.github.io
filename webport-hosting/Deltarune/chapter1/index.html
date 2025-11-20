@@ -1445,34 +1445,39 @@
       // If Module exists now, ensure preRun array exists and push injector function.
       // If Module not yet defined, this still works because Module is defined earlier in file.
       window.Module = window.Module || {};
-      Module.preRun = Module.preRun || [];
-
-      // Injector: write customUNXData into Emscripten FS as "game.unx" before runtime starts.
-      Module.preRun.push(function() {
-        if (customUNXData && typeof FS !== 'undefined' && FS.writeFile) {
-          try {
-            FS.writeFile('game.unx', customUNXData);
-            console.log('Injected custom game.unx into FS (preRun).');
-          } catch (err) {
-            console.error('Failed to write custom game.unx into FS', err);
-          }
-        }
-      });
-
-      // Intercept fetch() so if any network request specifically asks for "game.unx",
-      // we supply the uploaded bytes (works while loading resources).
-      const originalFetch = window.fetch.bind(window);
-      window.fetch = async function(resource, init) {
+// FULL replacement for Module.preRun
+Module.preRun = Module.preRun || [];
+Module.preRun.push(function () {
+    if (customUNXData) {
         try {
-          if (typeof resource === 'string' && resource.endsWith('game.unx') && customUNXData) {
-            console.log('Intercepted fetch for game.unx — serving custom file.');
-            return new Response(customUNXData);
-          }
-        } catch (e) {
-          console.warn('Error in fetch interception', e);
+            // Remove any existing game.unx inside FS
+            if (FS.analyzePath("game.unx").exists) {
+                FS.unlink("game.unx");
+            }
+
+            FS.writeFile("game.unx", customUNXData);
+            console.log(">>> Custom game.unx injected into Emscripten FS");
+        } catch (err) {
+            console.error("FS injection error:", err);
         }
-        return originalFetch(resource, init);
-      };
+    }
+});
+
+
+// FULL replacement for your fetch override
+const originalFetch = window.fetch;
+window.fetch = async function(resource, options) {
+    const url = typeof resource === "string" ? resource : resource.url;
+
+    // Match ANY path ending in game.unx
+    if (customUNXData && /game\\.unx$/i.test(url)) {
+        console.log(">>> Custom game.unx served via fetch:", url);
+        return new Response(customUNXData);
+    }
+
+    return originalFetch(resource, options);
+};
+
 
       // Handle input changes (user uploads a file)
       const input = document.getElementById('customUnxInput');
