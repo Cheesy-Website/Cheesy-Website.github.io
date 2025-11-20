@@ -326,41 +326,9 @@
       #pauseMenu button[hidden] {
         display: none;
       }
-
-      /* small custom-unx UI */
-      #custom-unx-ui {
-        position: absolute;
-        top: 8px;
-        left: 8px;
-        z-index: 9999;
-        display: flex;
-        gap: 6px;
-        align-items: center;
-      }
-      #custom-unx-ui input[type=file] {
-        background: rgba(255,255,255,0.06);
-        color: #fff;
-        border: 1px dashed #4caf50;
-        padding: 6px;
-        border-radius: 4px;
-      }
-      #clear-unx {
-        background: rgba(255,255,255,0.06);
-        color: #fff;
-        border: 1px solid #f55;
-        padding: 6px 8px;
-        border-radius: 4px;
-        cursor: pointer;
-      }
     </style>
   </head>
   <body>
-    <!-- Added UI: upload and clear buttons -->
-    <div id="custom-unx-ui">
-      <input id="customUnxInput" type="file" accept=".unx" />
-      <button id="clear-unx" title="Clear saved custom game.unx">Clear custom</button>
-    </div>
-
     <canvas
       class="emscripten"
       id="canvas"
@@ -631,7 +599,7 @@
 "runner.wasm",
 "audio-worklet.js",
 "audio_intronoise.ogg",
-/* game.unx removed so custom upload will be used instead */
+"game.unx",
 "snd_closet_fall.ogg",
 "snd_closet_impact.ogg",
 "snd_great_shine.ogg",
@@ -914,7 +882,7 @@
 "mus/wet_tapdancing2.ogg",
 "mus/wet_tapdancing_failed.ogg",
 "mus/wind.ogg",
-"mus/wind_highplace.ogg" ].join(";");
+"mus/wind_highplace.ogg" ].join( ";");
       }
 
 		// Verify Files
@@ -1394,149 +1362,6 @@
         lockOrientationIfSupported();
       });
     </script>
-
-    <!-- NEW: custom game.unx handling script (only added code) -->
-    <script>
-    (function(){
-      // Key used to persist the custom game.unx in localStorage
-      const STORAGE_KEY = 'custom_game_unx_b64';
-
-      // Holds the uploaded file bytes
-      let customUNXData = null;
-
-      // Utility: convert Uint8Array to base64 (for localStorage)
-      function uint8ToBase64(bytes) {
-        const chunkSize = 0x8000;
-        let index = 0;
-        let result = '';
-        while (index < bytes.length) {
-          const chunk = bytes.subarray(index, Math.min(index + chunkSize, bytes.length));
-          result += String.fromCharCode.apply(null, chunk);
-          index += chunkSize;
-        }
-        return btoa(result);
-      }
-
-      // Utility: convert base64 back to Uint8Array
-      function base64ToUint8(b64) {
-        const binary = atob(b64);
-        const len = binary.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) bytes[i] = binary.charCodeAt(i);
-        return bytes;
-      }
-
-      // Try to load previously saved custom unx from localStorage
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          try {
-            customUNXData = base64ToUint8(saved);
-            console.log('Loaded saved custom game.unx from localStorage (' + customUNXData.length + ' bytes)');
-          } catch (e) {
-            console.warn('Failed to decode saved custom game.unx', e);
-            customUNXData = null;
-          }
-        }
-      } catch (e) {
-        console.warn('localStorage not available or failed', e);
-      }
-
-      // If Module exists now, ensure preRun array exists and push injector function.
-      // If Module not yet defined, this still works because Module is defined earlier in file.
-      window.Module = window.Module || {};
-// FULL replacement for Module.preRun
-Module.preRun = Module.preRun || [];
-Module.preRun.push(function () {
-    if (customUNXData) {
-        try {
-            // Remove any existing game.unx inside FS
-            if (FS.analyzePath("game.unx").exists) {
-                FS.unlink("game.unx");
-            }
-
-            FS.writeFile("game.unx", customUNXData);
-            console.log(">>> Custom game.unx injected into Emscripten FS");
-        } catch (err) {
-            console.error("FS injection error:", err);
-        }
-    }
-});
-
-
-// FULL replacement for your fetch override
-const originalFetch = window.fetch;
-window.fetch = async function(resource, options) {
-    const url = typeof resource === "string" ? resource : resource.url;
-
-    // Match ANY path ending in game.unx
-    if (customUNXData && /game\\.unx$/i.test(url)) {
-        console.log(">>> Custom game.unx served via fetch:", url);
-        return new Response(customUNXData);
-    }
-
-    return originalFetch(resource, options);
-};
-
-
-      // Handle input changes (user uploads a file)
-      const input = document.getElementById('customUnxInput');
-      const clearBtn = document.getElementById('clear-unx');
-
-      if (input) {
-        input.addEventListener('change', async function(evt) {
-          const f = evt.target.files && evt.target.files[0];
-          if (!f) return;
-
-          try {
-            const ab = await f.arrayBuffer();
-            customUNXData = new Uint8Array(ab);
-            console.log('User selected custom game.unx (' + customUNXData.length + ' bytes)');
-
-            // Try to persist it to localStorage (may fail on large files)
-            try {
-              const b64 = uint8ToBase64(customUNXData);
-              localStorage.setItem(STORAGE_KEY, b64);
-              console.log('Saved custom game.unx to localStorage.');
-            } catch (err) {
-              console.warn('Saving custom game.unx to localStorage failed (file may be too large).', err);
-              // If saving fails, we still proceed for this session.
-            }
-
-            // After upload + save, reload the page so the engine starts with the new file injected.
-            // This ensures a clean replacement of the bundled WAD with the user's WAD.
-            console.log('Reloading to start the engine with the custom game.unx...');
-            // small delay so console logs and storage complete
-            setTimeout(() => location.reload(), 300);
-          } catch (err) {
-            console.error('Failed to read uploaded file', err);
-            alert('Failed to read file: ' + err);
-          }
-        });
-      }
-
-      if (clearBtn) {
-        clearBtn.addEventListener('click', function() {
-          try {
-            localStorage.removeItem(STORAGE_KEY);
-            customUNXData = null;
-            alert('Cleared saved custom game.unx. Reloading to use built-in file.');
-            setTimeout(() => location.reload(), 150);
-          } catch (e) {
-            console.warn('Failed to clear saved custom game.unx', e);
-            alert('Failed to clear saved file.');
-          }
-        });
-      }
-
-      // Expose for debugging
-      window.__customUNX = {
-        getBytes: () => customUNXData,
-        clearSaved: () => { localStorage.removeItem(STORAGE_KEY); customUNXData = null; }
-      };
-    })();
-    </script>
-
 	<!-- Load Main Game Runner JS File -->
     <script async type="text/javascript" src="runner.js"></script>
   </body>
