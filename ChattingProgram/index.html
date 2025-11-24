@@ -159,13 +159,22 @@
 </div>
 
 <div id="chat-screen">
+  <button id="load-older-btn" style="
+    width: 100%;
+    background: none;
+    border: 2px solid white;
+    color: white;
+    font-family: utfont;
+    font-size: 20px;
+    padding: 5px;
+    cursor: pointer;
+    display: none;
+    margin-bottom: 5px;
+  ">LOAD OLDER MESSAGES</button>
+
   <div id="chat-box"></div>
   <form id="chat-form">
-    <input id="chat-input" placeholder="TYPE MESSAGE..." autocomplete="off">
-    <button type="submit">SEND</button>
-  </form>
-  <button id="change-nickname-btn">CHANGE NICKNAME</button>
-</div>
+
 
 <audio id="type-sound" src="type.wav"></audio>
 <audio id="click-sound" src="click.wav"></audio>
@@ -179,6 +188,8 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 let nickname = "";
 let room = "public";
 let lastSender = null;
+let loadedCount = 50;
+let oldestLoadedId = null;
 
 const MESSAGE_LIMIT = 500;
 
@@ -357,16 +368,27 @@ async function renderMessage(msg, useTypewriter = true) {
 }
 
 async function subscribeToRoom(roomName) {
-  const { data: messages } = await sb
+
+  let { data: messages } = await sb
     .from("messages")
     .select("*")
     .eq("room", roomName)
-    .order("id", { ascending: true });
+    .order("id", { ascending: false })
+    .limit(50);
+
+  messages.reverse();
 
   chatBox.innerHTML = "";
   lastSender = null;
 
-  for (const msg of messages) await renderMessage(msg, false);
+  if (messages.length > 0) {
+    oldestLoadedId = messages[0].id;
+    document.getElementById("load-older-btn").style.display = "block";
+  }
+
+  for (const msg of messages) {
+    await renderMessage(msg, false);
+  }
 
   sb.channel("room-" + roomName)
     .on("postgres_changes", {
@@ -377,6 +399,7 @@ async function subscribeToRoom(roomName) {
     }, payload => renderMessage(payload.new, true))
     .subscribe();
 }
+
 
 const startButton = document.getElementById("start-button");
 const skipButton = document.getElementById("skip-button");
@@ -407,6 +430,39 @@ skipButton.addEventListener("click", () => {
   startChatInterface();
 });
 
+async function loadOlderMessages() {
+  if (!oldestLoadedId) return;
+
+  const { data: older } = await sb
+    .from("messages")
+    .select("*")
+    .eq("room", room)
+    .lt("id", oldestLoadedId)
+    .order("id", { ascending: false })
+    .limit(50);
+
+  if (!older || older.length === 0) {
+    document.getElementById("load-older-btn").style.display = "none";
+    return;
+  }
+
+  older.reverse();
+  for (const msg of older) {
+    const div = document.createElement("div");
+    div.className = "msg";
+    div.innerHTML = parseBBColor(`${msg.sender}: ${msg.content}`);
+    chatBox.insertBefore(div, chatBox.firstChild);
+  }
+
+  oldestLoadedId = older[0].id;
+}
+
+document.getElementById("load-older-btn").onclick = async () => {
+  playClick();
+  await loadOlderMessages();
+};
+
+  
 trustBtn.addEventListener("click", () => {
   const startVisible = !(startButton.style.display === "none");
   const startupPlaying = (startup.style.display === "block");
