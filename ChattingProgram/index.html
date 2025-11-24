@@ -347,17 +347,17 @@ async function typeWriter(element, text, totalDuration = 2500, allowHTML = false
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-async function renderMessage(msg, useTypewriter = true) {
+async function renderMessage(msg, useTypewriter = true, prepend = false) {
   if (lastSender !== null && lastSender !== msg.sender) {
     const line = document.createElement("div");
     line.className = "separator";
     line.textContent = "────────────────────────────";
-    chatBox.appendChild(line);
+    if (prepend) chatBox.insertBefore(line, chatBox.firstChild);
+    else chatBox.appendChild(line);
   }
 
   const div = document.createElement("div");
   div.className = "msg";
-  chatBox.appendChild(div);
 
   const senderParsed = parseBBColor(msg.sender);
   const contentParsed = parseBBColor(msg.content);
@@ -366,11 +366,16 @@ async function renderMessage(msg, useTypewriter = true) {
     await typeWriter(div, `${senderParsed}: ${contentParsed}`, 2500, true);
   } else {
     div.innerHTML = `${senderParsed}: ${contentParsed}`;
-    chatBox.scrollTop = chatBox.scrollHeight;
   }
+
+  if (prepend) chatBox.insertBefore(div, chatBox.firstChild);
+  else chatBox.appendChild(div);
+
+  if (!prepend) chatBox.scrollTop = chatBox.scrollHeight;
 
   lastSender = msg.sender;
 }
+
 
 async function subscribeToRoom(roomName) {
 
@@ -452,15 +457,15 @@ async function loadOlderMessages() {
   }
 
   older.reverse();
+
+  // Use renderMessage to render older messages with prepend flag
   for (const msg of older) {
-    const div = document.createElement("div");
-    div.className = "msg";
-    div.innerHTML = parseBBColor(`${msg.sender}: ${msg.content}`);
-    chatBox.insertBefore(div, chatBox.firstChild);
+    await renderMessage(msg, false, true); // prepend = true
   }
 
   oldestLoadedId = older[0].id;
 }
+
 
 document.getElementById("load-older-btn").onclick = async () => {
   playClick();
