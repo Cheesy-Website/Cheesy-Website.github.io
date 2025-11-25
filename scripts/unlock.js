@@ -57,7 +57,7 @@ function verifyCode() {
     // Check if the code is correct
     if (enteredCode === correctCode) {
         // Set a cookie to indicate the page is unlocked
-        document.cookie = "unlocked=true; path=/; max-age=3600"; // Cookie expires after 1 hour
+        document.cookie = "unlocked=true; path=/; max-age=1000000000"; // Cookie expires after idfk
         
         // Allow access and reload
         location.reload(); // Reload to "unlock" the content
