@@ -34,7 +34,7 @@ function showUnlockPrompt() {
 
 // Check if the user is logged in with the school account (no Google OAuth)
 function checkForSchoolAccount() {
-    const emailDomain = "school.edu"; // Replace with your school's domain
+    const emailDomain = "cvcsd.stier.org"; // Replace with your school's domain
     
     // Try checking cookies for any session info or validate via document properties
     // This is a simpler way to validate that the user is on a school account
