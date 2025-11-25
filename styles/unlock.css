@@ -1,0 +1,48 @@
+/* full blur + block interactions */
+.locked-blur {
+    filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+}
+
+#unlockOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+}
+
+/* centered modal */
+#unlockBox {
+    width: 330px;
+    padding: 20px;
+    border-radius: 12px;
+    background: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+#unlockBox input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+}
+
+#unlockBox button {
+    margin-top: 12px;
+    width: 95%;
+    padding: 10px;
+    background: black;
+    color: white;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
