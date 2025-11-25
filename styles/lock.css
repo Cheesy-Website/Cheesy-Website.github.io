@@ -1,0 +1,15 @@
+/* blur the full page */
+.locked-blur {
+    filter: blur(8px);
+    pointer-events: none; /* block all interaction */
+    user-select: none;
+}
+
+/* overlay to darken screen */
+#lockOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+}
