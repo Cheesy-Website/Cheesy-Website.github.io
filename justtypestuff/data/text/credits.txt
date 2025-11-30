@@ -1,0 +1,447 @@
+----------------------------------------------------------------------------------
+
+  CONSTELLATION
+
+   v1.0, 15th November 2017
+      
+   Terry Cavanagh (http://www.distractionware.com)
+   
+----------------------------------------------------------------------------------
+
+-= About CONSTELLATION =-
+
+Constellation was commisioned and created for Now Play This 2017.
+
+Constellation was made for running at parties and events! If you're planning to
+show it at a public event, let me know! I might add some words for you!
+
+-= SECRET CONTROLS =-
+
+Things I forgot to mention in the game:
+
+You can hold down SHIFT to hide the cursor and move the camera slower!
+
+-= SPECIAL CREDITS =-
+
+Constellation was pieced together from lots of royalty free and creative commons
+assets!
+
+There are a huge number of people to thank for all of this, but I'm particularly
+grateful to the following three people:
+
+<b>Emil Persson</b>, aka <b>humus</b>, for his amazing collection of well over
+a hundred skybox photos. All of the photograph skyboxes in Constellation come from
+his collection.
+
+<b>Chris Matz*, aka </b>amethyst7</b>, for his extremely cool collection of terragen
+created skyboxes, 8 of which are used in this game.
+
+<b>Devon O. Wolfgang</b> for his wonderful collection of Starling fragment shaders.
+Virtually all the filters in the game are his.
+
+-= SPOILER WARNING =-
+
+A credits list for this game shows every asset there is to discover! Be careful!
+
+-= SOUNDS =-
+
+If you type "music", you'll hear a track called "safehaven" by Stian Stark. http://stianstark.com/
+Stian originally created this for another project of mine that unfortunately didn't
+work out. I always loved this piece of music though, so I asked him if it'd be ok to
+include in the game.
+
+typing sounds are by sofa sound, soundsnap.com/user/30
+
+telephone sound effect by justine angus, soundsnap.com/user-name/justine_angus
+
+"Morning in the country" by inchadney
+http://www.freesound.org/people/inchadney/sounds/56611/
+
+"Wind in birch trees, a passing sheep" by juskiddink
+http://www.freesound.org/people/juskiddink/sounds/127596/
+
+"Ambience Outdoor Wind Birds" by Tdude9000
+http://www.freesound.org/people/Tdude9000/sounds/138294/
+
+"rbh meadow dc crix birds" by RHumphries
+http://www.freesound.org/people/RHumphries/sounds/1054/
+
+"River - Beek1" by HerbertBoland
+http://www.freesound.org/people/HerbertBoland/sounds/28168/
+
+"River - Beek5" by HerbertBoland
+http://www.freesound.org/people/HerbertBoland/sounds/28171/
+
+"Waves - ocean waves 3" by mmiron
+http://www.freesound.org/people/mmiron/sounds/163124/
+
+"Lake Waves Hjalmaren" by Owl
+http://www.freesound.org/people/Owl/sounds/156525/
+
+"DMP013016 HEAVY SNOW STORM MS" by martypinso
+http://www.freesound.org/people/martypinso/sounds/35480/
+
+"air-conditioning_hotel-room" by geodylabs
+http://www.freesound.org/people/geodylabs/sounds/122824/
+
+"Wind strong JPN" by jpnien
+http://www.freesound.org/people/jpnien/sounds/97397/
+
+"Rooftop city neighbourhood sunset, distant draffic, residents activity, walla" by risto_alcinov
+http://www.freesound.org/people/risto_alcinov/sounds/371261/
+
+projectpegasus/innermostjourney: "innermostjourney" from "Project Pegasus", by Bryan Lake
+projectpegasus/arpeggios/80sarp: "80sarp" from "Project Pegasus", by Bryan Lake
+projectpegasus/arpeggios/kevlar: "kevlar" from "Project Pegasus", by Bryan Lake
+projectpegasus/arpeggios/slowburn: "slowburn" from "Project Pegasus", by Bryan Lake
+magneticfield/beige: "beige" from "Magnetic Fields", by The Unfinished
+magneticfield/black: "black" from "Magnetic Fields", by The Unfinished
+magneticfield/bronze: "bronze" from "Magnetic Fields", by The Unfinished
+magneticfield/copper: "copper" from "Magnetic Fields", by The Unfinished
+magneticfield/emerald: "emerald" from "Magnetic Fields", by The Unfinished
+magneticfield/orange: "orange" from "Magnetic Fields", by The Unfinished
+antigen/marblevoid: "marblevoid" from "Antigen", by Dronny Darko
+antigen/memoryarea: "memoryarea" from "Antigen," by Dronny Darko
+antigen/sleepbox: "sleepbox" from "Antigen", by Dronny Darko
+antigen/transmissionsroom: "transmissionsroom" from "Antigen", by Dronny Darko
+antigen/transparenttunnel: "transparenttunnel" from "Antigen", by Dronny Darko
+
+-= MODELS =-
+
+"apple" 
+Free apple model from Turbosquid by VyVera, https://www.turbosquid.com/FullPreview/Index.cfm/ID/889330
+
+"banana"
+Free banana model from Turbosquid by gallerie1, https://www.turbosquid.com/FullPreview/Index.cfm/ID/458771
+
+"beachball"
+Free asset from Turbosquid, by 3dthings and 50c3nt, This model: https://www.turbosquid.com/FullPreview/Index.cfm/ID/586038
+with this texture: https://www.turbosquid.com/FullPreview/Index.cfm/ID/708200
+
+"bear"
+Free bear model from Turbosquid by WindTrees, https://www.turbosquid.com/FullPreview/Index.cfm/ID/237730
+
+"bell"
+Hand Bell, Bought on Turbosquid by raphael120, https://www.turbosquid.com/3d-models/3d-hand-bell/641577
+
+"bishop"
+Free Chess Set by OmniStorm, from Turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/654392
+
+"book"
+3D Office Props pack by luis77, bought from https://www.cgtrader.com/3d-models/furniture/other/office-props-pack
+
+"brioche"
+3D Office Props pack by luis77, bought from https://www.cgtrader.com/3d-models/furniture/other/office-props-pack
+
+"bucket"
+Free bucket model from Turbosquid by blackquadart, https://www.turbosquid.com/FullPreview/Index.cfm/ID/716534
+
+"car"
+Bought on Turbosquid, 3D Generic low poly sedan car 005 by Ghashrod, https://www.turbosquid.com/FullPreview/Index.cfm/ID/1148128
+
+"cat"
+Bought on Turbosquid, Cat model by gayngu, https://www.turbosquid.com/FullPreview/Index.cfm/ID/813255
+
+"chair"
+Props for the Classroom pack by Victor 3D, downloaded from unity asset store here: https://www.assetstore.unity3d.com/en/#!/content/5977
+
+"clipboard"
+3D Office Props pack by luis77, bought from https://www.cgtrader.com/3d-models/furniture/other/office-props-pack
+
+"coffee"
+3D Office Props pack by luis77, bought from https://www.cgtrader.com/3d-models/furniture/other/office-props-pack
+
+"cow"
+by petomavar, bought from https://www.turbosquid.com/FullPreview/Index.cfm/ID/700798
+
+"crate"
+From Props pack by lustre, bought from https://www.assetstore.unity3d.com/en/#!/content/17590
+
+"cup"
+3D Office Props pack by luis77, bought from https://www.cgtrader.com/3d-models/furniture/other/office-props-pack
+
+"deer"
+Free dear model from Turbosquid by WindTrees, https://www.turbosquid.com/FullPreview/Index.cfm/ID/240485
+
+"dice"
+Free dice model from Turbosquid by PixelGolden, https://www.turbosquid.com/FullPreview/Index.cfm/ID/881597
+
+"dog"
+Bought on Turbosquid, German Shepard by Dorokhina Ekaterina, https://www.turbosquid.com/3d-models/3d-german-shepherd-model/824631
+
+"doll"
+Russian Matryoshka Doll by sanchiesp, bought from Turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/1036099
+
+"duck"
+Rubber Duck model by BSKer, bought from Turbosquid: https://www.turbosquid.com/3d-models/3d-model-rubber-duck/1061770
+
+"earth"
+Free asset from Turbosquid, This model: https://www.turbosquid.com/FullPreview/Index.cfm/ID/586038
+Planet textures from http://www.solarsystemscope.com/textures/
+
+"egg"
+"This is your brain on drugs" from Turbosquid by Brian K. Trepanier, https://www.turbosquid.com/FullPreview/Index.cfm/ID/255939
+http://trepaning.com [81 verts, 144 polys]
+
+"extinguisher"
+Fire Extinguisher CO2 by theflyingtim, From turbosquid: https://www.turbosquid.com/3d-models/free-obj-mode-co2-extinguisher/1109715
+
+"fan"
+Props for the Classroom pack by Victor 3D, downloaded from unity asset store here: https://www.assetstore.unity3d.com/en/#!/content/5977
+
+"floppy"
+Free Floppy Disk model from Turbosquid by drumdorf, https://www.turbosquid.com/FullPreview/Index.cfm/ID/919944
+
+"foot"
+3D model Female Foot (Blender) by WatcomHecht: from Turbosquid, https://www.turbosquid.com/FullPreview/Index.cfm/ID/1176743
+
+"gramophone"
+Old Gramophone Low by HQModel, downloaded from turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/1105869
+
+"guitar"
+"Larrivee acoustic guitar: C body maple" by Brian K. Trepanier, from TurboSquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/253483
+http://trepaning.com [900 verts, 1648 polys]
+
+"hand"
+Rigged Hands by 3DHaupt, from Turbosquid, https://www.turbosquid.com/FullPreview/Index.cfm/ID/932376
+
+"hat"
+Free cowboy hat model from Turbosquid by Geddon3D, https://www.turbosquid.com/FullPreview/Index.cfm/ID/290469
+
+"holly"
+holly branch, from Turbosquid by nardid, https://www.turbosquid.com/FullPreview/Index.cfm/ID/1082525
+	
+"hourglass"
+Hourglass model by NORB3D, downloaded from Turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/379409
+
+"icecream"
+Chocolate Ice Cream model by Fatgod88, bought from Turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/769857
+
+"king"
+Free Chess Set by OmniStorm, from Turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/654392
+
+"knight"
+Free Chess Set by OmniStorm, from Turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/654392
+
+"lamp"
+3D Office Props pack by luis77, bought from https://www.cgtrader.com/3d-models/furniture/other/office-props-pack
+
+"laptop"
+3D Office Props pack by luis77, bought from https://www.cgtrader.com/3d-models/furniture/other/office-props-pack
+
+"lighthouse"
+Free lighthouse model from Turbosquid by POPA_3D, https://www.turbosquid.com/FullPreview/Index.cfm/ID/328013
+
+"mannequin"
+Mannequin by Racche Coon, https://www.turbosquid.com/FullPreview/Index.cfm/ID/730508
+
+"mars"
+Free asset from Turbosquid, This model: https://www.turbosquid.com/FullPreview/Index.cfm/ID/586038
+Planet textures from http://www.solarsystemscope.com/textures/
+
+"milk"
+From Props pack by lustre, bought from https://www.assetstore.unity3d.com/en/#!/content/17590
+
+"moon"
+Free asset from Turbosquid, This model: https://www.turbosquid.com/FullPreview/Index.cfm/ID/586038
+Planet textures from http://www.solarsystemscope.com/textures/
+
+"notebook"
+3D Office Props pack by luis77, bought from https://www.cgtrader.com/3d-models/furniture/other/office-props-pack
+
+"pawn"
+Free Chess Set by OmniStorm, from Turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/654392
+
+"pear"
+Free pear model from Turbosquid by Artystarty, https://www.turbosquid.com/FullPreview/Index.cfm/ID/729927
+
+"penguin"
+Simple Penguin by show3it, bought from https://www.turbosquid.com/FullPreview/Index.cfm/ID/727658
+
+"phone"
+3D Office Props pack by luis77, bought from https://www.cgtrader.com/3d-models/furniture/other/office-props-pack
+
+"pineapple"
+Pineapple model by Fatgod88, bought from Turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/762333
+
+"pizza"
+Pizza by MarkAust, bought from Turbosquid: https://www.turbosquid.com/3d-models/max-pepperoni-pizza/1045720
+
+"plane"
+waterplane by Redfox1980, https://www.turbosquid.com/3d-models/plane-water-waterplane-3d-model/637135
+
+"plant"
+Free potted plant model from Turbosquid by POPA_3D, https://www.turbosquid.com/FullPreview/Index.cfm/ID/418392
+
+"present"
+Free gift box from Turbosquid by POPA_3D, https://www.turbosquid.com/FullPreview/Index.cfm/ID/450470
+
+"printer"
+3D Office Props pack by luis77, bought from https://www.cgtrader.com/3d-models/furniture/other/office-props-pack
+
+"queen"
+Free Chess Set by OmniStorm, from Turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/654392
+
+"rockinghorse"
+included with away3d basic example Basic_LOAD3DS
+
+"rook"
+Free Chess Set by OmniStorm, from Turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/654392
+
+"scissors"
+3D Office Props pack by luis77, bought from https://www.cgtrader.com/3d-models/furniture/other/office-props-pack
+
+"shark"
+Free asset on Turbosquid, https://www.turbosquid.com/FullPreview/Index.cfm/ID/1116894
+
+"shoe"
+Ladies Shoes by Aphrodite3d, https://www.turbosquid.com/3d-models/free-obj-model-ladies-shoes/787513
+
+"skelly"
+"Gameready Lowpoly Skeleton" by netgoblin: Bought on turbosquid, https://www.turbosquid.com/3d-models/3d-gameready-skeleton-bones/1011009
+
+"skull"
+Bought on turbosquid, https://www.turbosquid.com/3d-models/3d-gameready-skeleton-bones/1011009
+
+"soldierant"
+included with away3d basic example Basic_LOAD3DS
+formica rufa by 3DMB From Turbosquid: https://www.turbosquid.com/3d-models/3d-model-formica-rufa-ant/388875
+
+"suitcase"
+suitcase by blackquadart: From turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/718573
+
+"sun"
+Free asset from Turbosquid, This model: https://www.turbosquid.com/FullPreview/Index.cfm/ID/586038
+Planet textures from http://www.solarsystemscope.com/textures/
+
+"teapot"
+The utah teapot by Martin Newell: https://en.wikipedia.org/wiki/Utah_teapot
+
+"tooth"
+Third molar tooth model by bescec, bought on Turbosquid at https://www.turbosquid.com/FullPreview/Index.cfm/ID/655416
+
+"traffic"
+Traffic Cone by Fatgod88, bought on Turbosquid at https://www.turbosquid.com/FullPreview/Index.cfm/ID/716488
+
+"turtle"
+by EvgeniyKa, bought on Turbosquid at https://www.turbosquid.com/FullPreview/Index.cfm/ID/976183
+
+"watermelon"
+Watermelon model by Fatgod88, bought from Turbosquid: https://www.turbosquid.com/FullPreview/Index.cfm/ID/752164
+
+"window"
+Props for the Classroom pack by Victor 3D, downloaded from unity asset store here: https://www.assetstore.unity3d.com/en/#!/content/5977
+
+*-= SKYBOXES =-*
+
+"space" by David Bronke, created for the RFI MMORPG project.
+https://twitter.com/codermonkeyfuel
+https://github.com/SkewedAspect/rfi-content
+
+"desert" by amethyst7, aka Chris Matz
+"emerald" by amethyst7, aka Chris Matz
+"greenhaze" by amethyst7, aka Chris Matz
+"leather" by amethyst7, aka Chris Matz
+"mudskip" by amethyst7, aka Chris Matz
+"purple" by amethyst7, aka Chris Matz
+"rapture" by amethyst7, aka Chris Matz
+"shadow" by amethyst7, aka Chris Matz
+WEB site: http://amethyst7.gotdoofed.com
+
+amethyst7's skyboxes are available under GNU General Public License version 2.
+
+"misty" by aXon
+http://axon.drunkencoon.com
+
+"DarkStormy" by Heiko Irrgang
+
+licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.
+Based on a work at http://93i.de.
+
+"Hell" by Necro/Castle Necrosis
+
+The credits for this skybox simply read:
+~necros          {www.planetquake.com/necros} -//-//- Castle Necrosis
+
+"indigo" by  Zachery "skiingpenguins" Slocum
+(freezurbern@gmail.com) http://www.freezurbern.com
+Originally created for the first person shooter engine "Cube 2: Sauerbraten"
+Content released under the Creative Commons Attribution-ShareAlike? 3.0 Unported License.
+http://creativecommons.org/licenses/by-sa/3.0/
+
+"Moody Night" by SlowHandd
+
+"BlueDesaturatedMoroseSite" by Speedy
+
+Autor: Speedy
+	 www.planetquake.com/speedy (more skyboxes and quake maps there)
+	 speeds@softhome.net
+	 ICQ 68154481	
+
+editors used: Bryce4, PS
+
+dedicated to:    Biosphere
+
+"interstellar" by Jochum Skoglund aka hipshot
+"violent days" by Jochum Skoglund aka hipshot
+"stormy days" by Jochum Skoglund aka hipshot
+
+Jochum can be found online here:
+twitter: @Transflash
+email: hipshot@zfight.com
+website: www.zfight.com
+
+"Dark Skies" by [WTF?]Mr-Gibs
+(mr-gibs@columbus.rr.com)
+
+"awup" by The Mighty Pete
+http://www.petesoasis.com
+
+Available under GNU General Public License version 2.
+
+"bridge" by Emil Persson, humus.name
+"brudslojan" by Emil Persson, humus.name
+"yokohama3" by Emil Persson, humus.name
+"buddha" by Emil Persson, humus.name
+"creek" by Emil Persson, humus.name
+"lancellottichapel" by Emil Persson, humus.name
+"meadow" by Emil Persson, humus.name
+"nightpath" by Emil Persson, humus.name
+"park3" by Emil Persson, humus.name
+"pond" by Emil Persson, humus.name
+"stairs" by Emil Persson, humus.name
+"storforsen4" by Emil Persson, humus.name
+"swedishroyalcastle" by Emil Persson, humus.name
+"pier" by Emil Persson, humus.name
+"street" by Emil Persson, humus.name
+"fishermansbastion" by Emil Persson, humus.name
+"fishpond" by Emil Persson, humus.name
+"footballfield" by Emil Persson, humus.name
+"pereabeach1" by Emil Persson, humus.name
+"roundabout" by Emil Persson, humus.name
+"saintlazaruschurch2" by Emil Persson, humus.name
+"skansen" by Emil Persson, humus.name
+"skansen3" by Emil Persson, humus.name
+"tenerife3" by Emil Persson, humus.name
+"beach" by Emil Persson, humus.name
+"arstabridge" by Emil Persson, humus.name
+"backyard" by Emil Persson, humus.name
+"dallasw" by Emil Persson, humus.name
+"fjaderholmarna" by Emil Persson, humus.name
+"iceriver" by Emil Persson, humus.name
+"langholmen" by Emil Persson, humus.name
+"lundagatan" by Emil Persson, humus.name
+"nissibeach2" by Emil Persson, humus.name
+"palmtrees" by Emil Persson, humus.name
+"saintlazaruschurch" by Emil Persson, humus.name
+"teide" by Emil Persson, humus.name
+"unionsquare" by Emil Persson, humus.name
+
+All humus.name skyboxes are licensed under a Creative Commons Attribution 3.0 Unported License.
+
+*-= EVERYTHING ELSE =-*
+
+This game is built in the haxe port of Away3D, which is maintained by Greg Caldwell and
+Joshua Granick. Away3D is great!
+
+Thanks for playing! - Terry Cavanagh, 2017

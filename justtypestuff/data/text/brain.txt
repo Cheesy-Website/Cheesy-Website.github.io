@@ -1,0 +1,479 @@
+//IMPORTANT NOTICE
+
+
+//IF THERE ARE ANY ISSUES (SUCH AS SOMETHING ENDLESSLY LOADING), PLEASE REPORT IT TO ME USING THE SUGGESTION THING ON THE HOMEPAGE
+
+//CLOSE THIS TAB TO START PLAYING
+
+//PS. Scroll down for all usable commands
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#clear
+
+//Scenes!
+#secretscenes
+latte: changescene(cup)
+toner: changescene(printer)
+call: changescene(phone)
+delivery: changescene(milk)
+rocking: changescene(rockinghorse)
+hellfire, hell-fire: changescene(book)
+realistic, fps, first-person-shooter, firstpersonshooter: changescene(crate)
+utah: changescene(teapot)
+horror, fear: changescene(skelly)
+secret, now-play-this, bar-sk: changescene(nowplaythis)
+purgatory: changescene(purgatory)
+constellation, galaxy, solar-system, solarsystem, milkyway, milky-way: changescene(solarsystem)
+platonic, polyhedra: changescene(platonic)
+polka: changescene(polka)
+demoscene: changescene(demoscene)
+life, still-life, stilllife: changescene(life)
+vapourwave, vaporwave, millennial, millennials: changescene(vapourwave)
+victory, win, end, finish, triumph, success, conclusion, ending: changescene(victory)
+formation, order: changescene(order)
+chaos, neon: changescene(chaos)
+museum: changescene(oldending)
+christmas: changescene(christmas)
+
+#plurals
+#models
+model: addmodel(any)
+bell: addmodel(bell)
+bucket: addmodel(bucket)
+apple: addmodel(apple)
+plane, airplane, jet, aeroplane, superman, flight: addmodel(plane)
+penguin, linux: addmodel(penguin)
+egg, fried, fry: addmodel(egg)
+pear: addmodel(pear)
+banana: addmodel(banana)
+hat, cowboy: addmodel(hat)
+lighthouse, beacon, house, home, building: addmodel(lighthouse)
+crate: addmodel(crate)
+teapot, tea: addmodel(teapot)
+book, read, reading, poem: addmodel(book)
+icecream, ice-cream, cream, chocolate, lolly: addmodel(icecream)
+guitar: addmodel(guitar)
+hand, clap, glove: addmodel(hand)
+plant: addmodel(plant)
+king: addmodel(king)
+queen: addmodel(queen)
+bishop: addmodel(bishop)
+rook: addmodel(rook)
+knight: addmodel(knight)
+pawn: addmodel(pawn)
+suitcase, briefcase, luggage, case: addmodel(suitcase)
+doll, matryoshka: addmodel(doll)
+extinguisher, fire-extinguisher, co2, carbon: addmodel(extinguisher)
+pineapple: addmodel(pineapple)
+watermelon, melon: addmodel(watermelon)
+duck, quack, rubber, ducky: addmodel(duck)
+horse: addmodel(rockinghorse)
+gift, present: addmodel(present)
+deer, dear, doe, a-female-deer: addmodel(deer)
+milk: addmodel(milk)
+phone, mobile, telephone: addmodel(phone)
+printer, fax: addmodel(printer)
+cup, mug: addmodel(cup)
+pizza, pie: addmodel(pizza)
+ball, beachball, beach-ball: addmodel(beachball)
+cat, miaow, meow, kitty: addmodel(cat)
+car, van, vehicle, automobile: addmodel(car)
+dog, woof, bark, growl, doggy: addmodel(dog)
+skeleton, spooky, bones, skelly, nyeh-heh-heh: addmodel(skelly)
+skull, face: addmodel(skull)
+shark, fish: addmodel(shark)
+ant, insect, friend, bug: addmodel(soldierant)
+bear, cub: addmodel(bear)
+laptop, computer: addmodel(laptop)
+bread, croissant, brioche: addmodel(brioche)
+clipboard: addmodel(clipboard)
+lamp: addmodel(lamp)
+fan: addmodel(fan)
+notebook: addmodel(notebook)
+chair, seat: addmodel(chair)
+window: addmodel(window)
+sun, sol: addmodel(sun)
+moon, satellite, luna: addmodel(moon)
+earth, terra: addmodel(earth)
+mars: addmodel(mars)
+hourglass, clock: addmodel(hourglass)
+mannequin, puppet, human, boy, girl, villain, robot: addmodel(mannequin)
+gramophone, grammy, hipster, vinyl, record, record-player, mp3, ogg, wav, midi: addmodel(gramophone)
+disk, save, storage, load, floppy, floppy-disk, diskette: addmodel(floppy)
+shoe, footwear, foot-wear, boot, high-heel, highheel, stiletto: addmodel(shoe)
+cow, bull: addmodel(cow)
+turtle, tortoise, shell: addmodel(turtle)
+traffic: addmodel(traffic)
+holly: addmodel(holly)
+
+#endplurals
+
+time: addmodel(hourglass)
+body, hero: addmodel(mannequin)
+bodies, heroes: addmodel(mannequin, 5)
+herd: addmodel(cow, 5)
+stuff, detritus, junk, blah, things, objects: makethings(3)
+thing, something, object, anything: addmodel(any)
+toys: addmodel(beachball) & addmodel(mannequin)
+foot: addmodel(foot)
+feet: addmodel(foot, 5)
+tooth: addmodel(tooth)
+teeth, dentist: addmodel(tooth, 5)
+die: addmodel(dice)
+dice: addmodel(dice, 5)
+blinds: addmodel(window)
+scissors: addmodel(scissors)
+scissorses, scissorss, scisso: addmodel(scissors)
+mrbones: addmodel(skelly)
+person, man, woman, child: addmodel(mannequin)
+people, men, women, children: addmodel(mannequin, 5)
+bush: addmodel(plant)
+bushes: addmodel(plant, 5)
+
+//Groups
+planet: addmodelgroupsingle(earth, mars)
+planets: addmodelgroup(earth, mars)
+coffee: addmodelgroupsingle(cup, coffee)
+coffees: addmodelgroup(coffee, cup, coffee, cup)
+breakfast, brunch: addmodelgroup(cup, brioche, egg)
+breakfasts, brunches: addmodelgroup(cup, brioche, egg, cup, brioche, egg)
+animal, mammal: addmodelgroupsingle(cat, dog, deer, bear, cow, turtle)
+animals, mammasl: addmodelgroup(cat, dog, deer, bear, cow, turtle)
+bird: addmodelgroupsingle(duck, penguin)
+birds: addmodelgroup(duck, penguin, duck, penguin)
+chess, piece: addmodelgroupsingle(pawn, rook, king, knight, bishop)
+chesses, chesss, chessboard: addmodelgroup(pawn, rook, king, knight, bishop)
+fruit: addmodelgroupsingle(apple, pear, banana, pineapple, watermelon)
+fruits, fruit-salad, fruitsalad, fruitbowl, fruit-bowl: addmodelgroup(apple, pear, banana, pineapple, watermelon)
+food: addmodelgroupsingle(pizza, brioche, milk, icecream, egg, teapot)
+foods: addmodelgroup(pizza, brioche, milk, icecream, egg, teapot)
+office: addmodelgroupsingle(printer, clipboard, phone, floppy, chair, fan, lamp)
+offices: addmodelgroup(printer, clipboard, phone, floppy, chair, fan, lamp)
+
+//shapes
+#none
+square: makesquare(1)
+cube, shiny: makeshinycube(1)
+sphere, orb, mirrorball: makeshinysphere(1)
+circle, balloon, dot, point: makesphere(1)
+cone: makecone(1)
+tube, cylinder, pipe, sausage: makecylinder(1)
+donut, torus: maketorus(1)
+vector, segment, line-segment, linesegment: makeline(1, 2)
+triangle, tri: makeline(1, 3)
+polygon, poly: makeline(1, 4)
+scribble, squiggle: makeline(1, 6)
+stripe, ribbon, band: makestripe(1)
+pillar, spotlight: makespotlight(1)
+pyramid, tetrahedron: makepolyhedra(1, 1)
+wireframe, hexahedron: makepolyhedra(2, 1)
+
+#shapes
+squares: makesquare(5)
+cubes, cubist, shinys: makeshinycube(5)
+spheres, orbs, mirrorballs: makeshinysphere(5)
+circles, balloons, dots: makesphere(5)
+cones: makecone(5)
+tubes, cylinders, pipes, sausages: makecylinder(5)
+donuts, toruses: maketorus(5)
+lines, segments, line-segments, linesegments, vectors: makeline(5)
+triangles, tris: makeline(5, 3)
+polygons, polys: makeline(5, 4)
+scribbles, squiggles: makeline(5, 6)
+stripes, ribbons, bands: makestripe(3)
+pillars, spotlights: makespotlight(3)
+pyramids, tetrahedrons: makepolyhedra(1, 5)
+wireframes, hexahedrons: makepolyhedra(2, 5)
+
+//Toggleable effects
+#filters
+normal, nofilter, filter, clearfilter, makeup, original, vanilla, ordinary, unfiltered, unfilter, toggle: clearfilter
+glow, bloom: togglebloom
+blur, soft, blurry, sharp, sharper: toggleblur
+monochrome, grayscale, sad, sadness, contrast, gray, grey, mono, greyscale, noir: grayscale
+vivid, happy, saturation, happiness, colors, colours, color, colour, colorful, colourful, intensify, intense, intensity: colourful
+invert, negative: toggleinvert
+3d, glasses, chromaticaberration, chromatic-aberration, chroma: togglechromaticaberration
+vr, virtualreality, virtual-reality, vive, htc, htcvive, htc-vive, oculus, oculusrift, oculus-rift: togglevr
+static, video, grain, grainy, tape, vcr, noise, noisy, hazy, haze, dazy, interference: togglevcr
+photo, hashtag, crossprocessing, instagram, camera, kodak, photograph, pic, picture, pics, snap: toggleinstagram
+border, vignette: togglevignette
+scanline, scan, scanlines: togglescanline
+mirror, split: togglemirror
+reflect, reflection, reflections: togglereflect
+diamond: togglediamond
+pixel, mosaic, lowrez, low-rez, low-res, low-resolution, lowresolution, resolution: togglepixel
+wobble, twist: togglewobble
+flare, rays, sunshine, sunny, sunlight, shine, lens-flare: togglegodrays
+dither, newsprint, halftone: togglenewsprint
+hexagon, kaleidoscope, pattern, six, stars, star, 6: togglekaleidoscope
+gameboy: togglecolourmap(gameboy)
+two, black-and-white, blackandwhite, 2-bit, 2, blackwhite: togglecolourmap(blackwhite)
+heat, hot, warm, campfire, camp-fire: togglecolourmap(fire)
+cga, ega: togglecolourmap(cga)
+cold, ice, icy, frost: togglecolourmap(ice)
+lighter, light, bright, brighter, illuminate: gammaplus()
+darker, dark: gammaminus()
+backtofront, backward, backwards, back-to-front, sideways, reverse: togglefliph()
+flip, australia, upsidedown, upside-down: toggleflipv()
+cinema, cinematic, film, movie, films, movies: togglecinemabars()
+art, frame: toggleart()
+game, videogame, video-game: togglegame()
+glitch, drunk, ghost, line-glitch, tear, scream: togglelineglitch()
+infinite, escher, staircase, infinity: toggleescher()
+sepia: togglesepia()
+warhol, three, 3, 9, nine, spider, cctv, andywarhol, andy-warhol, eye, eyes: togglescreenrepeat()
+cycle, hue, hue-shift, colour-cycle, color-cycle, disco, cycling, party: togglehueshift()
+join, connect, dottedline, dotted-line, dottedlines, dotted-lines, diagram: enableobjectconnect()
+disconnect, disjoin, unjoin, break: disableobjectconnect()
+
+//don't suggest these ones
+#none
+terry, hades, orpheus, eurydice, dont-look-back: togglecolourmap(hades)
+octahedron, crystal: makepolyhedra(3, 1)
+octahedrons, crystals: makepolyhedra(3, 5)
+dodecahedron: makepolyhedra(4, 1)
+dodecahedrons: makepolyhedra(4, 5)
+icosahedron: makepolyhedra(5, 1)
+icosahedrons: makepolyhedra(5, 5)
+
+#special
+music: togglemusic()
+
+//Skyboxes
+#places
+white: changesky(white)
+black, void: changesky(black)
+rainbow: changesky(rainbow)
+gradient: changesky(gradient)
+red, crimson: changesky(hipshot/violentdays)
+green, interstellar: changesky(hipshot/interstellar)
+blue, sapphire: changesky(axon/misty)
+yellow: changesky(ame/ame_leather)
+purple, magenta: changesky(ame/ame_purple)
+cyan, turquoise, cerulean, teal: changesky(mightypete/awup)
+pink: changesky(ame/ame_purple)
+brown: changesky(ame/ame_mudskip)
+orange: changesky(hipshot/violentdays)
+
+greenlight, green-light: changesky(ame/ame_greenhaze)
+doom: changesky(speedy/morose)
+alien, aliens, ufo, ufos: changesky(wtfmrgibs/darkskies)
+hell, lava, chasm, demon, demons, devil, volcano: changesky(necros/hell)
+cloud, clouds, cloudy, fly: changesky(hipshot/violentdays, hipshot/stormydays)
+night, city, city-scape, cityscape, london, east: changesky(humus/yokohama3)
+forest, woods, tree, trees, nature, grove: changesky(humus/storforsen4, humus/creek)
+hotel, room, bedroom, bed: changesky(humus/dallasw)
+church, chapel, mass: changesky(humus/lancellottichapel)
+heaven, paradise: changesky(hipshot/stormydays)
+space: changesky(space)
+asteroid, lunar, nowhere: changesky(skiingpenguins/indigo)
+sunrise, sunset, early, late, dawn, daybreak: changesky(humus/arstabridge) & togglegodrays()
+morning: changesky(humus/arstabridge)
+plain, meadow, birdsong: changesky(humus/meadow)
+lake, bridge: changesky(humus/bridge)
+beneath, under, underneath: changesky(humus/tenerife3)
+pond: changesky(humus/pond)
+marsh, fishing, hut, fishing-hut, well: changesky(humus/fishpond)
+arctic, antarctic, antarctica: changesky(ame/ame_shadow)
+statue, buddha: changesky(humus/buddha)
+waterfall: changesky(humus/brudslojan)
+sodium, path, creepy, scary: changesky(humus/nightpath)
+stair, stairs: changesky(humus/stairs)
+castle: changesky(humus/swedishroyalcastle)
+docks, dock, waterfront: changesky(humus/pier)
+water, river: changesky(humus/storforsen4)
+underwater, under-water, sunken, boat, shipwreck: changesky(mightypete/awup)
+desert: changesky(ame/ame_desert)
+emerald: changesky(ame/ame_emerald)
+lagoon: changesky(slowhandd/mnight)
+evening: changesky(humus/park3)
+autumn, day: changesky(humus/street)
+street: changesky(humus/street)
+beach, sea, summer, holiday, holidays, coast, coastal, south: changesky(humus/beach)
+bastion, tower, high, walls, above, fort, fortress, look-out, lookout: changesky(humus/fishermansbastion)
+grass, football, foot-ball, field, pitch, play: changesky(humus/footballfield)
+tourist, san-francisco, sanfrancisco, sanfran, san-fran, tour, west: changesky(humus/unionsquare)
+ocean, pier: changesky(humus/pereabeach1)
+roundabout, round, roadside, road, roads: changesky(humus/roundabout)
+villa, medieval, renaissance: changesky(humus/saintlazaruschurch2)
+park: changesky(humus/skansen)
+flower, flowers, garden, blossom, blossoms: changesky(humus/skansen3)
+design, metalwork, iron, landmark: changesky(humus/tenerife3)
+snowy, sweden: changesky(humus/backyard)
+island, archipelago: changesky(humus/fjaderholmarna)
+winter, north: changesky(humus/iceriver)
+hill, hills, mountain, mountains, hilltop, hill-top: changesky(humus/langholmen)
+flats, flat, apartments, apartment, battle, battleground, battlegrounds, pubg, plunkbat: changesky(humus/lundagatan)
+shrub, shrubs, rock, rocks, rocky: changesky(humus/nissibeach2)
+palmtrees, palm, palms, palm-tree, palmtree, palm-trees: changesky(humus/palmtrees)
+courtyard, town-square, townsquare: changesky(humus/saintlazaruschurch)
+outback, arizona: changesky(humus/teide)
+
+//Size
+#actions
+big, grow, bigger, great, size: scale(1, 1)
+small, shrink, little, smaller: scale(-1, -1)
+huge, giant, gigantic, biggest: scale(3, 3)
+tiny, smol, smallest: scale(-2, -2)
+thin, thinner, thiner, skinny, narrow, narrower: scale(-1, 0)
+wide, wider, fat, fatter: scale(1, 0)
+short, shorter: scale(0, -1)
+tall, taller, long, longer: scale(0, 1)
+
+//Camera control
+in, enhance, zoom-in, zoomin, zoom, near, nearer, close, closer: zoomin()
+out, zoom-out, zoomout, far, farther, further: zoomout()
+fov: resetfov()
+
+//Movement
+shift, shuffle, juggle: position(shuffle)
+explode, detonate, detonation, blast, boom: positionexplode()
+swap, exchange: position(swap)
+shoot, gun, punch: positionexplode(1)
+stop, freeze, pause: speedstop()
+faster, fast, quicker, quick, quickly, go, start, continue, run, now, immediately, haste, hastily: speedfaster()
+slower, slow, slowly: speedslower()
+down, fall, gravity, drop: movement(gravity, 0, -10, 0)
+jump, toss, throw, dive, bounce, throw-all, throw-everything, throw-more, chuck-out, chuck: movement(jump, 0, -10, 0)
+up, rise, float, vvvvvv: movement(gravity, 0, 10, 0)
+left, scroll: movement(gravity, -10, 0, 0)
+right, pan, wind: movement(gravity, 10, 0, 0)
+forward: movement(gravity, 0, 0, 10)
+back: movement(gravity, 0, 0, -10)
+move: movement(random)
+expand, push, force: position(expand)
+contract, pull: position(contract)
+dance, snooker: toggledance()
+
+//Boundaries
+box, boxes, outline: boundary(box)
+world, internet, worlds: boundary(sphere)
+shape, shapes: boundary(dodecahedron)
+cage, cages: boundary(cage)
+teleport, beam: boundary(beam)
+travel, travelator, warp, into, drive, woosh: boundary(laser)
+
+//positioning
+orbit, revolve, rotate, spin, spinning: movement(orbit)
+line: position(line)
+column, columns: position(column)
+row, queue: position(row)
+grid, floor, group, rows: position(grid)
+lattice, matrix, 3d-grid: position(lattice)
+wall: position(wall)
+cross, mark, marks, x: position(cross)
+distribute, scatter, disorder: position(randomgrid)
+spiral, spirals: position(spiral)
+atom, atomic, rings, ring: position(rings)
+sine, cosine, sin, cos, tangent, tan: position(sinewave)
+wave, waves, plasma, blanket, sheet, fabric: position(fabric)
+tunnel: position(tunnel)
+
+//Words
+sky, anywhere, different, elsewhere, somewhere, place, change, there: changesky
+#none
+//never suggest these ones
+hello, hellos, hi, heya: say(hello, 6)
+text: say(text, 6)
+words: say(words, 6)
+word: say(word, 6)
+how-are-you, how-you-doing, howareyou: say(fine thanks, 1)
+
+//Particlefields
+#weather
+rain, storm, cry, umbrella: changeparticlefield(rain)
+snow, blizzard, sugar: changeparticlefield(snow)
+pollen: changeparticlefield(pollen)
+smoke, fog, foggy, mist, misty: changeparticlefield(smoke)
+dust, dusty: changeparticlefield(dust)
+bubble, bubbles, suds, fizz, fizzy: changeparticlefield(bubble)
+hearts, heart, love, date: changeparticlefield(love)
+embers, fire, flame, ember, flames: changeparticlefield(fire)
+
+//Define the following commands as "flow": i.e. not included when calling multiple commands
+#none
+#flow
+
+//weird/special
+quiet, shush, shhh, silence, shut-up, pick-up, pickup, mute, audio: quiet
+answer: quietspecial
+
+//flow commands
+tidy, clean, remove, disappear, clear, empty: tidy
+reset, delete, bye, byebye, bye-bye, restart, goodbye, adieu, farewell, cya, reload, blank, quit, nothing, death, nuke, exit, wipe, leave, game-over, gameover, lose, defeat, erase: reset
+begin: begin
+again, yes, repeat, okay, another: repeat(1)
+many, more, multiple: repeat(5)
+lots: repeat(10)
+millions, billions, hundreds, thousands: repeat(15)
+less, no, undo, few, fewer: undo
+auto, automatic, autoplay, screensaver, screen-saver: toggleautoplay(1)
+random, suggest, suggestion: randomaction()
+
+#notinhelp
+help, hint: sayhint(3)
+helps, hints: sayhint(5)
+
+credit, credits: togglecredits()

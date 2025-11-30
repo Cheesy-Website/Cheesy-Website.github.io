@@ -1,0 +1,20 @@
+//For desktop builds only
+
+//startfullscreen
+//  1 yes
+//  0 no
+startfullscreen: 1
+
+//fps: either 60 or 30. Try 30 if you encounter performance issues
+fps: 60
+
+//enable escape to quit: 
+//  1 means pressing escape will close the game 
+//  0 or otherwise means disabling pressing escape to quit
+//  This is a useful setting to change if you're running the game at an event!
+escapetoquit: 1
+
+//showarrowkeyhint:
+//  1 means that the game will occasionally show an arrow key hint if the player hasn't pressed them
+//  0 means that the game won't
+showarrowkeyhint: 1

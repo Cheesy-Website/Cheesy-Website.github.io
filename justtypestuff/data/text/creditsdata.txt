@@ -1,0 +1,159 @@
+projectpegasus/innermostjourney: "innermostjourney" from "Project Pegasus", by Bryan Lake
+projectpegasus/arpeggios/80sarp: "80sarp" from "Project Pegasus", by Bryan Lake
+projectpegasus/arpeggios/kevlar: "kevlar" from "Project Pegasus", by Bryan Lake
+projectpegasus/arpeggios/slowburn: "slowburn" from "Project Pegasus", by Bryan Lake
+magneticfield/beige: "beige" from "Magnetic Fields", by The Unfinished
+magneticfield/black: "black" from "Magnetic Fields", by The Unfinished
+magneticfield/bronze: "bronze" from "Magnetic Fields", by The Unfinished
+magneticfield/copper: "copper" from "Magnetic Fields", by The Unfinished
+magneticfield/emerald: "emerald" from "Magnetic Fields", by The Unfinished
+magneticfield/orange: "orange" from "Magnetic Fields", by The Unfinished
+antigen/marblevoid: "marblevoid" from "Antigen", by Dronny Darko
+antigen/memoryarea: "memoryarea" from "Antigen," by Dronny Darko
+antigen/sleepbox: "sleepbox" from "Antigen", by Dronny Darko
+antigen/transmissionsroom: "transmissionsroom" from "Antigen", by Dronny Darko
+antigen/transparenttunnel: "transparenttunnel" from "Antigen", by Dronny Darko
+freesound/1054__rhumphries__rbh-meadow-dc-crix-birds: "rbh meadow dc crix birds" by RHumphries
+freesound/28168__herbertboland__beek1: "River - Beek1" by HerbertBoland
+freesound/28171__herbertboland__beek5: "River - Beek5" by HerbertBoland
+freesound/35480__martypinso__dmp013016-heavy-snow-storm-ms: "DMP013016 HEAVY SNOW STORM MS" by martypinso
+freesound/56611__inchadney__morning-in-the-country: "Morning in the country" by inchadney
+freesound/97397__jpnien__wind-strong-jpn: "Wind strong JPN" by jpnien
+freesound/122824__geodylabs__air-conditioning-hotel-room: "air-conditioning_hotel-room" by geodylabs
+freesound/127596__juskiddink__wind-in-birch-trees-a-passing-sheep: "Wind in birch trees, a passing sheep" by juskiddink
+freesound/138294__tdude9000__ambience-outdoor-wind-birds: "Ambience Outdoor Wind Birds" by Tdude9000
+freesound/156525__owl__lake-waves-hjalmaren: "Lake Waves Hjalmaren" by Owl
+freesound/163124__mmiron__ocean-waves-3: "Waves - ocean waves 3" by mmiron
+freesound/371261__risto-alcinov__rooftop-city: "Rooftop city [...] residents activity, walla" by risto_alcinov
+
+apple: VyVera
+banana: gallerie1
+beachball: 3dthings and 50c3nt
+bear: WindTrees
+bell: raphael120
+bishop: OmniStorm
+book: luis77
+brioche: luis77
+bucket: blackquadart
+car: Ghashrod
+cat: gayngu
+chair: Victor 3D
+clipboard: luis77
+coffee: luis77
+cow: petomavar
+crate: lustre
+cup: luis77
+deer: WindTrees
+dice: PixelGolden
+dog: Dorokhina Ekaterina
+doll: sanchiesp
+duck: BSKer
+earth: solarsystemscope.com/textures/
+egg: Brian K. Trepanier
+extinguisher: theflyingtim
+fan: Victor 3D
+floppy: drumdorf
+foot: WatcomHecht
+gramophone: HQModel
+guitar: Brian K. Trepanier
+hand: 3DHaupt
+hat: Geddon3D
+holly: nardid
+hourglass: NORB3D
+icecream: Fatgod88
+king: OmniStorm
+knight: OmniStorm
+lamp: luis77
+laptop: luis77
+lighthouse: POPA_3D
+mannequin: Racche Coon
+mars: solarsystemscope.com/textures/
+milk: lustre
+moon: solarsystemscope.com/textures/
+notebook: luis77
+pawn: OmniStorm
+pear: Artystarty
+penguin: show3it
+phone: luis77
+pineapple: Fatgod88
+pizza: MarkAust
+plane: Redfox1980
+plant: POPA_3D
+present: POPA_3D
+printer: luis77
+queen: OmniStorm
+rockinghorse: away3d
+rook: OmniStorm
+scissors: luis77
+shark: an uncredited Turbosquid staff member
+shoe: Aphrodite3d
+skelly: netgoblin
+skull: netgoblin
+soldierant: 3DMB
+suitcase: blackquadart
+sun: solarsystemscope.com/textures/
+teapot: Martin Newell
+tooth: bescec
+traffic: Fatgod88
+turtle: EvgeniyKa
+watermelon: Fatgod88
+window: Victor 3D
+
+space: "space" by David Bronke, created for the RFI MMORPG project
+heikoirrgang/darkstormy: "DarkStormy" by Heiko Irrgang
+necros/hell: "Hell" by Necro/Castle Necrosis
+skiingpenguins/indigo: "indigo" by  Zachery "skiingpenguins" Slocum
+hipshot/interstellar: "interstellar" by Jochum Skoglund aka hipshot
+axon/misty: "misty" by aXon
+slowhandd/mnight: "Moody Night" by SlowHandd
+speedy/morose: "BlueDesaturatedMoroseSite" by Speedy
+hipshot/violentdays: "violent days" by Jochum Skoglund aka hipshot
+hipshot/stormydays: "stormy days" by Jochum Skoglund aka hipshot
+wtfmrgibs/darkskies: "Dark Skies" by [WTF?]Mr-Gibs
+ame/ame_desert: "desert" by amethyst7, aka Chris Matz
+ame/ame_emerald: "emerald" by amethyst7, aka Chris Matz
+ame/ame_greenhaze: "greenhaze" by amethyst7, aka Chris Matz
+ame/ame_leather: "leather" by amethyst7, aka Chris Matz
+ame/ame_mudskip: "mudskip" by amethyst7, aka Chris Matz
+ame/ame_purple: "purple" by amethyst7, aka Chris Matz
+ame/ame_rapture: "rapture" by amethyst7, aka Chris Matz
+ame/ame_shadow: "shadow" by amethyst7, aka Chris Matz
+mightypete/awup: "awup" by The Mighty Pete
+humus/bridge: "bridge" by Emil Persson, humus.name
+humus/brudslojan: "brudslojan" by Emil Persson, humus.name
+humus/yokohama3: "yokohama3" by Emil Persson, humus.name
+humus/buddha: "buddha" by Emil Persson, humus.name
+humus/creek: "creek" by Emil Persson, humus.name
+humus/lancellottichapel: "lancellottichapel" by Emil Persson, humus.name
+humus/meadow: "meadow" by Emil Persson, humus.name
+humus/nightpath: "nightpath" by Emil Persson, humus.name
+humus/park3: "park3" by Emil Persson, humus.name
+humus/pond: "pond" by Emil Persson, humus.name
+humus/stairs: "stairs" by Emil Persson, humus.name
+humus/storforsen4: "storforsen4" by Emil Persson, humus.name
+humus/swedishroyalcastle: "swedishroyalcastle" by Emil Persson, humus.name
+humus/pier: "pier" by Emil Persson, humus.name
+humus/street: "street" by Emil Persson, humus.name
+humus/fishermansbastion: "fishermansbastion" by Emil Persson, humus.name
+humus/fishpond: "fishpond" by Emil Persson, humus.name
+humus/footballfield: "footballfield" by Emil Persson, humus.name
+humus/pereabeach1: "pereabeach1" by Emil Persson, humus.name
+humus/roundabout: "roundabout" by Emil Persson, humus.name
+humus/saintlazaruschurch2: "saintlazaruschurch2" by Emil Persson, humus.name
+humus/skansen: "skansen" by Emil Persson, humus.name
+humus/skansen3: "skansen3" by Emil Persson, humus.name
+humus/tenerife3: "tenerife3" by Emil Persson, humus.name
+humus/beach: "beach" by Emil Persson, humus.name
+humus/arstabridge: "arstabridge" by Emil Persson, humus.name
+humus/backyard: "backyard" by Emil Persson, humus.name
+humus/dallasw: "dallasw" by Emil Persson, humus.name
+humus/fjaderholmarna: "fjaderholmarna" by Emil Persson, humus.name
+humus/iceriver: "iceriver" by Emil Persson, humus.name
+humus/langholmen: "langholmen" by Emil Persson, humus.name
+humus/lundagatan: "lundagatan" by Emil Persson, humus.name
+humus/nissibeach2: "nissibeach2" by Emil Persson, humus.name
+humus/palmtrees: "palmtrees" by Emil Persson, humus.name
+humus/saintlazaruschurch: "saintlazaruschurch" by Emil Persson, humus.name
+humus/teide: "teide" by Emil Persson, humus.name
+humus/unionsquare: "unionsquare" by Emil Persson, humus.name
+
