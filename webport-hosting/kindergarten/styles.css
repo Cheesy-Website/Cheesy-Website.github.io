@@ -1,0 +1,29 @@
+  @font-face {
+font-family: "utfont";
+src: url("/fonts/determinationsanswebregular-369x-webfont.woff") format("woff"),
+    src: url("/fonts/determinationsanswebregular-369x.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+body {
+
+ font-family: 'utfont'; 
+
+h1 {
+  font-size: 60px;
+}
+
+h2 {
+  font-size: 50px;
+}
+
+p {
+  font-size: 40px;
+}
+  margin: 0;
+  background: #00a624;
+  background-image: url("https://i.ibb.co/BtyvbdQ/bgBlue.png");
+  text-align: center;
+}
+
+
