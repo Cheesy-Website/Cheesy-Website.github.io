@@ -132,11 +132,7 @@
     <input type="hidden" name="friends" id="form-friends">
     <input type="hidden" name="chromosome" id="form-chromosome">
     <input type="hidden" name="best_friend" id="form-bestfriend">
-    <input type="hidden" name="favourite_shows" id="form-shows">
-    <input type="hidden" name="favorite_food" id="form-food">
-    <input type="hidden" name="favorite_games" id="form-games">
-    <input type="hidden" name="favourite_animals" id="form-animal">
-    <input type="hidden" name="other" id="form-other">
+    <input type="hidden" name="suggestion" id="form-suggestion">
     <input type="hidden" name="_redirect" value="thankyou.html">
   </form>
 
@@ -147,11 +143,7 @@ const questions = [
   { id: 'friends', text: 'WHO ARE YOUR FRIENDS?', type: 'text', placeholder: 'ENTER NAME(S)' },
   { id: 'chromosome', text: 'WOULD YOU LIKE YOUR CHROMEBOOK TO BE UNEMPLOYED? (ASK HELAINA IF YOU DONT KNOW WHAT THIS IS)', type: 'text', placeholder: 'Y/N' },
   { id: 'best_friend', text: 'WHO IS YOUR BEST FRIEND?', type: 'text', placeholder: 'ENTER NAME' },
-  { id: 'favourite_shows', text: 'WHAT ARE YOUR FAVOURITE SHOWS?', type: 'text', placeholder: 'E.G. MURDER DRONES' },
-  { id: 'favorite_food', text: 'WHAT IS YOUR FAVORITE FOOD?', type: 'text', placeholder: 'E.G. PIZZA' },
-  { id: 'favorite_games', text: 'WHAT ARE YOUR FAVORITE GAMES?', type: 'text', placeholder: 'E.G. DELTARUNE' },
-  { id: 'favourite_animals', text: 'WHAT ARE YOUR FAVORITE ANIMALS?', type: 'text', placeholder: 'E.G. PENGUIN' },
-  { id: 'other', text: 'IS THERE ANYTHING ELSE?', type: 'text', placeholder: 'ENTER ANYTHING ELSE' },
+  { id: 'suggestion', text: 'IS THERE ANYTHING YOU WOULD LIKE ME TO ADD?', type: 'text', placeholder: 'ENTER GAME(S)/FEATURE(S)/OTHER' },
 ];
 
 let answers = {};
@@ -215,14 +207,10 @@ function submitForm() {
   document.getElementById('form-friends').value = answers['friends'];
   document.getElementById('form-chromosome').value = answers['chromosome'];
   document.getElementById('form-bestfriend').value = answers['best_friend'];
-  document.getElementById('form-shows').value = answers['favourite_shows'];
-  document.getElementById('form-food').value = answers['favorite_food'];
-  document.getElementById('form-games').value = answers['favorite_games'];
-  document.getElementById('form-animal').value = answers['favourite_animals'];
-  document.getElementById('form-other').value = answers['other'];
+  document.getElementById('form-suggestion').value = answers['suggestion'];
 
   const box = document.getElementById("survey-box");
-  typeText(box, "THANK YOU\nFOR YOUR TIME.\nYOUR ANSWERS, YOUR WONDERFUL CRE- WAIT, WRONG SCRIPT\nYOUR ANSWERS, ARE BEING SAVED TO THE [[HYPERLINK BLOCKED]]", 40, () => {
+  typeText(box, "THANK YOU\nFOR YOUR TIME.\nYOUR ANSWERS, YOUR WONDERFUL SUGGESTION, \n IS NOW BEING SAVED", 40, () => {
     document.getElementById("survey-form").submit();
   });
 }
