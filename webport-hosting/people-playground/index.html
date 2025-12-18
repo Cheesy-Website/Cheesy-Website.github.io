@@ -25,6 +25,53 @@
             left: 0;
         }
     </style>
+    <script>
+               // Window load: initialize cookies
+        window.onload = function() {
+            const cookies = document.cookie.split(';');
+            let userKey = '';
+            let userLink = '';
+            
+            cookies.forEach(cookie => {
+                const [name, value] = cookie.trim().split('=');
+
+                if (name === 'warningEnabled') {
+                    document.getElementById('warning').checked = (value === 'true');
+                }
+                if (name === 'userKey') {
+                    userKey = value;
+                }
+                if (name === 'userLink') {
+                    userLink = value;
+                }
+                if (name === 'Blank') {
+                    document.getElementById('Blank').checked = (value === 'true');
+                }
+            });
+
+            // Panic key functionality
+            document.addEventListener('keydown', function(event) {
+                if (event.key === userKey) {
+                    window.open(userLink, "_blank");
+                }
+            });
+        };
+
+        // Warn on page unload
+        window.onbeforeunload = function() {
+            const cookies = document.cookie.split(';');
+            let warningEnabled = false;
+            cookies.forEach(cookie => {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'warningEnabled') {
+                    warningEnabled = (value === 'true');
+                }
+            });
+            if (warningEnabled) {
+                return "Are you sure you want to leave this page?";
+            }
+        };
+    </script>
 </head>
 
 <body>
