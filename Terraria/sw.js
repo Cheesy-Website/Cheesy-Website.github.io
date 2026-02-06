@@ -1,80 +1,98 @@
+// Service Worker for Terrarium deployed under /terraria/
+
+const CACHE_NAME = "terrarium-v1";
+
+// --- Fetch handler ---
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     (async () => {
       try {
-        if (new URL(event.request.url).pathname === "/") {
-          maybeFlushCache();
+        // Flush cache if root page is requested
+        if (new URL(event.request.url).pathname.endsWith("/")) {
+          await maybeFlushCache();
         }
-        let req = await caches.match(event.request);
-        if (req) {
-          let headers = new Headers(req.headers);
-          if (headers.get("Cross-Origin-Embedder-Policy") != "require-corp")
+
+        // Return cached response if available
+        let cached = await caches.match(event.request);
+        if (cached) {
+          const headers = new Headers(cached.headers);
+          if (headers.get("Cross-Origin-Embedder-Policy") !== "require-corp")
             headers.append("Cross-Origin-Embedder-Policy", "require-corp");
-          if (headers.get("Cross-Origin-Opener-Policy") != "same-origin")
+          if (headers.get("Cross-Origin-Opener-Policy") !== "same-origin")
             headers.append("Cross-Origin-Opener-Policy", "same-origin");
 
-          return new Response(req.body, {
-            status: req.status,
-            statusText: req.statusText,
+          return new Response(cached.body, {
+            status: cached.status,
+            statusText: cached.statusText,
             headers: headers,
           });
         }
-        req = await fetch(event.request);
-        return req;
+
+        // Otherwise fetch from network
+        return fetch(event.request);
       } catch (e) {
-        console.log("error", e);
-        return new Response("Worker error", {
-          status: 500,
-          statusText: "Network error",
-        });
+        console.error("SW fetch error", e);
+        return new Response("Worker error", { status: 500, statusText: "Network error" });
       }
-    })(),
+    })()
   );
 });
 
-async function installCache() {
-  const cache = await caches.open("v1");
-  const boot = await fetch("_framework/blazor.boot.json");
-  const bootjson = await boot.json();
-  let resources = [
-    "/",
-    "/MILESTONE",
-    "/_framework/blazor.boot.json",
-    "/app.ico",
-    "/backdrop.png",
-    "/AndyBold.ttf",
-    "/assets/index.js",
-    "/assets/index.css",
-    ...Object.keys(bootjson.resources.fingerprinting).map(
-      (r) => "_framework/" + r,
-    ),
-  ];
-  await cache.addAll(resources);
-}
-
+// --- Cache installation ---
 self.addEventListener("install", (event) => {
   event.waitUntil(installCache());
-  console.log("cache installed");
 });
 
-async function maybeFlushCache() {
-  const cachedmilestone = await caches.match("/MILESTONE");
-  const response = await fetch("/MILESTONE");
-  const milestone = await response.text();
-  if (cachedmilestone) {
-    const cachedmilestoneText = await cachedmilestone.text();
-    if (cachedmilestoneText === milestone) {
-      console.log("cache up to date");
-      return;
-    }
-  }
+async function installCache() {
+  const cache = await caches.open(CACHE_NAME);
 
-  caches.keys().then((cacheNames) => {
-    console.log("flushing cache");
-    return Promise.all(cacheNames.map((name) => caches.delete(name)));
-  });
+  // Fetch boot JSON for Blazor resources
+  const bootResponse = await fetch("./_framework/blazor.boot.json");
+  const bootJson = await bootResponse.json();
+
+  // List of resources to cache (relative to sw.js location)
+  const resources = [
+    "./", // index.html
+    "./MILESTONE",
+    "./_framework/blazor.boot.json",
+    "./app.ico",
+    "./backdrop.png",
+    "./AndyBold.ttf",
+    "./assets/index.js",
+    "./assets/index.css",
+    ...Object.keys(bootJson.resources.fingerprinting).map((r) => "./_framework/" + r),
+  ];
+
+  await cache.addAll(resources);
+  console.log("SW cache installed", resources);
 }
 
+// --- Cache flush if MILESTONE changes ---
+async function maybeFlushCache() {
+  try {
+    const cached = await caches.match("./MILESTONE");
+    const response = await fetch("./MILESTONE");
+    const milestoneText = await response.text();
+
+    if (cached) {
+      const cachedText = await cached.text();
+      if (cachedText === milestoneText) {
+        console.log("Cache is up-to-date");
+        return;
+      }
+    }
+
+    // Flush all caches
+    const keys = await caches.keys();
+    await Promise.all(keys.map((key) => caches.delete(key)));
+    console.log("Cache flushed due to new MILESTONE");
+  } catch (e) {
+    console.error("SW maybeFlushCache error", e);
+  }
+}
+
+// --- Activate handler ---
 self.addEventListener("activate", (event) => {
   event.waitUntil(maybeFlushCache());
+  console.log("SW activated");
 });
