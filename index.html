@@ -64,6 +64,55 @@
                 -3px -3px 0 #000,
                  3px  3px 0 #000;
         }
+
+		 #popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  /* Popup box */
+  #popup-box {
+    background: #fff;
+    color: #000;
+    max-width: 500px;
+    padding: 20px 24px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    font-family: system-ui, sans-serif;
+  }
+
+  #popup-box p {
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .popup-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .popup-buttons button {
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+  }
+
+  #popup-ok {
+    background: #e0e0e0;
+  }
+
+  #popup-dont-show {
+    background: #007bff;
+    color: #fff;
+  }
     </style>
 
     <script>
@@ -505,6 +554,62 @@ document.addEventListener("click", function(e) {
     <a href="webport-hosting/Leaf" style="display:inline-block; text-decoration:none; color:#00ff00; margin-right:20px;">
         <h1>Leaf Blower Revolution</h1>
     </a> </p>
+
+	<!-- Popup Overlay -->
+<div id="popup-overlay">
+  <div id="popup-box">
+    <p>
+      I am no longer working on this regularly because I both can't find the time
+      to do so, and when I do, I just don't have the motivation to work on it.
+      At most there will be a few bug patches every month or so, but don't expect anything big until summer (assuming I make it to summer ).
+    </p>
+
+    <div class="popup-buttons">
+      <button id="popup-ok">OK</button>
+      <button id="popup-dont-show">Don’t show again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const COOKIE_NAME = "hideMaintenancePopup";
+
+  function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+  }
+
+  function getCookie(name) {
+    return document.cookie
+      .split("; ")
+      .find(row => row.startsWith(name + "="))
+      ?.split("=")[1];
+  }
+
+  function showPopup() {
+    document.getElementById("popup-overlay").style.display = "flex";
+  }
+
+  function hidePopup() {
+    document.getElementById("popup-overlay").style.display = "none";
+  }
+
+  // Run on page load
+  window.addEventListener("DOMContentLoaded", () => {
+    if (!getCookie(COOKIE_NAME)) {
+      showPopup();
+    }
+
+    document.getElementById("popup-ok").addEventListener("click", hidePopup);
+
+    document.getElementById("popup-dont-show").addEventListener("click", () => {
+      // 10 years = effectively "forever"
+      setCookie(COOKIE_NAME, "true", 3650);
+      hidePopup();
+    });
+  });
+</script>
 	
 	<script src="https://cdn.jsdelivr.net/gh/adryd325/oneko.js/oneko.js"></script>
 </body>
