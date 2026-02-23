@@ -65,25 +65,24 @@
                  3px  3px 0 #000;
         }
 
-		 #popup-overlay {
+#popup-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.85);
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 9999;
   }
 
-  /* Popup box */
   #popup-box {
-    background: #fff;
-    color: #000;
+    background: #000;
+    color: #00ff00;
     max-width: 500px;
     padding: 20px 24px;
     border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    font-family: system-ui, sans-serif;
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.3);
+    font-family: monospace;
   }
 
   #popup-box p {
@@ -101,17 +100,17 @@
     padding: 8px 14px;
     cursor: pointer;
     border-radius: 4px;
-    border: none;
+    border: 1px solid #00ff00;
     font-size: 14px;
+    background: #000;
+    color: #00ff00;
   }
 
-  #popup-ok {
-    background: #e0e0e0;
+  .popup-buttons button:hover {
+    background: #00ff00;
+    color: #000;
   }
-
-  #popup-dont-show {
-    background: #007bff;
-    color: #fff;
+</style>olor: #fff;
   }
     </style>
 
