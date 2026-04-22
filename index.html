@@ -326,10 +326,11 @@ document.addEventListener("click", function(e) {
 				<li>Version 1.2.9.5 - Just some minor bug fixes (👍︎☟︎✌︎❄︎❄︎✋︎☠︎☝︎♉︎🏱︎☼︎⚐︎☝︎☼︎✌︎💣︎ not loading newer messages) also improved load time by making only the 50 newest messages load and a button that loads 50 more messages.</li>
 				<li>Version 1.2.9.7 - Added Constellation (Also I have a few games planned that will come out 1.3).</li>
 				<li>Version 1.3 - A LOT OF STUFF, Added like, 18 games.</li>
+				<li>Version 1.3.1 - Fixed FNAF not working. Also sorry for the lack of updates, just haven't felt like doing work on any of my projects recently, I'm gonna start working on them again.</li>
             </ul>
         </div>
         <ul>
-            <li>Version 1.3.1 - Fixed FNAF not working. Also sorry for the lack of updates, just haven't felt like doing work on any of my projects recently, I'm gonna start working on them again.</li>
+            <li>Version 1.3.2 - Added Tuff Client to Minecraft which is basically just modded Minecraft, Also added a changelog alert. Also, shut up, im working on fixing Chapter 3 soon.</li>
         </ul>
     </div>
 
@@ -576,6 +577,11 @@ document.addEventListener("click", function(e) {
 
 <script>
   const COOKIE_NAME = "hideMaintenancePopup";
+  const CHANGELOG_COOKIE = "changelog";
+  const CURRENT_CHANGELOG = "1.3.2";
+
+  const changelogMessage =
+    "New update detected! Please check the changelog for details.";
 
   function setCookie(name, value, days) {
     const date = new Date();
@@ -591,16 +597,25 @@ document.addEventListener("click", function(e) {
   }
 
   function showPopup() {
-    document.body.style.overflow = "hidden"; // prevent page scroll
+    document.body.style.overflow = "hidden";
     document.getElementById("popup-overlay").style.display = "flex";
   }
 
   function hidePopup() {
-    document.body.style.overflow = ""; // restore scroll
+    document.body.style.overflow = "";
     document.getElementById("popup-overlay").style.display = "none";
   }
 
   window.addEventListener("DOMContentLoaded", () => {
+    const popupText = document.querySelector("#popup-box p");
+    const dontShowBtn = document.getElementById("popup-dont-show");
+
+    const originalText = popupText.innerHTML;
+    const originalDontShowDisplay = dontShowBtn.style.display;
+
+    // ----------------------------
+    // Maintenance popup (existing)
+    // ----------------------------
     if (!getCookie(COOKIE_NAME)) {
       showPopup();
     }
@@ -608,9 +623,32 @@ document.addEventListener("click", function(e) {
     document.getElementById("popup-ok").addEventListener("click", hidePopup);
 
     document.getElementById("popup-dont-show").addEventListener("click", () => {
-      setCookie(COOKIE_NAME, "true", 3650); // ~10 years
+      setCookie(COOKIE_NAME, "true", 3650);
       hidePopup();
     });
+
+// ----------------------------
+// Changelog popup system
+// ----------------------------
+const savedVersion = getCookie(CHANGELOG_COOKIE);
+
+// if new or missing version → show changelog popup
+if (savedVersion !== CURRENT_CHANGELOG) {
+  popupText.textContent = changelogMessage;
+
+  // hide "don’t show again" for changelog alerts
+  dontShowBtn.style.display = "none";
+
+  showPopup();
+
+  document.getElementById("popup-ok").addEventListener("click", () => {
+    popupText.innerHTML = originalText;
+    dontShowBtn.style.display = originalDontShowDisplay;
+  });
+}
+
+// ALWAYS update cookie AFTER check
+setCookie(CHANGELOG_COOKIE, CURRENT_CHANGELOG, 3650);
   });
 </script>
 	
