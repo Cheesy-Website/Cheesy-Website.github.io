@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conway's Advanced Game of Life</title>
+    <!-- Link to Part 2 (CSS) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Simulation Lab</h2>
+        
+        <div class="stats">
+            Gen: <span id="genCount">0</span> | Zoom: <span id="zoomPercent">100%</span>
+        </div>
+
+        <div class="section">
+            <h3>Controls</h3>
+            <div class="btn-group">
+                <button id="startBtn">Start</button>
+                <button id="stepBtn">Next Step</button>
+            </div>
+            <div class="btn-group">
+                <button id="clearBtn">Clear Grid</button>
+                <button id="randomBtn">Randomize</button>
+            </div>
+            <div class="btn-group-full">
+                <button id="fullscreenBtn">📺 Fullscreen View</button>
+            </div>
+        </div>
+		
+<div class="section">
+    <h3>Simulation Speed</h3>
+
+    <div class="speed-controls">
+        <input
+            type="range"
+            id="speedSlider"
+            min="1"
+            max="200"
+            value="14">
+
+        <div class="speed-input-row">
+            <label for="speedInput">Speed:</label>
+            <input
+                type="number"
+                id="speedInput"
+                value="14"
+                min="1"
+                step="1">
+            <span>Gen/s</span>
+        </div>
+    </div>
+</div>
+
+
+        <div class="section">
+            <h3>Structure Stamps</h3>
+            <div class="stamp-grid">
+                <button class="stamp-btn active" id="drawBtn" data-type="draw">🖌️ Draw Cell</button>
+                <button class="stamp-btn" data-type="glider">✈️ Glider</button>
+                <button class="stamp-btn" data-type="pulsar">💥 Pulsar</button>
+                <button class="stamp-btn" data-type="lwss">🚀 Spaceship</button>
+                <button class="stamp-btn" data-type="gosper">⚙️ Glider Gun</button>
+                <button class="stamp-btn" data-type="block">📦 Block</button>
+            </div>
+        </div>
+		
+		<div class="section">
+    <h3>Custom Stamp</h3>
+	
+	<a href="editor.html" target="_blank">Stamp Editor</a>
+
+    <textarea
+        id="stampData"
+        rows="5"
+        placeholder="Example:
+010
+111
+001"></textarea>
+
+    <input
+        type="text"
+        id="stampName"
+        placeholder="Stamp name">
+
+    <button id="importStampBtn">
+        Import Stamp
+    </button>
+</div>
+
+        <div class="section">
+            <h3>Rule Presets</h3>
+            <div class="preset-card-list">
+                <div class="preset-card" data-born="3" data-survive="23">
+                    <div class="code">B3/S23</div>
+                    <div class="title">Conway's Life</div>
+                    <div class="desc">The original balance between chaos and order. Contains gliders and guns.</div>
+                </div>
+                <div class="preset-card" data-born="36" data-survive="23">
+                    <div class="code">B36/S23</div>
+                    <div class="title">HighLife</div>
+                    <div class="desc">Like Life but with a replicator! Small patterns can duplicate themselves.</div>
+                </div>
+                <div class="preset-card" data-born="3678" data-survive="34678">
+                    <div class="code">B3678/S34678</div>
+                    <div class="title">Day & Night</div>
+                    <div class="desc">Symmetric rules where solid blocks and empty holes move identically.</div>
+                </div>
+                <div class="preset-card" data-born="3" data-survive="12345">
+                    <div class="code">B3/S12345</div>
+                    <div class="title">Maze</div>
+                    <div class="desc">Grows organic, winding labyrinth hallways out of random cells.</div>
+                </div>
+                <div class="preset-card" data-born="3" data-survive="45678">
+                    <div class="code">B3/S45678</div>
+                    <div class="title">Coral</div>
+                    <div class="desc">Grows vast, stable skeletal-like structures across the grid.</div>
+                </div>
+                <div class="preset-card" data-born="36" data-survive="125">
+                    <div class="code">B36/S125</div>
+                    <div class="title">2x2</div>
+                    <div class="desc">Creates highly geometric structures dominated by 2x2 blocks.</div>
+                </div>
+                <div class="preset-card" data-born="35678" data-survive="5678">
+                    <div class="code">B35678/S5678</div>
+                    <div class="title">Diamoeba</div>
+                    <div class="desc">Forms unpredictable, stretching amoeba blobs that fuse together.</div>
+                </div>
+                <div class="preset-card" data-born="3" data-survive="238">
+                    <div class="code">B3/S238</div>
+                    <div class="title">Pedestrian Life</div>
+                    <div class="desc">Standard rules but standard paths contain rare alternative movements.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Evolution Rules (Manual)</h3>
+            <div class="rule-inputs">
+                <div>
+                    <label>Born</label>
+                    <input type="text" id="bornInput" value="3">
+                </div>
+                <div>
+                    <label>Survive</label>
+                    <input type="text" id="surviveInput" value="23">
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Grid Architecture</h3>
+            <div class="size-inputs">
+                <div>
+                    <label>Columns</label>
+                    <input type="number" id="colsInput" value="80" min="10" max="300">
+                </div>
+                <div>
+                    <label>Rows</label>
+                    <input type="number" id="rowsInput" value="50" min="10" max="300">
+                </div>
+            </div>
+            <button id="applySizeBtn" style="margin-top: 5px;">Rebuild Grid Dimension</button>
+        </div>
+
+        <div class="section">
+            <h3>Visual Themes</h3>
+            <select id="themeSelect">
+                <option value="cyberpunk">Cyberpunk Sky</option>
+                <option value="classic">Retro Matrix</option>
+                <option value="monochrome">High Contrast</option>
+                <option value="sunset">Neon Sunset</option>
+                <option value="custom">-- Custom Theme --</option>
+            </select>
+
+            <div class="color-pickers" id="customPickers" style="display: none;">
+                <div class="color-item">
+                    <label>Alive Cells</label>
+                    <input type="color" id="aliveColorPicker" value="#38bdf8">
+                </div>
+                <div class="color-item">
+                    <label>Dead Background</label>
+                    <input type="color" id="deadColorPicker" value="#0f172a">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="workspace" id="workspace">
+        <div class="viewport">
+            <div class="canvas-wrapper" id="canvasWrapper">
+                <canvas id="lifeCanvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to Part 3 (JavaScript Logic) -->
+    <script src="script.js"></script>
+</body>
+</html>
