@@ -57,6 +57,13 @@ const stampData = document.getElementById('stampData');
 const stampName = document.getElementById('stampName');
 const importStampBtn = document.getElementById('importStampBtn');
 
+const wrapEdgesToggle = document.getElementById('wrapEdgesToggle');
+let wrapEdges = false;
+
+wrapEdgesToggle.addEventListener('change', () => {
+    wrapEdges = wrapEdgesToggle.checked;
+});
+
 // Get rid of the stupid ass middle click issue that I hate oh so very much
 workspace.addEventListener("mousedown", (e) => {
     if (e.button === 1) {
@@ -97,7 +104,46 @@ let mouseRow = -1;
 
 let generationsPerSecond = 14;
 
-// FIXED: Using your pixel-perfect custom Gosper Glider Gun layout string mapping!
+let automatonType = "life";
+
+const automatonTypeSelect = document.getElementById('automatonType');
+
+const elementaryControls = document.getElementById('elementaryControls');
+
+automatonTypeSelect.addEventListener('change', () => {
+    automatonType = automatonTypeSelect.value;
+
+    if (automatonType === "elementary") {
+        elementaryControls.style.display = "block";
+        grid = createGrid();
+        generation = 0;
+    } else {
+        elementaryControls.style.display = "none";
+    }
+
+    drawGrid();
+});
+
+let elementaryRule = 90;
+
+const ruleNumberInput = document.getElementById('ruleNumber');
+
+ruleNumberInput.addEventListener('input', () => {
+    let val = parseInt(ruleNumberInput.value);
+
+    if (isNaN(val)) val = 0;
+    val = Math.max(0, Math.min(255, val));
+
+    elementaryRule = val;
+    ruleNumberInput.value = val;
+
+    if (automatonType === "elementary") {
+        grid = createGrid();
+        generation = 0;
+        drawGrid();
+    }
+});
+
 const rawPatterns = {
     block: "11|11",
     glider: "010|001|111",
@@ -217,10 +263,52 @@ function drawGrid() {
             ctx.globalAlpha = 1.0;
         }
     }
+if (automatonType === "life") {
     genCountEl.textContent = generation;
+} else {
+    genCountEl.textContent = `R${elementaryRule}`;
+}
 }
 
 function computeNextGeneration() {
+    if (automatonType === "life") {
+        computeLife();
+    } else {
+        computeElementary();
+    }
+}
+
+function computeElementary() {
+    const ruleBits = elementaryRule
+        .toString(2)
+        .padStart(8, "0")
+        .split("")
+        .reverse();
+
+    // if first step, seed middle row
+    if (generation === 0) {
+        const mid = Math.floor(COLS / 2);
+        grid[0][mid] = 1;
+    }
+
+    const r = generation;
+    if (r >= ROWS - 1) return;
+
+    for (let c = 1; c < COLS - 1; c++) {
+
+        const left = grid[r][c - 1];
+        const center = grid[r][c];
+        const right = grid[r][c + 1];
+
+        const idx = (left << 2) | (center << 1) | right;
+
+        grid[r + 1][c] = parseInt(ruleBits[idx]);
+    }
+
+    generation++;
+}
+
+function computeLife() {
     const nextGrid = createGrid();
     parseRules();
 
@@ -254,22 +342,28 @@ speedInput.addEventListener('input', () => {
     speedSlider.value = Math.min(value, Number(speedSlider.max));
 });
 
-// FIXED: Hard boundary neighborhood checking logic (No wrapping)
 function countNeighbors(row, col) {
     let count = 0;
+
     for (let i = -1; i <= 1; i++) {
         for (let j = -1; j <= 1; j++) {
             if (i === 0 && j === 0) continue;
-            
-            const newRow = row + i;
-            const newCol = col + j;
-            
-            // Hard Border Wall Check: Ignore positions beyond canvas edges
-            if (newRow >= 0 && newRow < ROWS && newCol >= 0 && newCol < COLS) {
+
+            let newRow = row + i;
+            let newCol = col + j;
+
+            if (wrapEdges) {
+                newRow = (newRow + ROWS) % ROWS;
+                newCol = (newCol + COLS) % COLS;
                 count += grid[newRow][newCol];
+            } else {
+                if (newRow >= 0 && newRow < ROWS && newCol >= 0 && newCol < COLS) {
+                    count += grid[newRow][newCol];
+                }
             }
         }
     }
+
     return count;
 }
 
