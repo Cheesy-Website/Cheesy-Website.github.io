@@ -1,0 +1,15 @@
+- Runtime Engine updated from 1.09a to 1.11.
+
+- However, updating the engine came with a fault of no spaces being available when selecting an actor name. So, the puzzle where selecting an actor name is required has the spaces removed.
+
+- Added option to make the player/puppeteer gender-neutral, with they/them pronouns.
+
+- Fixed bug that causes the batter to move slow after talking to Zacharie on the monorail.
+
+
+For a full list of engine changes:
+https://docs.google.com/document/d/1sXlXZIXdjxVq5gh_lPFuFLMbMRzZe4BKPpRI13ZD2Qc/edit
+
+For business (& mostly non-business) inquiries:
+http://dark-lord-saytenn.tumblr.com/
+https://twitter.com/LordSaytenn
